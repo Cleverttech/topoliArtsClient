@@ -1,71 +1,209 @@
-# Getting Started with Create React App
+# Topoli Arts
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br>
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+This is app or platform where professional artists as mentors get to offer mentorships courses,
+interact with students and also wheere students get to interact with each other.
 
-### `yarn start`
+## User Stories
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **404:** As an anon/user I can see a 404 page if I try to reach a page that does not exist so that I know it's my fault
+- **Signup:** As a user , I can signup to the platform and be a member
+- **Login:** As a user , I can login to my already created account
+- **Logout:** As a user I can logout from the platform so no one else can modify my information
+- **Search through page contents** As a user I can search between different types of courses
+- **Create course** As a user(mentor) I can create new courses to my stack of courses.
+- **Create Portfolio** As a user(mentor) I can create new portfolio to portfolio items stack
+- **Send messages** As a user I can send either direct messages or on the geral chatroom platform
+- **Check profile** As a user I can check my profile and updates
+- **settings** As a user I can update my registration details
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Backlog
 
-### `yarn test`
+- Chatroom
+- One on One chats
+- Free course trial
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br>
 
-### `yarn build`
+# Client / Frontend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## React Router Routes (React App)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Path                         | Component                                 | Permissions                | Behavior                                                      |
+| ---------------------------- | ----------------------------------------- | -------------------------- | ------------------------------------------------------------- |
+| `/`                          | Loading + LandingPage                     | public `<Route>`           | Home page                                                     |
+| `/register`                  | RegisterForm                              | anon only `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup |
+| `/login`                     | LoginForm                                 | anon only `<AnonRoute>`    | Login form, link to signup, navigate to homepage after login  |
+| `/logout`                    | n/a                                       | user only `<PrivateRoute>` | Navigate to homepage after logout, expire session             |
+| `/artists`                   | NavBar, ArtistsList, Footer               | public `<Route>`           |                                                               |
+| `/artists/:artistId`         | NavBar, Portfolio, Footer                 | public `<Route>`           |                                                               |
+| `/profile`                   | NavBar, Profile(Mini-comps), Footer       | user only `<PrivateRoute>` |                                                               |
+| `/courses`                   | NavBar, SearchField , CoursesList, Footer | public `<Route>`           |                                                               |
+| `/courses/:courseId`         | BuyCourseForm                             | user only `<PrivateRoute>` |                                                               |
+| `/courses/:courseId/payment` | CheckoutForm                              | user only `<PrivateRoute>` |                                                               |
+| `/users`                     | UsersLists                                | user only `<PrivateRoute>` |                                                               |
+| `/forchildren`               | ForChildren                               | public `<Route>`           |                                                               |
+| `/forchildren/readings`      | ReadingsForm                              | public `<Route>`           |                                                               |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Components
 
-### `yarn eject`
+- LoadingPage
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- LoginForm
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- RegisterForm
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- NavBar
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- SearchField
 
-## Learn More
+- Footer
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Profile
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Portfolio
 
-### Code Splitting
+- CheckoutForm
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- ArtistsList
 
-### Analyzing the Bundle Size
+- CoursesList
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- BuyCourseForm
 
-### Making a Progressive Web App
+- UsersLists
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- ReadingsForm
 
-### Advanced Configuration
+## Services
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Auth Service
 
-### Deployment
+  - auth.login(user)
+  - auth.register(user)
+  - auth.logout()
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Mentor Service
+  - courses.filter()
+  - courses.detail(id)
+  - courses.add(id)
+  - courses.delete(id)
+- External Libraries
+  - Stripe npm package
+  - Socket.io
+  - Material UI
 
-### `yarn build` fails to minify
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# topoliArtsClients
+# Server / Backend
+
+## Models
+
+User model
+
+```javascript
+{
+  username: {type: String, required: true},
+  email: {type: String, required: true, unique: true},
+  password: {type: String, required: true},
+  image: {type: String, default : String}
+  role: {type: String}
+  courses: {type: Schema.Types.ObjectId,ref:'Course'}
+  elements: {type: Schema.Types.ObjectId,ref:'Portfolio'}
+}
+```
+
+Portfolio model
+
+```javascript
+{
+  cover: {type: String, required: true},
+  title: {type: String, required: true},
+  description: {type: String, required: true},
+  image: [type: String]
+
+}
+```
+
+Courses model
+
+```javascript
+ {
+   mentor: {type: Schema.Types.ObjectId, ref:'User'},
+   name: {type: String, required: true},
+   description: {type: String, required: true},
+   image: {type: String, required: true},
+   price: {type: Number, required: true}
+   downloadables: {type: Array}
+   buyers: [
+       type: new Schema ({ userId: userID}, {timestamp: true})
+   ],
+ }
+```
+
+Conversation model
+
+```javascript
+{
+  participants: [{ type: Schema.Types.ObjectId, ref: "User" }];
+}
+```
+
+Messages model
+
+```javascript
+{
+message: {type: String}
+sender:  {type: Schema.Types.ObjectId, ref:'User'}
+conversationId:  {type: Schema.Types.ObjectId, ref:'Conversation'}
+timestamp: {timestamp: true}
+}
+```
+
+<br>
+
+## API Endpoints (backend routes)
+
+| HTTP Method | URL                   |
+| ----------- | --------------------- |
+| POST        | `/auth/register`      |
+| POST        | `/auth/login`         |
+| POST        | `/auth/logout`        |
+| POST        | `/profile`            |
+| GET         | `/courses`            |
+| GET         | `/courses/:id`        |
+| DELETE      | `/courses/:id/delete` |
+| POST        | `/courses/create`     |
+| GET         | `/artists`            |
+| GET         | `/artists/:id`        |
+| POST        | `/artists/:id`        |
+| POST        | `/conversations`      |
+| POST        | `/messages`           |
+
+<br>
+
+## Links
+
+### Trello/Kanban
+
+[Link to your trello board](https://trello.com/)
+or picture of your physical board
+
+### Git
+
+The url to your repository and to your deployed project
+
+[Client repository Link](https://github.com/)
+
+[Server repository Link](https://github.com/)
+
+[Deployed App Link](https://topoliarts.herokuapp.com/)
+
+### Slides
+
+The url to your presentation slides
+
+[Slides Link](https://docs.google.com/)
