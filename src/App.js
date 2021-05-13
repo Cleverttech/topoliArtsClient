@@ -1,5 +1,5 @@
 import { React, Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import axios from "axios";
 import config from "./config";
@@ -88,7 +88,7 @@ class App extends Component {
       })
       .catch((errorObj) => {
         this.setState({
-          error: errorObj.response.data,
+          error: errorObj.data,
         });
       });
   };
@@ -145,4 +145,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

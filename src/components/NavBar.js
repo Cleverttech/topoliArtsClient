@@ -27,7 +27,7 @@ class NavBar extends Component {
               </Nav.Link>
               {user ? (
                 <Button onClick={onLogout} variant="link">
-                  Login
+                  Logout
                 </Button>
               ) : (
                 <>
