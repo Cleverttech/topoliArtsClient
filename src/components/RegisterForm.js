@@ -2,11 +2,11 @@ import { Form, FormControl, Button } from "react-bootstrap";
 
 import React, { Component } from "react";
 
-export class RegisterForm extends Component {
+class RegisterForm extends Component {
   render() {
     return (
       <div>
-        <Form>
+        <Form onSubmit={onRegister}>
           <Form.Group controlId="formBasicUsername">
             <Form.Label>Username</Form.Label>
             <Form.Control type="username" placeholder="Username" />

@@ -112,7 +112,7 @@ User model
   image: {type: String, default : String}
   role: {type: String}
   courses: {type: Schema.Types.ObjectId,ref:'Course'}
-  elements: {type: Schema.Types.ObjectId,ref:'Portfolio'}
+  portfolio: {type: Schema.Types.ObjectId,ref:'Portfolio'}
 }
 ```
 
@@ -123,7 +123,7 @@ Portfolio model
   cover: {type: String, required: true},
   title: {type: String, required: true},
   description: {type: String, required: true},
-  image: [type: String]
+  image: {type: [String]}
 
 }
 ```
@@ -137,10 +137,10 @@ Courses model
    description: {type: String, required: true},
    image: {type: String, required: true},
    price: {type: Number, required: true}
-   downloadables: {type: Array}
-   buyers: [
-       type: new Schema ({ userId: userID}, {timestamp: true})
-   ],
+   downloadables: {type: [String]}
+   buyers: [{
+       type: new Schema ({userId: {type: Schema.Types.ObjectId, ref:'User'}, {timestamp: true}})
+   }],
  }
 ```
 
@@ -159,7 +159,7 @@ Messages model
 message: {type: String}
 sender:  {type: Schema.Types.ObjectId, ref:'User'}
 conversationId:  {type: Schema.Types.ObjectId, ref:'Conversation'}
-timestamp: {timestamp: true}
+timestamp: true}
 }
 ```
 
