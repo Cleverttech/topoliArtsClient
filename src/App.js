@@ -5,6 +5,7 @@ import axios from "axios";
 import config from "./config";
 import { makeStyles } from "@material-ui/core/styles";
 import RegisterForm from "./components/RegisterForm";
+import ForChildren from "./components/ForChildren";
 import LoginForm from "./components/LoginForm";
 
 class App extends Component {
@@ -116,6 +117,7 @@ class App extends Component {
       <div className="App">
         <NavBar onLogout={this.handleLogout} user={user} />
         <Switch>
+          <Route path="/forchildren" component={ForChildren} />
           <Route
             exact
             path="/register"
