@@ -6,7 +6,7 @@ export class RegisterForm extends Component {
   render() {
     return (
       <div>
-        <Form>
+        <Form onSubmit={onRegister}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" />
