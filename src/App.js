@@ -89,6 +89,9 @@ handleRegister = (e) => {
     return (
     <div className="App">
       <NavBar />
+      <Switch>
+        
+      </Switch>
     </div>
     );
   }
