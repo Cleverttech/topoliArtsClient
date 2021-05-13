@@ -6,6 +6,7 @@ import config from "./config";
 import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
 
+
 class App extends Component {
   state = {
     user: null,
@@ -18,24 +19,24 @@ class App extends Component {
     filteredUserList: [],
   };
 
-  // componentDidMount() {
-  //   axios
-  //     .get(`${config.API_URL}/api/user`, { withCredentials: true })
-  //     .then((response) => {
-  //       console.log(response)
-  //       this.setState({
-  //         user: response.data,
-  //         fetchingUser: false,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error)
-  //       this.setState({
-  //         error: error.data,
-  //         fetchingUser: false,
-  //       });
-  //     });
-  // }
+  componentDidMount() {
+    axios
+      .get(`${config.API_URL}/api/user`, { withCredentials: true })
+      .then((response) => {
+        console.log(response)
+        this.setState({
+          user: response.data,
+          fetchingUser: false,
+        });
+      })
+      .catch((error) => {
+        console.log(error)
+        this.setState({
+          error: error.data,
+          fetchingUser: false,
+        });
+      });
+  }
 
   handleRegister = (e) => {
     e.preventDefault()
