@@ -6,6 +6,7 @@ import config from "./config";
 import { makeStyles } from "@material-ui/core/styles";
 import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
+import LandingPage from "./components/LandingPage";
 
 class App extends Component {
   state = {
@@ -113,8 +114,12 @@ class App extends Component {
   render() {
     const { error, user } = this.state;
     return (
-      <div className="App">
+      <div className="App" >
         <NavBar onLogout={this.handleLogout} user={user} />
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+
+        <LandingPage />
+        </div>
         <Switch>
           <Route
             exact
