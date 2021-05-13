@@ -4,17 +4,22 @@ import React, { Component } from "react";
 
 class RegisterForm extends Component {
   render() {
+    const { onRegister } = this.props;
     return (
       <div>
         <Form onSubmit={onRegister}>
           <Form.Group controlId="formBasicUsername">
             <Form.Label>Username</Form.Label>
-            <Form.Control type="username" placeholder="Username" />
+            <Form.Control
+              type="username"
+              name="username"
+              placeholder="Username"
+            />
           </Form.Group>
 
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control type="email" name="email" placeholder="Enter email" />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
@@ -22,7 +27,11 @@ class RegisterForm extends Component {
 
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
           </Form.Group>
           <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />

@@ -3,6 +3,8 @@ import { Switch, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import axios from "axios";
 import config from "./config";
+import RegisterForm from "./components/RegisterForm";
+import LoginForm from "./components/LoginForm";
 
 class App extends Component {
   state = {
@@ -10,7 +12,7 @@ class App extends Component {
     fetchingUser: true,
     error: null,
     courses: [],
-    filteredCourses,
+    filteredCourses: [],
     artists: [],
     userList: [],
     filteredUserList: [],
@@ -27,7 +29,7 @@ class App extends Component {
       })
       .catch((errorObj) => {
         this.setState({
-          error: errorObj.response.data,
+          // error: errorObj.response.data,
           fetchingUser: false,
         });
       });
@@ -63,7 +65,7 @@ class App extends Component {
       });
   };
 
-  handleLogin = async (e) => {
+  handleLogin = (e) => {
     e.preventDefault();
     const { email, password } = e.target;
     let newUser = {
@@ -97,11 +99,13 @@ class App extends Component {
         <NavBar />
         <Switch>
           <Route
-            exact
             path="/register"
             render={(routeProps) => {
               return (
-                <SignUp onRegister={this.handleRegister} {...routeProps} />
+                <RegisterForm
+                  onRegister={this.handleRegister}
+                  {...routeProps}
+                />
               );
             }}
           />
@@ -110,8 +114,8 @@ class App extends Component {
             path="/login"
             render={(routeProps) => {
               return (
-                <SignIn
-                  error={error}
+                <LoginForm
+                  // error={error}
                   onLogin={this.handleLogin}
                   {...routeProps}
                 />
