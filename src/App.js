@@ -5,6 +5,7 @@ import axios from "axios";
 import config from "./config";
 import { makeStyles } from "@material-ui/core/styles";
 import RegisterForm from "./components/RegisterForm";
+import ForChildren from "./components/ForChildren";
 import LoginForm from "./components/LoginForm";
 import LandingPage from "./components/LandingPage";
 
@@ -121,6 +122,7 @@ class App extends Component {
         <LandingPage />
         </div>
         <Switch>
+          <Route path="/forchildren" component={ForChildren} />
           <Route
             exact
             path="/register"
