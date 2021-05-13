@@ -3,9 +3,9 @@ import { Switch, Route, withRouter } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import axios from "axios";
 import config from "./config";
+import { makeStyles } from "@material-ui/core/styles";
 import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
-
 
 class App extends Component {
   state = {
@@ -13,7 +13,7 @@ class App extends Component {
     fetchingUser: true,
     error: null,
     courses: [],
-    filteredCourses:[],
+    filteredCourses: [],
     artists: [],
     userList: [],
     filteredUserList: [],
@@ -23,14 +23,14 @@ class App extends Component {
     axios
       .get(`${config.API_URL}/api/user`, { withCredentials: true })
       .then((response) => {
-        console.log(response)
+        console.log(response);
         this.setState({
           user: response.data,
           fetchingUser: false,
         });
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         this.setState({
           error: error.data,
           fetchingUser: false,
@@ -39,25 +39,32 @@ class App extends Component {
   }
 
   handleRegister = (e) => {
-    e.preventDefault()
-    const {username, email, password} = e.target
-    
-    let newUser={
+    e.preventDefault();
+    const { username, email, password } = e.target;
+
+    let newUser = {
       username: username.value,
       email: email.value,
       password: password.value,
-    }
-    axios.post(`${config.API_URL}/api/register`, newUser, {withCredentials:true})
-    .then((result) => {
-      this.setState({
-        user: result.data,
-      },()=>{
-        this.props.history.push('/')
+    };
+    axios
+      .post(`${config.API_URL}/api/register`, newUser, {
+        withCredentials: true,
       })
-    }).catch((error) => {
-      console.log(error)
-    });
-  }
+      .then((result) => {
+        this.setState(
+          {
+            user: result.data,
+          },
+          () => {
+            this.props.history.push("/");
+          }
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   handleLogin = (e) => {
     e.preventDefault();
@@ -109,9 +116,16 @@ class App extends Component {
       <div className="App">
         <NavBar onLogout={this.handleLogout} user={user} />
         <Switch>
-          <Route exact path="/register" render={(routeProps) => {
-            return (
-              <RegisterForm error={error} onRegister={this.handleRegister} {...routeProps} />
+          <Route
+            exact
+            path="/register"
+            render={(routeProps) => {
+              return (
+                <RegisterForm
+                  error={error}
+                  onRegister={this.handleRegister}
+                  {...routeProps}
+                />
               );
             }}
           />

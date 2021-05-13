@@ -1,41 +1,75 @@
-import { Form, Button } from "react-bootstrap";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  CardContent,
+  Card,
+  Grid,
+  TextField,
+  Paper,
+  Button,
+  FormControl,
+} from "@material-ui/core";
 
-import React, { Component } from "react";
-
-class RegisterForm extends Component {
-  
-  render() {
-    const { onRegister } = this.props
-    return (
-      <div>
-        <Form onSubmit={onRegister}>
-          <Form.Group controlId="formBasicUsername">
-            <Form.Label>Username</Form.Label>
-            <Form.Control type="username" name='username' placeholder="Username" />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" name='email' placeholder="Enter email" />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" name='password' placeholder="Password" />
-          </Form.Group>
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
-      </div>
-    );
-  }
+{
+}
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(2),
+      width: "40ch",
+    },
+    flexGrow: 1,
+  },
+  formHeight: {
+    height: "1000px",
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+}));
+function RegisterForm(props) {
+  const classes = useStyles();
+  const { onRegister } = props;
+  return (
+    <div className={classes.root}>
+      <Grid container direction="row" justify="center" alignItems="center">
+        <Grid item>
+          <Card className={classes.paper}>
+            <CardContent>
+              <form onSubmit={onRegister}>
+                <FormControl noValidate autoComplete="off">
+                  <TextField
+                    id="outlined-basic"
+                    name="username"
+                    label="Username"
+                    variant="outlined"
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    name="email"
+                    label="Email"
+                    variant="outlined"
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    name="password"
+                    type="password"
+                    label="Password"
+                    variant="outlined"
+                  />
+                  <Button type="submit" variant="contained" color="primary">
+                    Submit
+                  </Button>
+                </FormControl>
+              </form>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+    </div>
+  );
 }
 
 export default RegisterForm;
