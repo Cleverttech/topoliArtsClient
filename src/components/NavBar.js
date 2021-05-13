@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 class NavBar extends Component {
   render() {
+    const { user, onLogout } = this.props;
     return (
       <div>
         <Navbar bg="dark" expand="lg" variant="dark">
@@ -24,12 +25,20 @@ class NavBar extends Component {
               <Nav.Link>
                 <Link to="/forchildren">For Children</Link>
               </Nav.Link>
-              <Button variant="link">
-                <Link to="/login">Login</Link>
-              </Button>
-              <Button variant="secondary">
-                <Link to="/register">Register</Link>
-              </Button>{" "}
+              {user ? (
+                <Button onClick={onLogout} variant="link">
+                  Login
+                </Button>
+              ) : (
+                <>
+                  <Button variant="link">
+                    <Link to="/login">Login</Link>
+                  </Button>
+                  <Button variant="secondary">
+                    <Link to="/register">Register</Link>
+                  </Button>{" "}
+                </>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Navbar>

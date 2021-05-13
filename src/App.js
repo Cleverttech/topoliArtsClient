@@ -93,10 +93,27 @@ class App extends Component {
       });
   };
 
+  handleLogout = () => {
+    axios
+      .post(`${config.API_URL}/api/logout`, {}, { withCredentials: true })
+      .then(() => {
+        this.setState({
+          user: null,
+        });
+      })
+      .catch((errorObj) => {
+        // the real error json is always is the .response.data
+        this.setState({
+          error: errorObj.response.data,
+        });
+      });
+  };
+
   render() {
+    const { error, user } = this.state;
     return (
       <div className="App">
-        <NavBar />
+        <NavBar onLogout={this.handleLogout} user={user} />
         <Switch>
           <Route
             path="/register"
@@ -115,7 +132,7 @@ class App extends Component {
             render={(routeProps) => {
               return (
                 <LoginForm
-                  // error={error}
+                  error={error}
                   onLogin={this.handleLogin}
                   {...routeProps}
                 />
