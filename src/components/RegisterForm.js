@@ -7,6 +7,11 @@ export class RegisterForm extends Component {
     return (
       <div>
         <Form>
+          <Form.Group controlId="formBasicUsername">
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="username" placeholder="Username" />
+          </Form.Group>
+
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" />
@@ -26,7 +31,6 @@ export class RegisterForm extends Component {
             Submit
           </Button>
         </Form>
-        ;
       </div>
     );
   }
