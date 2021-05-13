@@ -61,7 +61,7 @@ handleRegister = (e) => {
     })
 }
 
-  handleSignIn = async (e) => {
+  handleLogin = async (e) => {
   e.preventDefault()
   const { email , password} = e.target
   let newUser = {
@@ -69,7 +69,7 @@ handleRegister = (e) => {
     password: password.value
   }
 
-  axios.post(`${config.API_URL}/api/signin`, newUser, {withCredentials: true})
+  axios.post(`${config.API_URL}/api/login`, newUser, {withCredentials: true})
     .then((response) => {
       this.setState({
         user: response.data,
@@ -89,9 +89,6 @@ handleRegister = (e) => {
     return (
     <div className="App">
       <NavBar />
-      <Switch>
-        
-      </Switch>
     </div>
     );
   }
