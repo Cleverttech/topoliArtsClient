@@ -119,9 +119,9 @@ class App extends Component {
         <NavBar onLogout={this.handleLogout} user={user} />
         <div style={{display: 'flex', justifyContent: 'center'}}>
 
-        <LandingPage />
         </div>
         <Switch>
+          <Route exact path="/" component={LandingPage} />
           <Route path="/forchildren" component={ForChildren} />
           <Route
             exact
