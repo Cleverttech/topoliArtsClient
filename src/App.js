@@ -63,7 +63,7 @@ class App extends Component {
       });
   };
 
-  handleSignIn = async (e) => {
+  handleLogin = async (e) => {
     e.preventDefault();
     const { email, password } = e.target;
     let newUser = {
@@ -72,7 +72,7 @@ class App extends Component {
     };
 
     axios
-      .post(`${config.API_URL}/api/signin`, newUser, { withCredentials: true })
+      .post(`${config.API_URL}/api/login`, newUser, { withCredentials: true })
       .then((response) => {
         this.setState(
           {
@@ -95,6 +95,30 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar />
+        <Switch>
+          <Route
+            exact
+            path="/register"
+            render={(routeProps) => {
+              return (
+                <SignUp onRegister={this.handleRegister} {...routeProps} />
+              );
+            }}
+          />
+          <Route
+            exact
+            path="/login"
+            render={(routeProps) => {
+              return (
+                <SignIn
+                  error={error}
+                  onLogin={this.handleLogin}
+                  {...routeProps}
+                />
+              );
+            }}
+          />
+        </Switch>
       </div>
     );
   }
