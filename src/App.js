@@ -1,11 +1,9 @@
 import { React, Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
-import NavBar from "./components/NavBar";
 import TestNavBar from "./components/TestNavBar";
 import axios from "axios";
 import config from "./config";
 import ForChildren from "./components/ForChildren";
-
 import LandingPage from "./components/LandingPage";
 import TestLogin from "./components/TestLogin";
 import TestResgister from "./components/TestResgister";
