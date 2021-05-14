@@ -1,15 +1,26 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Typography, Grid, Box, Link } from "@material-ui/core";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import BookReadingForm from "./BookReadingForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    // flexGrow: 1,
+    // display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
   },
 }));
 
@@ -25,12 +36,39 @@ const sectionStyle = { width: "70%", margin: "auto" };
 const friedaIntText = {
   margin: "20px",
 };
-const friedaIntBtn = {
-  margin: "40px auto",
-  width: " 400px",
-};
+
 function ForChildren() {
   const classes = useStyles();
+
+  const [open, setOpen] = useState(false);
+  const [openVol1, setOpenVol1] = useState(false);
+  const [openVol2, setOpenVol2] = useState(false);
+  const [openFriedaInt, setOpenFriedaInt] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpenVol1 = () => {
+    setOpenVol1(true);
+  };
+  const handleCloseVol1 = () => {
+    setOpenVol1(false);
+  };
+  const handleOpenVol2 = () => {
+    setOpenVol2(true);
+  };
+  const handleCloseVol2 = () => {
+    setOpenVol2(false);
+  };
+  const handleOpenFriedaInt = () => {
+    setOpenFriedaInt(true);
+  };
+  const handleCloseFriedaInt = () => {
+    setOpenFriedaInt(false);
+  };
 
   return (
     <div className={classes.root} style={sectionStyle}>
@@ -51,9 +89,24 @@ function ForChildren() {
             tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
             voluptua.
           </p>
-          <Button color="primary">
-            <Link to="/">Schedule a Book Reading</Link>
+          <Button type="button" onClick={handleOpen} color="primary">
+            Schedule a Book Reading
           </Button>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            onClick={handleClose}
+            open={open}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={open}>
+              <BookReadingForm />
+            </Fade>
+          </Modal>
         </Grid>
 
         <Grid item xs={6} fullWidth>
@@ -83,9 +136,29 @@ function ForChildren() {
               loading="lazy"
             />
             <Box justifyContent="center">
-              <Button href="#" variant="outlined" color="primary">
+              <Button
+                type="button"
+                onClick={handleOpenVol1}
+                variant="outlined"
+                color="primary"
+              >
                 View Frieda Vol.1
               </Button>
+              <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                onClick={handleCloseVol1}
+                open={openVol1}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                  timeout: 500,
+                }}
+              >
+                <Fade in={openVol1}>
+                  <img src="../assets/AllBooks/Frieda/MDerenbach_Frieda_3.jpg"></img>
+                </Fade>
+              </Modal>
             </Box>
           </Grid>
         </Grid>
@@ -97,9 +170,29 @@ function ForChildren() {
             alt="book-reading-image"
             loading="lazy"
           />
-          <Button href="#" variant="outlined" color="primary">
+          <Button
+            type="button"
+            onClick={handleOpenVol2}
+            variant="outlined"
+            color="primary"
+          >
             View Frieda Vol.2
           </Button>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            onClick={handleCloseVol2}
+            open={openVol2}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={openVol2}>
+              <img src="../assets/AllBooks/Frieda/MDerenbach_Frieda_1.jpg"></img>
+            </Fade>
+          </Modal>
         </Grid>
         <Typography fontWeight="fontWeightLight" style={friedaIntText}>
           <Box textAlign="center">
@@ -108,9 +201,24 @@ function ForChildren() {
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
             et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
           </Box>
-          <Button href="#" color="primary" style={friedaIntBtn}>
+          <Button type="button" onClick={handleOpenFriedaInt} color="primary">
             Frieda from the kids Perspective
           </Button>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            onClick={handleCloseFriedaInt}
+            open={openFriedaInt}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={openFriedaInt}>
+              <img src="../assets/AllBooks/Frieda/MDerenbach_Frieda_8.jpg"></img>
+            </Fade>
+          </Modal>
         </Typography>
       </Grid>
     </div>

@@ -117,7 +117,6 @@ class App extends Component {
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
-        {/* <BookReadingForm /> */}
 
         <div style={{ display: "flex", justifyContent: "center" }}></div>
         <Switch>

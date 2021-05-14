@@ -135,14 +135,14 @@ export default function PrimarySearchAppBar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <Button component={Link} to='/artists' color="inherit" >Artists</Button>
+      <MenuItem onClick={handleMobileMenuClose}>
+        <Link className='btn' to='/artists' color="inherit" >Artists</Link>
       </MenuItem>
-      <MenuItem>
-      <Button component={Link} to='/courses' color="inherit" >Programs</Button>
+      <MenuItem onClick={handleMobileMenuClose}>
+        <Link className='btn' to='/courses' color="inherit" >Programs</Link>
       </MenuItem>
-      <MenuItem>
-      <Button component={Link} to='/forchildren' color="inherit" >For Children</Button>
+      <MenuItem onClick={handleMobileMenuClose}>
+        <Button component={Link} to='/forchildren' color="inherit" >For Children</Button>
       </MenuItem>
       
       
