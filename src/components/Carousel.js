@@ -14,22 +14,22 @@ const tutorialSteps = [
   {
     // label: "San Francisco – Oakland Bay Bridge, United States",
     imgPath:
-    "https://lh3.google.com/u/0/d/13AInzB-6NreGNJJm09Jmx5jLELBLBI0T=w1291-h572-iv1"
+    "../assets/CharacterDesign/mädchen_intern.jpg"
   },
   {
     // label: "Bluetit",
     imgPath:
-    "https://lh3.google.com/u/0/d/1MiMZpZytjrugptxL_M2tqM_XtBajwjT6=w1291-h572-iv1"
+    "../assets/CharacterDesign/Matthias_Derenbach_Onno&Ontje_Charakterentwicklung1.jpg"
   },
   {
     // label: "Bali, Indonesia",
     imgPath:
-    "https://lh3.google.com/u/0/d/1ovnTBGWvO080_WwTkMu-a2c4OlnrwKLp=w1291-h572-iv1"
+    "../assets/CharacterDesign/Matthias_Derenbach_Onno&Ontje_Charakterentwicklung2.jpg"
   },
   {
     // label: "NeONBRAND Digital Marketing, Las Vegas, United States",
     imgPath:
-    "https://lh3.google.com/u/0/d/1tCvuxNhOMGa3cDQ2_tMKkqkEir5w_TAn=w1291-h572-iv1"
+    "../assets/AllBooks/Kasi_Kauz/Kasi_einzeln.jpg"
   },
 
 ];
