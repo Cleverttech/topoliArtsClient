@@ -10,11 +10,13 @@ import {
 } from "@material-ui/core";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import { makeStyles } from "@material-ui/core/styles";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControl from "@material-ui/core/FormControl";
-import RadioGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import {
+  FormLabel,
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import {
@@ -57,9 +59,7 @@ function BookReadingForm() {
   const btnStyle = {
     marginTop: "20px",
   };
-  const [selectedDate, setSelectedDate] = React.useState(
-    new Date("2014-08-18T21:11:54")
-  );
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleDateChange = (date) => {
     setSelectedDate(date);

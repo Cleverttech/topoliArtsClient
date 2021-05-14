@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Typography, Grid, Box, Link } from "@material-ui/core";
+import {
+  Button,
+  Typography,
+  Grid,
+  Box,
+  Link,
+  IconButton,
+} from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import BookReadingForm from "./BookReadingForm";
+import CancelIcon from "@material-ui/icons/Cancel";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,6 +77,14 @@ function ForChildren() {
   const handleCloseFriedaInt = () => {
     setOpenFriedaInt(false);
   };
+  const closeStyle = {
+    color: "white",
+  };
+  const centerBtn = {
+    justifyContent: "center",
+    display: "flex",
+    marginTop: "20px",
+  };
 
   return (
     <div className={classes.root} style={sectionStyle}>
@@ -89,13 +105,14 @@ function ForChildren() {
             tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
             voluptua.
           </p>
-          <Button type="button" onClick={handleOpen} color="primary">
-            Schedule a Book Reading
-          </Button>
+          <Box style={centerBtn}>
+            <Button type="button" onClick={handleOpen} color="primary">
+              Schedule a Book Reading
+            </Button>
+          </Box>
           <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
-            onClick={handleClose}
             open={open}
             closeAfterTransition
             BackdropComponent={Backdrop}
@@ -104,7 +121,12 @@ function ForChildren() {
             }}
           >
             <Fade in={open}>
-              <BookReadingForm />
+              <Grid>
+                <BookReadingForm />
+                <IconButton onClick={handleClose}>
+                  <CancelIcon fontSize="large" style={closeStyle} />
+                </IconButton>
+              </Grid>
             </Fade>
           </Modal>
         </Grid>
@@ -135,7 +157,7 @@ function ForChildren() {
               alt="book-reading-image"
               loading="lazy"
             />
-            <Box justifyContent="center">
+            <Box style={centerBtn}>
               <Button
                 type="button"
                 onClick={handleOpenVol1}
@@ -170,14 +192,17 @@ function ForChildren() {
             alt="book-reading-image"
             loading="lazy"
           />
-          <Button
-            type="button"
-            onClick={handleOpenVol2}
-            variant="outlined"
-            color="primary"
-          >
-            View Frieda Vol.2
-          </Button>
+          <Box style={centerBtn}>
+            <Button
+              type="button"
+              onClick={handleOpenVol2}
+              variant="outlined"
+              color="primary"
+            >
+              View Frieda Vol.2
+            </Button>
+          </Box>
+
           <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
@@ -201,9 +226,11 @@ function ForChildren() {
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
             et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
           </Box>
-          <Button type="button" onClick={handleOpenFriedaInt} color="primary">
-            Frieda from the kids Perspective
-          </Button>
+          <Box style={centerBtn}>
+            <Button type="button" onClick={handleOpenFriedaInt} color="primary">
+              Frieda from the kids Perspective
+            </Button>
+          </Box>
           <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
