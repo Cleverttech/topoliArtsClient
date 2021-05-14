@@ -39,7 +39,6 @@ class App extends Component {
   }
 
   handleRegister = (values) => {
-    // e.preventDefault();
     console.log("Checking", values);
 
     const { username, email, password } = values;
