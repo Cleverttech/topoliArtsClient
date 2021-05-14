@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Typography, Grid, Box } from "@material-ui/core";
+import { Button, Typography, Grid, Box, Link } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +22,13 @@ const FriedaCover = {
   width: "100%",
 };
 const sectionStyle = { width: "70%", margin: "auto" };
-
+const friedaIntText = {
+  margin: "20px",
+};
+const friedaIntBtn = {
+  margin: "40px auto",
+  width: " 400px",
+};
 function ForChildren() {
   const classes = useStyles();
 
@@ -45,8 +51,8 @@ function ForChildren() {
             tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
             voluptua.
           </p>
-          <Button href="#" color="primary">
-            Schedule a Book Reading
+          <Button color="primary">
+            <Link to="/">Schedule a Book Reading</Link>
           </Button>
         </Grid>
 
@@ -95,14 +101,14 @@ function ForChildren() {
             View Frieda Vol.2
           </Button>
         </Grid>
-        <Typography fontWeight="fontWeightLight">
+        <Typography fontWeight="fontWeightLight" style={friedaIntText}>
           <Box textAlign="center">
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
             nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
             erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
             et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
           </Box>
-          <Button href="#" color="primary">
+          <Button href="#" color="primary" style={friedaIntBtn}>
             Frieda from the kids Perspective
           </Button>
         </Typography>

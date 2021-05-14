@@ -1,6 +1,5 @@
 import { React, Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
-import NavBar from "./components/NavBar";
 import TestNavBar from "./components/TestNavBar";
 import axios from "axios";
 import config from "./config";
@@ -9,6 +8,7 @@ import ForChildren from "./components/ForChildren";
 import LandingPage from "./components/LandingPage";
 import TestLogin from "./components/TestLogin";
 import TestResgister from "./components/TestResgister";
+import BookReadingForm from "./components/BookReadingForm";
 
 class App extends Component {
   state = {
@@ -117,10 +117,11 @@ class App extends Component {
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
+        {/* <BookReadingForm /> */}
 
         <div style={{ display: "flex", justifyContent: "center" }}></div>
         <Switch>
-          <Route exact path="/" component={LandingPage} />
+          {/* <Route exact path="/" component={LandingPage} /> */}
           <Route path="/forchildren" component={ForChildren} />
           <Route
             exact
