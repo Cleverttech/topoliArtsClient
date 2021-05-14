@@ -1,10 +1,11 @@
 import { React, Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import NavBar from "./components/NavBar";
+import TestNavBar from "./components/TestNavBar";
 import axios from "axios";
 import config from "./config";
 import ForChildren from "./components/ForChildren";
-import LoginForm from "./components/LoginForm";
+
 import LandingPage from "./components/LandingPage";
 import TestLogin from "./components/TestLogin";
 import TestResgister from "./components/TestResgister";
@@ -39,8 +40,6 @@ class App extends Component {
   }
 
   handleRegister = (values) => {
-    console.log("Checking", values);
-
     const { username, email, password } = values;
 
     let newUser = {
@@ -63,16 +62,18 @@ class App extends Component {
         );
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.data);
+        this.setState({
+          error: error.response.data,
+        });
       });
   };
 
-  handleLogin = (e) => {
-    e.preventDefault();
-    const { email, password } = e.target;
+  handleLogin = (values) => {
+    const { email, password } = values;
     let newUser = {
-      email: email.value,
-      password: password.value,
+      email,
+      password,
     };
 
     axios
@@ -90,7 +91,7 @@ class App extends Component {
       })
       .catch((error) => {
         this.setState({
-          error: error.data,
+          error: error.response.data.error,
         });
       });
   };
@@ -103,10 +104,10 @@ class App extends Component {
           user: null,
         });
       })
-      .catch((errorObj) => {
+      .catch((error) => {
         // the real error json is always is the .response.data
         this.setState({
-          error: errorObj.response.data,
+          error: error.response.data,
         });
       });
   };
@@ -115,7 +116,7 @@ class App extends Component {
     const { error, user } = this.state;
     return (
       <div className="App">
-        <NavBar onLogout={this.handleLogout} user={user} />
+        <TestNavBar onLogout={this.handleLogout} user={user} />
 
         <div style={{ display: "flex", justifyContent: "center" }}></div>
         <Switch>
@@ -139,7 +140,7 @@ class App extends Component {
             path="/login"
             render={(routeProps) => {
               return (
-                <LoginForm
+                <TestLogin
                   error={error}
                   onLogin={this.handleLogin}
                   {...routeProps}

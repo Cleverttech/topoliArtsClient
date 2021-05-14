@@ -1,18 +1,12 @@
 import React from "react";
-import {
-  Avatar,
-  Grid,
-  Paper,
-  Typography,
-  TextField,
-  Button,
-  FormControlLabel,
-  Checkbox,
-  Link,
-} from "@material-ui/core";
+import { Avatar,  Grid,  Paper,  Typography,  TextField,  Button,  FormControlLabel,  Checkbox,  Link, FormHelperText} from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
-function TestLogin() {
+
+function TestLogin(props) {
+  const {error, onLogin} = props
   const paperStyle = {
     padding: "30px 20px",
     width: 375,
@@ -26,6 +20,24 @@ function TestLogin() {
     margin: "8px 0",
   };
 
+  //Validation starts here
+  const initialValues = {
+    username: "",
+    email: "",
+  };
+  
+  const validationSchema = Yup.object().shape({
+    
+    email: Yup.string().email("Enter valid email").required("Required"),
+    password: Yup.string()
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+        "Must contain 8 characters, a number and an Uppercase"
+      )
+      .required("Required"),
+  });
+
+  
   return (
     <Grid>
       <Paper elevation={20} style={paperStyle}>
@@ -36,38 +48,51 @@ function TestLogin() {
           <h2>Login</h2>
         </Grid>
 
-        <form>
-          <TextField
-            name="email"
-            fullWidth
-            label="Email"
-            placeholder="Enter email"
-          />
-          <TextField
-            name="password"
-            fullWidth
-            label="Password"
-            placeholder="Enter password"
-          />
-          <FormControlLabel
-            control={<Checkbox name="checkedB" />}
-            label="Remember me"
-          />
-          <Button
-            fullWidth
-            type="submit"
-            variant="contained"
-            color="primary"
-            style={buttonStyle}
-          >
-            Login
-          </Button>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onLogin}
+        >
+          {(props) => (
+            <Form>
+              
+              <Field
+                as={TextField}
+                name="email"
+                fullWidth
+                label="Email"
+                placeholder="Enter email"
+                helperText={
+                  <ErrorMessage name="email">
+                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                  </ErrorMessage>
+                }
+              />
+              <Field
+                as={TextField}
+                name="password"
+                fullWidth
+                label="Password"
+                type="password"
+                placeholder="Enter password"
+                helperText={
+                  <ErrorMessage name="password">
+                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                  </ErrorMessage>
+                }
+              />
+              <Button fullWidth type="submit" variant="contained" color="primary">
+                Login
+              </Button>
+            </Form>
+          )}
+        </Formik>
 
           <Typography>
             {" "}
-            Do you have an account ?<Link href="#">Resgister </Link>
+            You don't have an account yet ?<Link href="/register"> Register!</Link>
           </Typography>
-        </form>
+          <span style={{ color: "red" }}>{error}</span>        
       </Paper>
     </Grid>
   );
