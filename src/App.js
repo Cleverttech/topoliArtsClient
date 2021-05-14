@@ -3,11 +3,11 @@ import { Switch, Route, withRouter } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import axios from "axios";
 import config from "./config";
-import { makeStyles } from "@material-ui/core/styles";
-import RegisterForm from "./components/RegisterForm";
 import ForChildren from "./components/ForChildren";
 import LoginForm from "./components/LoginForm";
 import LandingPage from "./components/LandingPage";
+import TestLogin from "./components/TestLogin";
+import TestResgister from "./components/TestResgister";
 
 class App extends Component {
   state = {
@@ -25,14 +25,12 @@ class App extends Component {
     axios
       .get(`${config.API_URL}/api/user`, { withCredentials: true })
       .then((response) => {
-        console.log(response);
         this.setState({
           user: response.data,
           fetchingUser: false,
         });
       })
       .catch((error) => {
-        console.log(error);
         this.setState({
           error: error.data,
           fetchingUser: false,
@@ -40,14 +38,16 @@ class App extends Component {
       });
   }
 
-  handleRegister = (e) => {
-    e.preventDefault();
-    const { username, email, password } = e.target;
+  handleRegister = (values) => {
+    // e.preventDefault();
+    console.log("Checking", values);
+
+    const { username, email, password } = values;
 
     let newUser = {
-      username: username.value,
-      email: email.value,
-      password: password.value,
+      username,
+      email,
+      password,
     };
     axios
       .post(`${config.API_URL}/api/register`, newUser, {
@@ -115,11 +115,10 @@ class App extends Component {
   render() {
     const { error, user } = this.state;
     return (
-      <div className="App" >
+      <div className="App">
         <NavBar onLogout={this.handleLogout} user={user} />
-        <div style={{display: 'flex', justifyContent: 'center'}}>
 
-        </div>
+        <div style={{ display: "flex", justifyContent: "center" }}></div>
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/forchildren" component={ForChildren} />
@@ -128,9 +127,9 @@ class App extends Component {
             path="/register"
             render={(routeProps) => {
               return (
-                <RegisterForm
+                <TestResgister
                   error={error}
-                  onRegister={this.handleRegister}
+                  onSubmit={this.handleRegister}
                   {...routeProps}
                 />
               );
