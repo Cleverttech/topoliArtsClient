@@ -1,6 +1,7 @@
 import { React, Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import NavBar from "./components/NavBar";
+import TestNavBar from "./components/TestNavBar";
 import axios from "axios";
 import config from "./config";
 import ForChildren from "./components/ForChildren";
@@ -119,7 +120,7 @@ class App extends Component {
     const { error, user } = this.state;
     return (
       <div className="App">
-        <NavBar onLogout={this.handleLogout} user={user} />
+        <TestNavBar onLogout={this.handleLogout} user={user} />
 
         <div style={{ display: "flex", justifyContent: "center" }}></div>
         <Switch>
