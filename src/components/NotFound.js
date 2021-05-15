@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import data from '../animation/data.json'
-import LottieControl from './LottieControl'
+import LottieControlNotFound from './LottieControlNotFound'
 
 
 export default class NotFound extends Component {
@@ -11,7 +11,7 @@ export default class NotFound extends Component {
       <div>
          <br></br>
          <br></br>
-        <LottieControl animation={data} width={600} height={400}/>
+        <LottieControlNotFound animation={data} width={300} height={300}/>
         <Link to='/'>Go Home!</Link>
       </div>
     )

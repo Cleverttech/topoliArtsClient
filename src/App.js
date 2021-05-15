@@ -1,4 +1,4 @@
-import { React, Component, Fragment } from "react";
+import { React, Component} from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import TestNavBar from "./components/TestNavBar";
 import axios from "axios";
@@ -12,6 +12,9 @@ import Courses from "./components/Courses";
 import Users from "./components/Users";
 import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
+
+
+
 
 class App extends Component {
   state = {
@@ -147,7 +150,7 @@ class App extends Component {
     e.preventDefault();
     let name = e.target.name.value;
     let description = e.target.description.value;
-    let price = e.target.description.value;
+    let price = e.target.price.value;
     let image = e.target.courseImage.files[0];
     let formData = new FormData();
     formData.append("imageUrl", image);
@@ -198,7 +201,10 @@ class App extends Component {
           <Route exact path='/courses' render={(routeProps)=>{
             return (<Courses error={error} courses={courses} {...routeProps}/>)}}/>
           
-          <Route path='/users'  render={(routeProps)=>{
+          {/* <Route path='/artists' render={(routeProps)=>{
+            return (<Users error={error} userList={userList} {...routeProps}/>)}}/> */}
+
+          <Route path='/users' render={(routeProps)=>{
             return (<Users error={error} userList={userList} {...routeProps}/>)}}/>
           
           <Route exact path="/profile" render={(routeProps) => {
