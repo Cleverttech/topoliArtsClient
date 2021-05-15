@@ -9,6 +9,7 @@ import TestLogin from "./components/TestLogin";
 import TestResgister from "./components/TestResgister";
 // import BookReadingForm from "./components/BookReadingForm";
 import Courses from "./components/Courses";
+import Users from "./components/Users";
 import CoursesCreateForm from "./components/CoursesCreateForm";
 
 class App extends Component {
@@ -33,16 +34,28 @@ class App extends Component {
         });
       })
       .catch((error) => {
-        this.setState({
-          error: error.response.data,
-          fetchingUser: false,
-        });
+        console.log(error)
+        // this.setState({
+        //   error: error.response.data,
+        //   fetchingUser: false,
+        // });
       });
       
       axios.get(`${config.API_URL}/api/courses`, {withCredentials: true})
       .then((response) => {
         this.setState({
           courses: response.data
+        })
+      }).catch((err) => {
+        this.setState({
+          error: err.data
+        })
+      });
+      
+      axios.get(`${config.API_URL}/api/users`, {withCredentials: true})
+      .then((response) => {
+        this.setState({
+          userList: response.data
         })
       }).catch((err) => {
         this.setState({
@@ -103,9 +116,10 @@ class App extends Component {
         );
       })
       .catch((error) => {
-        this.setState({
-          error: error.response.data.error,
-        });
+        console.log(error)
+        // this.setState({
+        //   error: error.response.data.error,
+        // });
       });
   };
 
@@ -152,26 +166,27 @@ class App extends Component {
             this.props.history.push('/')
             })
         }).catch((error) => {
-            this.setState({
-              error: error.response.data.error
-            })
+            console.log(error)
         });
   });
 }
 
   render() {
-    const { error, user, courses } = this.state;
+    const { error, user, courses, userList } = this.state;
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
-        <CoursesCreateForm onCreate ={this.handleCreate}/>
-        <Route path='/courses' component={Courses}/>
+        <Route path='/users'  render={(routeProps)=>{
+          return <Users error={error} userList={userList} {...routeProps}/>}}/>
+        {/* <CoursesCreateForm onCreate ={this.handleCreate}/> */}
 
         <div style={{ display: "flex", justifyContent: "center" }}></div>
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/forchildren" component={ForChildren} />
-          
+          <Route exact path='/courses' render={(routeProps)=>{
+          return <Courses error={error} courses={courses} {...routeProps}/>}}
+          />
           
           <Route
             exact
