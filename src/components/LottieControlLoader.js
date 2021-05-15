@@ -3,7 +3,7 @@
 
 // export default function LottieControl (props){
 //     const { height, width, animation } = props
-	
+
 // 	const defaultOptions = {
 // 		loop: true,
 // 		autoplay: true,
@@ -15,11 +15,10 @@
 // 	return (
 // 		<div>
 // 			<Lottie
-// 				options={defaultOptions}  
-// 				height={height}  
+// 				options={defaultOptions}
+// 				height={height}
 // 				width={width }
 // 			/>
 // 		</div>
 // 	)
 // }
-

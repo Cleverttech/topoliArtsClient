@@ -1,8 +1,6 @@
-
 // import React, { Component } from 'react'
 // import loader from '../animation/loader.json'
 // import LottieControlLoader from './LottieControlNotFound'
-
 
 // export default class NotFound extends Component {
 //   render() {
@@ -15,4 +13,3 @@
 //     )
 //   }
 // }
-
