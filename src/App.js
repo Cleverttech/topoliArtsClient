@@ -216,7 +216,7 @@ class App extends Component {
           <Route exact path="/login" render={(routeProps) => {
             return ( <TestLogin error={error} onLogin={this.handleLogin} {...routeProps}/>);}}/>
           
-          <Route component={NotFound}/>
+          {/* <Route component={NotFound}/> */}
         </Switch>
       </div>
     );
