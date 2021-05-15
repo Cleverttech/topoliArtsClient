@@ -11,6 +11,8 @@ import TestResgister from "./components/TestResgister";
 import Courses from "./components/Courses";
 import Users from "./components/Users";
 import CoursesCreateForm from "./components/CoursesCreateForm";
+import NotFound from "./components/NotFound";
+
 
 class App extends Component {
   state = {
@@ -176,8 +178,7 @@ class App extends Component {
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
-        <Route path='/users'  render={(routeProps)=>{
-          return <Users error={error} userList={userList} {...routeProps}/>}}/>
+        
         {/* <CoursesCreateForm onCreate ={this.handleCreate}/> */}
 
         <div style={{ display: "flex", justifyContent: "center" }}></div>
@@ -185,35 +186,15 @@ class App extends Component {
           <Route exact path="/" component={LandingPage} />
           <Route path="/forchildren" component={ForChildren} />
           <Route exact path='/courses' render={(routeProps)=>{
-          return <Courses error={error} courses={courses} {...routeProps}/>}}
+            return (<Courses error={error} courses={courses} {...routeProps}/>)}}/>
+          <Route path='/users'  render={(routeProps)=>{
+            return (<Users error={error} userList={userList} {...routeProps}/>)}}/>
+          <Route exact path="/register" render={(routeProps) => {
+            return (<TestResgister error={error} onSubmit={this.handleRegister} {...routeProps}/>);}}
           />
-          
-          <Route
-            exact
-            path="/register"
-            render={(routeProps) => {
-              return (
-                <TestResgister
-                  error={error}
-                  onSubmit={this.handleRegister}
-                  {...routeProps}
-                />
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/login"
-            render={(routeProps) => {
-              return (
-                <TestLogin
-                  error={error}
-                  onLogin={this.handleLogin}
-                  {...routeProps}
-                />
-              );
-            }}
-          />
+          <Route exact path="/login" render={(routeProps) => {
+            return ( <TestLogin error={error} onLogin={this.handleLogin} {...routeProps}/>);}}/>
+          <Route component={NotFound}/>
         </Switch>
       </div>
     );
