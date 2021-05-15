@@ -5,7 +5,6 @@ import {
   Typography,
   Grid,
   Box,
-  Link,
   IconButton,
 } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
@@ -22,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   paper: {
-    padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
     backgroundColor: theme.palette.background.paper,

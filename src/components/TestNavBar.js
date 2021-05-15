@@ -1,18 +1,11 @@
 import React from "react";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import {  makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
@@ -20,7 +13,7 @@ import { Button } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   btn:{
     textDecoration: 'none',
-    color: 'inherit'
+    color: 'inherit',
   },
   grow: {
     flexGrow: 1,
@@ -110,24 +103,24 @@ export default function PrimarySearchAppBar(props) {
         <Link className={classes.btn} to='/courses' color="inherit" >Courses</Link>
       </MenuItem>
       <MenuItem onClick={handleMobileMenuClose}>
-      <Link className={classes.btn} to='/forchildren' color="inherit" >For Children</Link>
+        <Link className={classes.btn} to='/forchildren' color="inherit" >For Children</Link>
       </MenuItem>
       
       
       {
         user ?(
             <MenuItem onClick={handleMobileMenuClose}>
-                <Link className={classes.btn} onClick={onLogout} color="inherit" >Logout</Link>
+                <Link className={classes.btn} to='/' onClick={onLogout} color="inherit" >Logout</Link>
             </MenuItem>
         ):(
-            <>
+            <div>
                 <MenuItem onClick={handleMobileMenuClose}>
                   <Link className={classes.btn} to='/login' >Login</Link>
                 </MenuItem>
                 <MenuItem onClick={handleMobileMenuClose}>
                   <Link className={classes.btn} to='/register' color="inherit" >Register</Link>
                 </MenuItem>
-            </>
+            </div>
         )}
     </Menu>
   );
@@ -156,7 +149,7 @@ export default function PrimarySearchAppBar(props) {
                 {
                 user ?(
                   <MenuItem >
-                      <Link className={classes.btn} onClick={onLogout} color="inherit" >Logout</Link>
+                      <Link className={classes.btn} to='/' onClick={onLogout} color="inherit" >Logout</Link>
                   </MenuItem>
               ):(
                   <>
