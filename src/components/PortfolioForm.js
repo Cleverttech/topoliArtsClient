@@ -17,13 +17,25 @@ class PortfolioForm extends Component {
             accept="image/png,image/jpeg"
             placeholder="Choose cover"
           />
-          {/*
+
           <input
             type="file"
-            id="cover"
-            name="images"
+            id="image1"
+            name="image1"
             accept="image/png,image/jpeg"
-          /> */}
+          />
+          <input
+            type="file"
+            id="image2"
+            name="image2"
+            accept="image/png,image/jpeg"
+          />
+          <input
+            type="file"
+            id="image3"
+            name="image3"
+            accept="image/png,image/jpeg"
+          />
           <button type="submit">Create Portfolio</button>
         </form>
       </div>

@@ -1,4 +1,4 @@
-import { React, Component, Fragment } from "react";
+import { React, Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import TestNavBar from "./components/TestNavBar";
 import axios from "axios";
@@ -10,7 +10,7 @@ import TestResgister from "./components/TestResgister";
 // import BookReadingForm from "./components/BookReadingForm";
 import Courses from "./components/Courses";
 import Users from "./components/Users";
-
+import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
 
 class App extends Component {
@@ -150,46 +150,73 @@ class App extends Component {
     let title = e.target.title.value;
     let description = e.target.description.value;
     let cover = e.target.cover.files[0];
-    let formData = new FormData();
-    formData.append("imageUrl", cover);
+    let image1 = e.target.image1.files[0];
+    let image2 = e.target.image2.files[0];
+    let image3 = e.target.image3.files[0];
 
-    console.log(title, description, cover);
+    let formDataCover = new FormData();
+    let formDataImage1 = new FormData();
+    let formDataImage2 = new FormData();
+    let formDataImage3 = new FormData();
 
-    axios.post(`${config.API_URL}/api/upload`, formData).then((result) => {
-      return axios
-        .post(
-          `${config.API_URL}/api/portfolio/create`,
-          {
-            title,
-            description,
-            cover,
-            // image: result.data.image,
-          },
-          { withCredentials: true }
-        )
-        .then((response) => {
-          // 2. Once the server has successfully created a new portfolio, update your state that is visible to the user
-          this.setState(
-            {
-              portfolio: [response.data, ...this.state.portfolio],
-            },
-            () => {
-              //3. Once the state is update, redirect the user to the home page
-              this.props.history.push("/");
-            }
-          );
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
+    formDataCover.append("imageUrl", cover);
+    formDataImage1.append("imageUrl", image1);
+    formDataImage2.append("imageUrl", image2);
+    formDataImage3.append("imageUrl", image3);
+
+    axios
+      .post(`${config.API_URL}/api/upload`, formDataCover)
+      .then((response) => {
+        return axios
+          .post(`${config.API_URL}/api/upload`, formDataImage1)
+          .then((result) => {
+            return axios
+              .post(`${config.API_URL}/api/upload`, formDataImage2)
+              .then((result2) => {
+                return axios
+                  .post(`${config.API_URL}/api/upload`, formDataImage3)
+                  .then((result3) => {
+                    return axios
+                      .post(
+                        `${config.API_URL}/api/portfolio/create`,
+                        {
+                          title,
+                          description,
+                          cover: response.data.image,
+                          image1: [
+                            result.data.image,
+                            result2.data.image,
+                            result3.data.image,
+                          ],
+                        },
+                        { withCredentials: true }
+                      )
+                      .then((response) => {
+                        // 2.server has successfully created a new portfolio,
+                        this.setState(
+                          {
+                            portfolio: [response.data, ...this.state.portfolio],
+                          },
+                          () => {
+                            //3. Once the state is update, redirect the user to the home page
+                            this.props.history.push("/");
+                          }
+                        );
+                      });
+                  });
+              });
+          })
+          .catch((error) => {
+            console.log("Create did not work");
+          });
+      });
   }
 
   handleCreate(e) {
     e.preventDefault();
     let name = e.target.name.value;
     let description = e.target.description.value;
-    let price = e.target.description.value;
+    let price = e.target.price.value;
     let image = e.target.courseImage.files[0];
     let formData = new FormData();
     formData.append("imageUrl", image);
@@ -229,17 +256,14 @@ class App extends Component {
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
-        <Route
-          path="/users"
-          render={(routeProps) => {
-            return <Users error={error} userList={userList} {...routeProps} />;
-          }}
-        />
 
         <div style={{ display: "flex", justifyContent: "center" }}></div>
+
         <Switch>
           <Route exact path="/" component={LandingPage} />
+
           <Route path="/forchildren" component={ForChildren} />
+
           <Route
             exact
             path="/courses"
@@ -249,6 +273,19 @@ class App extends Component {
               );
             }}
           />
+
+          {/* <Route path='/artists' render={(routeProps)=>{
+            return (<Users error={error} userList={userList} {...routeProps}/>)}}/> */}
+
+          <Route
+            path="/users"
+            render={(routeProps) => {
+              return (
+                <Users error={error} userList={userList} {...routeProps} />
+              );
+            }}
+          />
+
           <Route
             exact
             path="/profile"
@@ -276,6 +313,7 @@ class App extends Component {
               );
             }}
           />
+
           <Route
             exact
             path="/login"
@@ -289,6 +327,8 @@ class App extends Component {
               );
             }}
           />
+
+          {/* <Route component={NotFound} /> */}
         </Switch>
       </div>
     );

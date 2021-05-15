@@ -1,3 +1,4 @@
+import { Button, Grid } from '@material-ui/core'
 import React, { Component } from 'react'
 
 
@@ -7,13 +8,22 @@ export default class Courses extends Component {
         const {courses} = this.props
   
         return (
-            <div>
+            <div style={{display: 'flex', flexDirection: 'column', alignItems:'center'}}>
                 <h1>Courses</h1>
                 {
                     courses.map((e)=>{
-                        console.log(e.mentor.username)
+
                         return <div key={e._id}>
-                                    {e.mentor._id}
+                                <div>
+                                <br></br>
+                                    <img style={{width: '40ch'}} src={e.image}/>
+                                    <div>
+                                        <h3>{e.name}</h3>
+                                        <Button variant="contained" color="primary">Enroll</Button>
+                                        
+                                    </div>
+                                    
+                                </div>
                                 </div>
                 })
                 }

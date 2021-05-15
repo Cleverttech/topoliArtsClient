@@ -118,18 +118,13 @@ export default function PrimarySearchAppBar(props) {
             </Link>
           </MenuItem>
           <MenuItem onClick={handleMobileMenuClose}>
-            <Link
-              className={classes.btn}
-              to="/"
-              onClick={onLogout}
-              color="inherit"
-            >
+            <Link className={classes.btn} to="/" onClick={onLogout} color="inherit">
               Logout
             </Link>
           </MenuItem>
         </>
       ) : (
-        <div>
+        <>
           <MenuItem onClick={handleMobileMenuClose}>
             <Link className={classes.btn} to="/login">
               Login
@@ -140,7 +135,7 @@ export default function PrimarySearchAppBar(props) {
               Register
             </Link>
           </MenuItem>
-        </div>
+        </>
       )}
     </Menu>
   );
@@ -173,23 +168,19 @@ export default function PrimarySearchAppBar(props) {
               </Link>
             </MenuItem>
             {user ? (
-              <>
-                <MenuItem>
-                  <MenuItem onClick={handleMobileMenuClose}>
-                    <Link className={classes.btn} to="/profile" color="inherit">
-                      Profile
-                    </Link>
-                  </MenuItem>
-                  <Link
-                    className={classes.btn}
-                    to="/"
-                    onClick={onLogout}
-                    color="inherit"
-                  >
-                    Logout
-                  </Link>
-                </MenuItem>
-              </>
+                    <>
+                      <MenuItem onClick={handleMobileMenuClose}>
+                        <Link className={classes.btn} to="/profile" color="inherit">
+                          Profile
+                        </Link>
+                      </MenuItem>
+                      
+                      <MenuItem onClick={handleMobileMenuClose}>
+                        <Link className={classes.btn} to="/" onClick={onLogout} color="inherit">
+                          Logout
+                        </Link>
+                      </MenuItem>
+                    </>
             ) : (
               <>
                 <MenuItem>
