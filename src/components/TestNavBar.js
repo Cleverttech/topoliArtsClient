@@ -19,6 +19,9 @@ import { Button } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
+  btn:{
+    color: 'green'
+  },
   grow: {
     flexGrow: 1,
   },
@@ -29,43 +32,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
-    },
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
     },
   },
   sectionDesktop: {
@@ -139,25 +105,25 @@ export default function PrimarySearchAppBar(props) {
         <Link className='btn' to='/artists' color="inherit" >Artists</Link>
       </MenuItem>
       <MenuItem onClick={handleMobileMenuClose}>
-        <Link className='btn' to='/courses' color="inherit" >Programs</Link>
+        <Link className='btn' to='/courses' color="inherit" >Courses</Link>
       </MenuItem>
       <MenuItem onClick={handleMobileMenuClose}>
-        <Button component={Link} to='/forchildren' color="inherit" >For Children</Button>
+      <Link className='btn' to='/forchildren' color="inherit" >For Children</Link>
       </MenuItem>
       
       
       {
         user ?(
-            <MenuItem>
-                <Button onClick={onLogout} color="inherit" >Logout</Button>
+            <MenuItem onClick={handleMobileMenuClose}>
+                <Link className={classes.btn} onClick={onLogout} color="inherit" >Logout</Link>
             </MenuItem>
         ):(
             <>
-                <MenuItem>
-                    <Button component={Link} to='/login' color="inherit" >Login</Button>
+                <MenuItem onClick={handleMobileMenuClose}>
+                  <Link className={classes.btn} to='/login' >Login</Link>
                 </MenuItem>
-                <MenuItem>
-                    <Button component={Link} to='/register' color="inherit" >Register</Button>
+                <MenuItem onClick={handleMobileMenuClose}>
+                  <Link className='btn' to='/register' color="inherit" >Register</Link>
                 </MenuItem>
             </>
         )}
@@ -178,32 +144,30 @@ export default function PrimarySearchAppBar(props) {
           
           <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-                <MenuItem>
-                    <Button component={Link} to='/artists' color="inherit" >Artists</Button>
-                </MenuItem>
-                <MenuItem>
-                    <Button component={Link} to='/courses' color="inherit" >Programs</Button>
-                </MenuItem>
-                <MenuItem>
-                    <Button component={Link} to='/forchildren' color="inherit" >For Children</Button>
-                </MenuItem>
+              <MenuItem >
+                <Link className='link' to='/artists' color="inherit" >Artists</Link>
+              </MenuItem>
+              <MenuItem >
+                <Link className='btn' to='/courses' color="inherit" >Courses</Link>
+              </MenuItem>
+              <MenuItem >
+                <Link className='btn' to='/forchildren' color="inherit" >For Children</Link>
+              </MenuItem>
                 {
                 user ?(
-                    
-                    <MenuItem>
-                        <Button onClick={onLogout} color="inherit" >Logout</Button>
-                    </MenuItem>
-                    
-                    ):(
-                        <>
-                            <MenuItem>
-                                <Button component={Link} to='/login' color="inherit" >Login</Button>
-                            </MenuItem>
-                            <MenuItem>
-                                <Button component={Link} to='/register' color="inherit" >Register</Button>
-                            </MenuItem>
-                        </>
-                    )}
+                  <MenuItem >
+                      <Link onClick={onLogout} color="inherit" >Logout</Link>
+                  </MenuItem>
+              ):(
+                  <>
+                      <MenuItem >
+                        <Link className={classes.btn} to='/login' >Login</Link>
+                      </MenuItem>
+                      <MenuItem >
+                        <Button  to='/register' color="inherit" >Register</Button>
+                      </MenuItem>
+                  </>
+              )}
                 
             </div>
           <div className={classes.sectionMobile}>

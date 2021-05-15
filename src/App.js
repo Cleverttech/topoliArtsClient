@@ -7,6 +7,7 @@ import ForChildren from "./components/ForChildren";
 import LandingPage from "./components/LandingPage";
 import TestLogin from "./components/TestLogin";
 import TestResgister from "./components/TestResgister";
+import BookReadingForm from "./components/BookReadingForm";
 
 class App extends Component {
   state = {
@@ -115,6 +116,7 @@ class App extends Component {
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
+        <BookReadingForm />
 
         <div style={{ display: "flex", justifyContent: "center" }}></div>
         <Switch>

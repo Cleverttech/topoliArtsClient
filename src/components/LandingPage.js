@@ -8,7 +8,7 @@ export default class LandingPage extends Component {
         return (
             <div>
                 <Grid container direction="column" justify="center" alignItems="center">
-                    <Carousel/>
+                    
                     <RandomPhrases/>
                 </Grid>
             </div>
