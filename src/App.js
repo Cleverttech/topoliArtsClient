@@ -19,6 +19,7 @@ class App extends Component {
     fetchingUser: true,
     error: null,
     courses: [],
+    portfolio: [],
     filteredCourses: [],
     artists: [],
     userList: [],
@@ -143,6 +144,47 @@ class App extends Component {
       });
   };
 
+  handleCreatePortfolio(e) {
+    e.preventDefault();
+
+    let title = e.target.title.value;
+    let description = e.target.description.value;
+    let cover = e.target.cover.files[0];
+    let formData = new FormData();
+    formData.append("imageUrl", cover);
+
+    console.log(title, description, cover);
+
+    axios.post(`${config.API_URL}/api/upload`, formData).then((result) => {
+      return axios
+        .post(
+          `${config.API_URL}/api/portfolio/create`,
+          {
+            title,
+            description,
+            cover,
+            // image: result.data.image,
+          },
+          { withCredentials: true }
+        )
+        .then((response) => {
+          // 2. Once the server has successfully created a new portfolio, update your state that is visible to the user
+          this.setState(
+            {
+              portfolio: [response.data, ...this.state.portfolio],
+            },
+            () => {
+              //3. Once the state is update, redirect the user to the home page
+              this.props.history.push("/");
+            }
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+  }
+
   handleCreate(e) {
     e.preventDefault();
     let name = e.target.name.value;
@@ -211,7 +253,13 @@ class App extends Component {
             exact
             path="/profile"
             render={(routeProps) => {
-              return <Profile onCreate={this.handleCreate} {...routeProps} />;
+              return (
+                <Profile
+                  onCreate={this.handleCreate}
+                  onCreatePortfolio={this.handleCreatePortfolio}
+                  {...routeProps}
+                />
+              );
             }}
           />
 

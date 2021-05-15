@@ -1,29 +1,33 @@
-import React from "react";
+import React, { Component } from "react";
 
-function PortfolioForm() {
-  return (
-    <div>
-      <form>
-        <label>title</label>
-        <input name="title" type="text" />
-        <label>description</label>
-        <input name="description" type="text" />
-        <label for="cover">Upload cover picture:</label>
-        <input
-          type="file"
-          id="cover"
-          name="cover"
-          accept="image/png,image/jpeg"
-        />
-        <label for="cover">upload carousel images:</label>
-        <input
-          type="file"
-          id="cover"
-          name="cover"
-          accept="image/png,image/jpeg"
-        />
-      </form>
-    </div>
-  );
+class PortfolioForm extends Component {
+  render() {
+    const { onCreatePortfolio } = this.props;
+    return (
+      <div>
+        <form onSubmit={onCreatePortfolio}>
+          <input name="title" type="text" placeholder="title" />
+
+          <input name="description" type="text" placeholder="description" />
+
+          <input
+            type="file"
+            id="cover"
+            name="cover"
+            accept="image/png,image/jpeg"
+            placeholder="Choose cover"
+          />
+          {/*
+          <input
+            type="file"
+            id="cover"
+            name="images"
+            accept="image/png,image/jpeg"
+          /> */}
+          <button type="submit">Create Portfolio</button>
+        </form>
+      </div>
+    );
+  }
 }
 export default PortfolioForm;
