@@ -1,5 +1,8 @@
 # Topoli Arts
 
+#4f4f4f Anthrazit(gray)
+#ff524e Button(accent)
+hsla(0,0%,100%,.2) (onhover)
 <br>
 
 ## Description

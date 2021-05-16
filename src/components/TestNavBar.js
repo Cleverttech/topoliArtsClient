@@ -118,7 +118,12 @@ export default function PrimarySearchAppBar(props) {
             </Link>
           </MenuItem>
           <MenuItem onClick={handleMobileMenuClose}>
-            <Link className={classes.btn} to="/" onClick={onLogout} color="inherit">
+            <Link
+              className={classes.btn}
+              to="/"
+              onClick={onLogout}
+              color="inherit"
+            >
               Logout
             </Link>
           </MenuItem>
@@ -168,19 +173,24 @@ export default function PrimarySearchAppBar(props) {
               </Link>
             </MenuItem>
             {user ? (
-                    <>
-                      <MenuItem onClick={handleMobileMenuClose}>
-                        <Link className={classes.btn} to="/profile" color="inherit">
-                          Profile
-                        </Link>
-                      </MenuItem>
-                      
-                      <MenuItem onClick={handleMobileMenuClose}>
-                        <Link className={classes.btn} to="/" onClick={onLogout} color="inherit">
-                          Logout
-                        </Link>
-                      </MenuItem>
-                    </>
+              <>
+                <MenuItem onClick={handleMobileMenuClose}>
+                  <Link className={classes.btn} to="/profile" color="inherit">
+                    Profile
+                  </Link>
+                </MenuItem>
+
+                <MenuItem onClick={handleMobileMenuClose}>
+                  <Link
+                    className={classes.btn}
+                    to="/"
+                    onClick={onLogout}
+                    color="inherit"
+                  >
+                    Logout
+                  </Link>
+                </MenuItem>
+              </>
             ) : (
               <>
                 <MenuItem>

@@ -200,6 +200,7 @@ class App extends Component {
                           () => {
                             //3. Once the state is update, redirect the user to the home page
                             this.props.history.push("/");
+                            console.log(this.state.portfolio);
                           }
                         );
                       });
@@ -207,7 +208,7 @@ class App extends Component {
               });
           })
           .catch((error) => {
-            console.log("Create did not work");
+            console.log(error, "Create did not work");
           });
       });
   }
@@ -250,14 +251,43 @@ class App extends Component {
         });
     });
   }
+  handleDeleteCourse = (courseId) => {
+    //1. Make an API call to the server side Route to delete that specific course
+    let filteredCourseid = this.state.courses.filter((course) => {
+      return course._id === courseId;
+    });
+    if (filteredCourseid) {
+      axios
+        .delete(`${config.API_URL}/api/courses/${courseId}`, {
+          withCredentials: true,
+        })
+        .then(() => {
+          let filteredCourses = this.state.courses.filter((course) => {
+            return course._id !== courseId;
+          });
+
+          this.setState(
+            {
+              courses: filteredCourses,
+            },
+            () => {
+              this.props.history.push("/");
+            }
+          );
+        })
+        .catch((err) => {
+          console.log("Delete course failed", err);
+        });
+    } else {
+      console.log("delete failed");
+    }
+  };
 
   render() {
     const { error, user, courses, userList } = this.state;
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
-
-        <div style={{ display: "flex", justifyContent: "center" }}></div>
 
         <Switch>
           <Route exact path="/" component={LandingPage} />
@@ -292,6 +322,9 @@ class App extends Component {
             render={(routeProps) => {
               return (
                 <Profile
+                  user={user}
+                  courses={courses}
+                  onDeleteCourse={this.handleDeleteCourse}
                   onCreate={this.handleCreate}
                   onCreatePortfolio={this.handleCreatePortfolio}
                   {...routeProps}
