@@ -10,7 +10,7 @@ import TestResgister from "./components/TestResgister";
 // import BookReadingForm from "./components/BookReadingForm";
 import Courses from "./components/Courses";
 import Users from "./components/Users";
-import NotFound from "./components/NotFound";
+// import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
 
 class App extends Component {
@@ -361,7 +361,35 @@ class App extends Component {
             }}
           />
 
-          {/* <Route component={NotFound} /> */}
+          <Route
+            exact
+            path="/register"
+            render={(routeProps) => {
+              return (
+                <TestResgister
+                  error={error}
+                  onSubmit={this.handleRegister}
+                  {...routeProps}
+                />
+              );
+            }}
+          />
+
+          <Route
+            exact
+            path="/login"
+            render={(routeProps) => {
+              return (
+                <TestLogin
+                  error={error}
+                  onLogin={this.handleLogin}
+                  {...routeProps}
+                />
+              );
+            }}
+          />
+
+          {/* <Route component={NotFound}/> */}
         </Switch>
       </div>
     );
