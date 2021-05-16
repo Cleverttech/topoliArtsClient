@@ -12,10 +12,12 @@ import Courses from "./components/Courses";
 import Users from "./components/Users";
 // import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
+import CoursesCreateForm from "./components/CoursesCreateForm";
 
 class App extends Component {
   state = {
     user: null,
+    newUser: null,
     fetchingUser: true,
     error: null,
     courses: [],
@@ -110,6 +112,7 @@ class App extends Component {
     axios
       .post(`${config.API_URL}/api/login`, newUser, { withCredentials: true })
       .then((response) => {
+        console.log(response.data)
         this.setState(
           {
             user: response.data,
@@ -213,6 +216,7 @@ class App extends Component {
   }
 
   handleCreate(e) {
+    
     e.preventDefault();
     let name = e.target.name.value;
     let description = e.target.description.value;
@@ -221,27 +225,16 @@ class App extends Component {
     let formData = new FormData();
     formData.append("imageUrl", image);
 
-    axios.post(`${config.API_URL}/api/upload`, formData).then((result) => {
-      return axios
-        .post(
-          `${config.API_URL}/api/courses/create`,
-          {
-            name,
-            description,
-            price,
-            image: result.data.image,
-          },
-          { withCredentials: true }
-        )
+    axios.post(`${config.API_URL}/api/upload`, formData)
+    .then((result) => {
+      return axios.post(`${config.API_URL}/api/courses/create`,{name, description, price, image: result.data.image}, { withCredentials: true })
         .then((response) => {
-          // 2. Once the server has successfully created a new todo, update your state that is visible to the user
-          this.setState(
-            {
-              courses: [response.data, ...this.state.courses],
-            },
-            () => {
+          
+          this.setState({
+            courses: [result.data],
+          },() => {
               //3. Once the state is update, redirect the user to the home page
-              this.props.history.push("/");
+              this.props.history.push("/courses");
             }
           );
         })
@@ -251,14 +244,35 @@ class App extends Component {
     });
   }
 
+  handleSubmitPic(e){
+    
+    e.preventDefault();
+    let img= e.target.img.files[0]
+    let formData = new FormData();
+    formData.append('imageUrl', img);
+    
+    
+    
+    axios.post(`${config.API_URL}/api/upload`, formData, {withCredentials: true})
+    .then((result) => {      
+      return axios.patch(`${config.API_URL}/api/user`, {img: result.data}, {withCredentials: true} )
+      .then((result1) => {
+        console.log(result1.data)
+        let newUser = result1.data        
+        this.setState({
+          user: newUser
+        })
+      })
+    }).catch((err) => {
+      console.log(err)
+    });
+  }
+
   render() {
     const { error, user, courses, userList } = this.state;
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
-
-        <div style={{ display: "flex", justifyContent: "center" }}></div>
-
         <Switch>
           <Route exact path="/" component={LandingPage} />
 
@@ -281,7 +295,7 @@ class App extends Component {
             return (<Users error={error} userList={userList} {...routeProps}/>)}}/>
           
           <Route exact path="/profile" render={(routeProps) => {
-            return (<Profile onCreate={this.handleCreate} {...routeProps} />);}}/>
+            return (<Profile onSubmitPic={this.handleSubmitPic} onCreate={this.handleCreate} user={user} courses={courses}{...routeProps} />);}}/>
 
           <Route exact path="/register" render={(routeProps) => {
             return (<TestResgister error={error} onSubmit={this.handleRegister} {...routeProps}/>);}}/>          

@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 
 
-export default class CoursesCreateForm extends Component {
 
-
-    render() {
-        const {onCreate} = this.props
+class CoursesCreateForm extends Component {
+    render() {   
+      const { onCreate } = this.props
         return (
           <form onSubmit={onCreate}>
             <input name="name" type="text" placeholder="Enter course name"/>
@@ -17,3 +16,5 @@ export default class CoursesCreateForm extends Component {
         )
       }
     }
+
+    export default CoursesCreateForm
