@@ -22,7 +22,13 @@ class Profile extends Component {
         <button>Submit</button>
         </form>
         <PortfolioForm onCreatePortfolio={onCreatePortfolio} /> <br></br>
-        <CoursesCreateForm onCreate={onCreate}/>
+        <CoursesCreateForm onCreate={onCreate} />
+        <MyCoursesByMentor
+          error={error}
+          courses={courses}
+          user={user}
+          onDeleteCourse={onDeleteCourse}
+        />
       </div>
     );
   }

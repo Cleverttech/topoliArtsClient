@@ -203,6 +203,7 @@ class App extends Component {
                           () => {
                             //3. Once the state is update, redirect the user to the home page
                             this.props.history.push("/");
+                            console.log(this.state.portfolio);
                           }
                         );
                       });
@@ -210,7 +211,7 @@ class App extends Component {
               });
           })
           .catch((error) => {
-            console.log("Create did not work");
+            console.log(error, "Create did not work");
           });
       });
   }
@@ -243,6 +244,37 @@ class App extends Component {
         });
     });
   }
+  handleDeleteCourse = (courseId) => {
+    //1. Make an API call to the server side Route to delete that specific course
+    let filteredCourseid = this.state.courses.filter((course) => {
+      return course._id === courseId;
+    });
+    if (filteredCourseid) {
+      axios
+        .delete(`${config.API_URL}/api/courses/${courseId}`, {
+          withCredentials: true,
+        })
+        .then(() => {
+          let filteredCourses = this.state.courses.filter((course) => {
+            return course._id !== courseId;
+          });
+
+          this.setState(
+            {
+              courses: filteredCourses,
+            },
+            () => {
+              this.props.history.push("/");
+            }
+          );
+        })
+        .catch((err) => {
+          console.log("Delete course failed", err);
+        });
+    } else {
+      console.log("delete failed");
+    }
+  };
 
   handleSubmitPic(e){
     
@@ -291,18 +323,88 @@ class App extends Component {
           {/* <Route path='/artists' render={(routeProps)=>{
             return (<Users error={error} userList={userList} {...routeProps}/>)}}/> */}
 
-          <Route path='/users' render={(routeProps)=>{
-            return (<Users error={error} userList={userList} {...routeProps}/>)}}/>
-          
-          <Route exact path="/profile" render={(routeProps) => {
-            return (<Profile onSubmitPic={this.handleSubmitPic} onCreate={this.handleCreate} user={user} courses={courses}{...routeProps} />);}}/>
+          <Route
+            path="/users"
+            render={(routeProps) => {
+              return (
+                <Users error={error} userList={userList} {...routeProps} />
+              );
+            }}
+          />
 
-          <Route exact path="/register" render={(routeProps) => {
-            return (<TestResgister error={error} onSubmit={this.handleRegister} {...routeProps}/>);}}/>          
-          
-          <Route exact path="/login" render={(routeProps) => {
-            return ( <TestLogin error={error} onLogin={this.handleLogin} {...routeProps}/>);}}/>
-          
+          <Route
+            exact
+            path="/profile"
+            render={(routeProps) => {
+              return (
+                <Profile
+                  user={user}
+                  courses={courses}
+                  onDeleteCourse={this.handleDeleteCourse}
+                  onCreate={this.handleCreate}
+                  onCreatePortfolio={this.handleCreatePortfolio}
+                  {...routeProps}
+                />
+              );
+            }}
+          />
+
+          <Route
+            exact
+            path="/register"
+            render={(routeProps) => {
+              return (
+                <TestResgister
+                  error={error}
+                  onSubmit={this.handleRegister}
+                  {...routeProps}
+                />
+              );
+            }}
+          />
+
+          <Route
+            exact
+            path="/login"
+            render={(routeProps) => {
+              return (
+                <TestLogin
+                  error={error}
+                  onLogin={this.handleLogin}
+                  {...routeProps}
+                />
+              );
+            }}
+          />
+
+          <Route
+            exact
+            path="/register"
+            render={(routeProps) => {
+              return (
+                <TestResgister
+                  error={error}
+                  onSubmit={this.handleRegister}
+                  {...routeProps}
+                />
+              );
+            }}
+          />
+
+          <Route
+            exact
+            path="/login"
+            render={(routeProps) => {
+              return (
+                <TestLogin
+                  error={error}
+                  onLogin={this.handleLogin}
+                  {...routeProps}
+                />
+              );
+            }}
+          />
+
           {/* <Route component={NotFound}/> */}
         </Switch>
       </div>
