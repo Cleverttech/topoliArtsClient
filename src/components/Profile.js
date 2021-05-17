@@ -8,26 +8,36 @@ class Profile extends Component {
   render() {
     const {
       onCreate,
-      onDeleteCourse,
       onCreatePortfolio,
       user,
-      error,
       courses,
+      onSubmitPic,
+      error,
+      onDeleteCourse,
     } = this.props;
-    return (
-      <div>
-        <h1>Profile page</h1>
-        <PortfolioForm onCreatePortfolio={onCreatePortfolio} /> <br></br>
-        <CoursesCreateForm onCreate={onCreate} />
-        <MyCoursesByMentor
-          error={error}
-          courses={courses}
-          user={user}
-          onDeleteCourse={onDeleteCourse}
-        />
-        <MyCoursesByStudent />
-      </div>
-    );
+    if (!user) {
+      return <p>Loading...</p>;
+    } else {
+      return (
+        <div>
+          <h1>Profile page</h1>
+          <img style={{ width: "150px" }} src={user.image} alt="profpic" />
+          <form onSubmit={onSubmitPic}>
+            <input name="img" type="file" placeholder="Select image" />
+            <button>Submit</button>
+          </form>
+          <PortfolioForm onCreatePortfolio={onCreatePortfolio} /> <br></br>
+          <CoursesCreateForm onCreate={onCreate} />
+          <MyCoursesByMentor
+            error={error}
+            courses={courses}
+            user={user}
+            onDeleteCourse={onDeleteCourse}
+          />
+          <MyCoursesByStudent />
+        </div>
+      );
+    }
   }
 }
 export default Profile;
