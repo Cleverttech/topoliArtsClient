@@ -20,22 +20,12 @@ class PortfolioForm extends Component {
 
           <input
             type="file"
-            id="image1"
-            name="image1"
+            id="images"
+            name="images"
             accept="image/png,image/jpeg"
+            multiple
           />
-          <input
-            type="file"
-            id="image2"
-            name="image2"
-            accept="image/png,image/jpeg"
-          />
-          <input
-            type="file"
-            id="image3"
-            name="image3"
-            accept="image/png,image/jpeg"
-          />
+
           <button type="submit">Create Portfolio</button>
         </form>
       </div>

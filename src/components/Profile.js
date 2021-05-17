@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import CoursesCreateForm from "./CoursesCreateForm";
 import PortfolioForm from "./PortfolioForm";
 import MyCoursesByMentor from "./MyCoursesByMentor";
-import { Route } from "react-router";
-import { Link } from "react-router-dom";
+import MyCoursesByStudent from "./MyCoursesByStudent";
 
 class Profile extends Component {
   render() {
@@ -26,6 +25,7 @@ class Profile extends Component {
           user={user}
           onDeleteCourse={onDeleteCourse}
         />
+        <MyCoursesByStudent />
       </div>
     );
   }

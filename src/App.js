@@ -144,74 +144,49 @@ class App extends Component {
       });
   };
 
-  handleCreatePortfolio(e) {
+  handleCreatePortfolio = async (e) => {
     e.preventDefault();
 
     let title = e.target.title.value;
     let description = e.target.description.value;
     let cover = e.target.cover.files[0];
-    let image1 = e.target.image1.files[0];
-    let image2 = e.target.image2.files[0];
-    let image3 = e.target.image3.files[0];
+    let images = e.target.images.files;
 
     let formDataCover = new FormData();
-    let formDataImage1 = new FormData();
-    let formDataImage2 = new FormData();
-    let formDataImage3 = new FormData();
-
+    let formDataImages = new FormData();
+    for (var i = 0; i < images.length; i++) {
+      formDataImages.append("imageUrl", images[i]);
+    }
     formDataCover.append("imageUrl", cover);
-    formDataImage1.append("imageUrl", image1);
-    formDataImage2.append("imageUrl", image2);
-    formDataImage3.append("imageUrl", image3);
 
-    axios
-      .post(`${config.API_URL}/api/upload`, formDataCover)
-      .then((response) => {
-        return axios
-          .post(`${config.API_URL}/api/upload`, formDataImage1)
-          .then((result) => {
-            return axios
-              .post(`${config.API_URL}/api/upload`, formDataImage2)
-              .then((result2) => {
-                return axios
-                  .post(`${config.API_URL}/api/upload`, formDataImage3)
-                  .then((result3) => {
-                    return axios
-                      .post(
-                        `${config.API_URL}/api/portfolio/create`,
-                        {
-                          title,
-                          description,
-                          cover: response.data.image,
-                          image1: [
-                            result.data.image,
-                            result2.data.image,
-                            result3.data.image,
-                          ],
-                        },
-                        { withCredentials: true }
-                      )
-                      .then((response) => {
-                        // 2.server has successfully created a new portfolio,
-                        this.setState(
-                          {
-                            portfolio: [response.data, ...this.state.portfolio],
-                          },
-                          () => {
-                            //3. Once the state is update, redirect the user to the home page
-                            this.props.history.push("/");
-                            console.log(this.state.portfolio);
-                          }
-                        );
-                      });
-                  });
-              });
-          })
-          .catch((error) => {
-            console.log(error, "Create did not work");
-          });
-      });
-  }
+    // append a flag
+    // formDataCover.append("singleImage", true);
+    // formDataImages.append("singleImage", false);
+    const [coverImage, allImages] = await Promise.all([
+      axios.post(`${config.API_URL}/api/upload`, formDataCover),
+      axios.post(`${config.API_URL}/api/upload`, formDataImages),
+    ]);
+    console.log(coverImage, allImages);
+    const createFormData = await axios.post(
+      `${config.API_URL}/api/portfolio/create`,
+      {
+        title,
+        description,
+        cover: coverImage.data.images[0],
+        images: allImages.data.images,
+      },
+      { withCredentials: true }
+    );
+    // 2.server has successfully created a new portfolio,
+    this.setState(
+      {
+        portfolio: [createFormData.data, ...this.state.portfolio],
+      },
+      () => {
+        this.props.history.push("/");
+      }
+    );
+  };
 
   handleCreate(e) {
     e.preventDefault();
@@ -361,7 +336,7 @@ class App extends Component {
             }}
           />
 
-          {/* <Route component={NotFound} /> */}
+          <Route component={NotFound} />
         </Switch>
       </div>
     );
