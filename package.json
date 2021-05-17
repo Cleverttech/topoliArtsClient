@@ -19,7 +19,11 @@
     "react-lottie": "^1.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
+<<<<<<< HEAD
     "socket.io-client": "^4.1.1",
+=======
+    "socket.io": "^4.1.1",
+>>>>>>> d08f9a641909276d907afeae098a0178e6e11568
     "yup": "^0.32.9"
   },
   "scripts": {
