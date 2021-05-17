@@ -14,8 +14,13 @@ import Profile from "./components/Profile";
 import CoursesCreateForm from "./components/CoursesCreateForm";
 import ChatPage from "./components/ChatPage";
 import Stripe from "./components/Stripe";
+<<<<<<< HEAD
 import Artists from "./components/Artists";
 import PortfolioDetails from "./components/PortfolioDetails";
+=======
+import Artists from './components/Artists'
+import PortfolioDetails from './components/PortfolioDetails'
+>>>>>>> 8483e29cf41426c20fef0c43fdfb0e7031950ffc
 // import './stripe.css'
 
 class App extends Component {
@@ -314,29 +319,11 @@ class App extends Component {
             }}
           />
 
-          <Route
-            exact
-            path="/artists"
-            render={(routeProps) => {
-              return (
-                <Artists error={error} userList={userList} {...routeProps} />
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/artists/:artistId"
-            // component={PortfolioDetails}
-            render={(routeProps) => {
-              return (
-                <PortfolioDetails
-                  user={user}
-                  courses={courses}
-                  {...routeProps}
-                />
-              );
-            }}
-          />
+          <Route exact path='/artists' render={(routeProps)=>{
+            return (<Artists error={error} userList={userList} {...routeProps}/>)}}/>
+          
+          <Route exact path='/artists/:artistId' render={(routeProps)=>{
+            return (<PortfolioDetails user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
 
           <Route
             path="/users"
@@ -359,6 +346,7 @@ class App extends Component {
                   onCreatePortfolio={this.handleCreatePortfolio}
                   courses={courses}
                   onSubmitPic={this.handleSubmitPic}
+                  onDeleteCourse={this.handleDeleteCourse}
                   {...routeProps}
                 />
               );

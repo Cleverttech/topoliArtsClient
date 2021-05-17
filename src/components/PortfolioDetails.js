@@ -1,41 +1,44 @@
-import React, { Component } from "react";
 import axios from "axios";
+import React, { Component } from "react";
 import config from "../config";
 
-class PortfolioDetails extends Component {
+export default class PortfolioDetails extends Component {
   state = {
-    portfolio: {},
+    portfolio: null,
   };
-  componentDidMount = () => {
+  componentDidMount() {
     const artistId = this.props.match.params.artistId;
     axios
-      .get(`${config.API_URL}/api/artists/${artistId}`, {
-        withCredentials: true,
-      })
+      .get(`${config.API_URL}/api/artists/${artistId}`)
       .then((result) => {
-        console.log(result.data);
         this.setState({
           portfolio: result.data.portfolio,
         });
       })
       .catch((err) => {
-        console.log("failed miserably");
+        console.log(err);
       });
-  };
+  }
+
   render() {
-    const { portfolio } = this.state;
-    const { userList, user, routeProps } = this.props;
-    console.log("Manually sent props", userList, user, routeProps);
+    const portfolio = this.state.portfolio;
+
+    if (!portfolio) {
+      return <p>Loading . . . </p>;
+    }
+
     return (
       <div>
-        <h2>This is the portfolio Details page</h2>
-        <p>{portfolio.cover}</p>
-        <p>{portfolio.description}</p>
-
-        <p>{portfolio.description}</p>
-        <p></p>
+        <h1>This is the specific portfolio</h1>
+        <img src={portfolio.cover} alt={portfolio.cover} />
+        {portfolio.images.map((e, i) => {
+          return (
+            <div key={e[i]}>
+              <img src={e} />
+            </div>
+          );
+        })}
       </div>
     );
   }
 }
-export default PortfolioDetails;
