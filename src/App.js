@@ -161,8 +161,8 @@ class App extends Component {
     formDataCover.append("imageUrl", cover);
 
     const [coverImage, allImages] = await Promise.all([
-      axios.post(`${config.API_URL}/api/upload`, formDataCover),
-      axios.post(`${config.API_URL}/api/upload`, formDataImages),
+      axios.post(`${config.API_URL}/api/uploadmultiple`, formDataCover),
+      axios.post(`${config.API_URL}/api/uploadmultiple`, formDataImages),
     ]);
     console.log(coverImage, allImages);
     const createFormData = await axios.post(
@@ -181,7 +181,7 @@ class App extends Component {
         portfolio: [createFormData.data, ...this.state.portfolio],
       },
       () => {
-        this.props.history.push("/courses");
+        this.props.history.push("/artists");
       }
     );
   };
@@ -289,9 +289,7 @@ class App extends Component {
         <TestNavBar onLogout={this.handleLogout} user={user} />
         <Switch>
           <Route exact path="/" component={LandingPage} />
-
           <Route path="/forchildren" component={ForChildren} />
-
           <Route
             exact
             path="/courses"
@@ -301,10 +299,15 @@ class App extends Component {
               );
             }}
           />
-
-          {/* <Route path='/artists' render={(routeProps)=>{
-            return (<Users error={error} userList={userList} {...routeProps}/>)}}/> */}
-
+          #{" "}
+          <Route
+            path="/artists"
+            render={(routeProps) => {
+              return (
+                <Users error={error} userList={userList} {...routeProps} />
+              );
+            }}
+          />
           <Route
             path="/users"
             render={(routeProps) => {
@@ -313,7 +316,6 @@ class App extends Component {
               );
             }}
           />
-
           <Route
             exact
             path="/profile"
@@ -321,6 +323,8 @@ class App extends Component {
               return (
                 <Profile
                   user={user}
+                  onCreate={this.handleCreate}
+                  onCreatePortfolio={this.handleCreatePortfolio}
                   courses={courses}
                   onSubmitPic={this.handleSubmitPic}
                   {...routeProps}
@@ -341,7 +345,6 @@ class App extends Component {
               );
             }}
           />
-
           <Route
             exact
             path="/register"
@@ -355,7 +358,6 @@ class App extends Component {
               );
             }}
           />
-
           <Route component={NotFound} />
         </Switch>
       </div>
