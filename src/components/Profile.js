@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import CoursesCreateForm from "./CoursesCreateForm";
 import MyCoursesByMentor from "./MyCoursesByMentor";
-import MyCoursesByStudent from "./MyCoursesByStudent";
 import PortfolioForm from "./PortfolioForm";
+import MyCoursesByBuyer from "./MyCoursesByBuyer";
 
 class Profile extends Component {
   render() {
@@ -34,7 +34,7 @@ class Profile extends Component {
             user={user}
             onDeleteCourse={onDeleteCourse}
           />
-          <MyCoursesByStudent />
+          <MyCoursesByBuyer />
         </div>
       );
     }
