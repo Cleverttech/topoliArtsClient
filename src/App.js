@@ -14,13 +14,8 @@ import Profile from "./components/Profile";
 import CoursesCreateForm from "./components/CoursesCreateForm";
 import ChatPage from "./components/ChatPage";
 import Stripe from "./components/Stripe";
-<<<<<<< HEAD
-import Artists from "./components/Artists";
-import PortfolioDetails from "./components/PortfolioDetails";
-=======
 import Artists from './components/Artists'
 import PortfolioDetails from './components/PortfolioDetails'
->>>>>>> 8483e29cf41426c20fef0c43fdfb0e7031950ffc
 // import './stripe.css'
 
 class App extends Component {
