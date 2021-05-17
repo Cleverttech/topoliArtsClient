@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 export default class Artists extends Component {
 
     handlePortfolio=()=>{
         
+        
+
     }
 
     render() {
@@ -27,7 +30,7 @@ export default class Artists extends Component {
                             <div key={singleUser._id}>
                                 <h3>{singleUser.username}</h3>,
                                 <img src={singleUser.image} alt={singleUser.image}/>,
-                                <button onClick={this.handlePortfolio}>Portfolio</button>
+                                <Link to={`/artists/${singleUser._id}`}><button >Portfolio</button></Link>
                             </div>
                         )
                         }

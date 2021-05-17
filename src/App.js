@@ -169,7 +169,7 @@ class App extends Component {
       axios.post(`${config.API_URL}/api/uploadmultiple`, formDataCover),
       axios.post(`${config.API_URL}/api/uploadmultiple`, formDataImages),
     ]);
-    console.log(coverImage, allImages);
+
     const createFormData = await axios.post(
       `${config.API_URL}/api/portfolio/create`,
       {
@@ -180,9 +180,11 @@ class App extends Component {
       },
       { withCredentials: true }
     );
+      const patchPortfolio = await axios.patch(`${config.API_URL}/api/user/portfolio`, {portfolio: createFormData }, {withCredentials: true} )
 
     this.setState(
       {
+        user: patchPortfolio,
         portfolio: [createFormData.data, ...this.state.portfolio],
       },
       () => {
