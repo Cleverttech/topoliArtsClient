@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class MyCoursesByMentor extends Component {
   render() {
-    console.log(this.props);
+
     const { courses, user, onDeleteCourse } = this.props;
     let filteredCourses = courses.filter((course) => {
       if (course.mentor._id === user._id) {

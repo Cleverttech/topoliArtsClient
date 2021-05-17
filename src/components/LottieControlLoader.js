@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import Reacts from "react";
 import Lottie from "react-lottie";
 
 export default function LottieControl(props) {

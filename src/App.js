@@ -7,7 +7,6 @@ import ForChildren from "./components/ForChildren";
 import LandingPage from "./components/LandingPage";
 import TestLogin from "./components/TestLogin";
 import TestResgister from "./components/TestResgister";
-// import BookReadingForm from "./components/BookReadingForm";
 import Courses from "./components/Courses";
 import Users from "./components/Users";
 import NotFound from "./components/NotFound";
@@ -16,6 +15,7 @@ import Profile from "./components/Profile";
 class App extends Component {
   state = {
     user: null,
+    newUser: null,
     fetchingUser: true,
     error: null,
     courses: [],
@@ -26,7 +26,7 @@ class App extends Component {
     filteredUserList: [],
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     axios
       .get(`${config.API_URL}/api/user`, { withCredentials: true })
       .then((response) => {
@@ -68,7 +68,7 @@ class App extends Component {
           error: err.data,
         });
       });
-  }
+  };
 
   handleRegister = (values) => {
     const { username, email, password } = values;
@@ -110,6 +110,7 @@ class App extends Component {
     axios
       .post(`${config.API_URL}/api/login`, newUser, { withCredentials: true })
       .then((response) => {
+        console.log(response.data);
         this.setState(
           {
             user: response.data,
@@ -159,9 +160,6 @@ class App extends Component {
     }
     formDataCover.append("imageUrl", cover);
 
-    // append a flag
-    // formDataCover.append("singleImage", true);
-    // formDataImages.append("singleImage", false);
     const [coverImage, allImages] = await Promise.all([
       axios.post(`${config.API_URL}/api/upload`, formDataCover),
       axios.post(`${config.API_URL}/api/upload`, formDataImages),
@@ -177,18 +175,18 @@ class App extends Component {
       },
       { withCredentials: true }
     );
-    // 2.server has successfully created a new portfolio,
+
     this.setState(
       {
         portfolio: [createFormData.data, ...this.state.portfolio],
       },
       () => {
-        this.props.history.push("/");
+        this.props.history.push("/courses");
       }
     );
   };
 
-  handleCreate(e) {
+  handleCreate = (e) => {
     e.preventDefault();
     let name = e.target.name.value;
     let description = e.target.description.value;
@@ -198,26 +196,20 @@ class App extends Component {
     formData.append("imageUrl", image);
 
     axios.post(`${config.API_URL}/api/upload`, formData).then((result) => {
-      return axios
+      axios
         .post(
           `${config.API_URL}/api/courses/create`,
-          {
-            name,
-            description,
-            price,
-            image: result.data.image,
-          },
+          { name, description, price, image: result.data.image },
           { withCredentials: true }
         )
         .then((response) => {
-          // 2. Once the server has successfully created a new todo, update your state that is visible to the user
           this.setState(
             {
               courses: [response.data, ...this.state.courses],
             },
             () => {
-              //3. Once the state is update, redirect the user to the home page
-              this.props.history.push("/");
+              console.log("hello");
+              this.props.history.push("/courses");
             }
           );
         })
@@ -225,7 +217,7 @@ class App extends Component {
           console.log(error);
         });
     });
-  }
+  };
   handleDeleteCourse = (courseId) => {
     //1. Make an API call to the server side Route to delete that specific course
     let filteredCourseid = this.state.courses.filter((course) => {
@@ -258,12 +250,43 @@ class App extends Component {
     }
   };
 
+  handleSubmitPic = (e) => {
+    e.preventDefault();
+    let img = e.target.img.files[0];
+    let formData = new FormData();
+    formData.append("imageUrl", img);
+
+    axios
+      .post(`${config.API_URL}/api/upload`, formData, { withCredentials: true })
+      .then((result) => {
+        axios
+          .patch(
+            `${config.API_URL}/api/user`,
+            { img: result.data },
+            { withCredentials: true }
+          )
+          .then((result1) => {
+            let newUser = result1.data;
+            this.setState(
+              {
+                user: newUser,
+              },
+              () => {
+                this.props.history.push("/");
+              }
+            );
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   render() {
     const { error, user, courses, userList } = this.state;
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
-
         <Switch>
           <Route exact path="/" component={LandingPage} />
 
@@ -299,9 +322,20 @@ class App extends Component {
                 <Profile
                   user={user}
                   courses={courses}
-                  onDeleteCourse={this.handleDeleteCourse}
-                  onCreate={this.handleCreate}
-                  onCreatePortfolio={this.handleCreatePortfolio}
+                  onSubmitPic={this.handleSubmitPic}
+                  {...routeProps}
+                />
+              );
+            }}
+          />
+          <Route
+            exact
+            path="/login"
+            render={(routeProps) => {
+              return (
+                <TestLogin
+                  error={error}
+                  onLogin={this.handleLogin}
                   {...routeProps}
                 />
               );
@@ -316,20 +350,6 @@ class App extends Component {
                 <TestResgister
                   error={error}
                   onSubmit={this.handleRegister}
-                  {...routeProps}
-                />
-              );
-            }}
-          />
-
-          <Route
-            exact
-            path="/login"
-            render={(routeProps) => {
-              return (
-                <TestLogin
-                  error={error}
-                  onLogin={this.handleLogin}
                   {...routeProps}
                 />
               );
