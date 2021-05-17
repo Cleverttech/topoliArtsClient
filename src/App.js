@@ -13,6 +13,10 @@ import Users from "./components/Users";
 // import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
 import CoursesCreateForm from "./components/CoursesCreateForm";
+import ChatPage from "./components/ChatPage";
+import Stripe from "./components/Stripe";
+import Artists from './components/Artists'
+// import './stripe.css'
 
 class App extends Component {
   state = {
@@ -292,7 +296,7 @@ class App extends Component {
           user: newUser
         },
         () => {
-          this.props.history.push("/");
+          this.props.history.push("/profile");
         }
       );
       })
@@ -303,9 +307,12 @@ class App extends Component {
 
   render() {
     const { error, user, courses, userList } = this.state;
+    
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
+        
+        
         <Switch>
           <Route exact path="/" component={LandingPage} />
 
@@ -321,8 +328,8 @@ class App extends Component {
             }}
           />
 
-          {/* <Route path='/artists' render={(routeProps)=>{
-            return (<Users error={error} userList={userList} {...routeProps}/>)}}/> */}
+          <Route path='/artists' render={(routeProps)=>{
+            return (<Artists error={error} userList={userList} {...routeProps}/>)}}/>
 
           <Route
             path="/users"
