@@ -28,7 +28,7 @@ class App extends Component {
     filteredUserList: [],
   };
 
-  componentDidMount() {
+  componentDidMount=()=> {
     axios
       .get(`${config.API_URL}/api/user`, { withCredentials: true })
       .then((response) => {
@@ -147,7 +147,7 @@ class App extends Component {
       });
   };
 
-  handleCreatePortfolio(e) {
+  handleCreatePortfolio = (e) => {
     e.preventDefault();
 
     let title = e.target.title.value;
@@ -216,7 +216,7 @@ class App extends Component {
       });
   }
 
-  handleCreate(e) {
+  handleCreate = (e) => {
     
     e.preventDefault();
     let name = e.target.name.value;
@@ -228,12 +228,13 @@ class App extends Component {
 
     axios.post(`${config.API_URL}/api/upload`, formData)
     .then((result) => {
-      return axios.post(`${config.API_URL}/api/courses/create`,{name, description, price, image: result.data.image}, { withCredentials: true })
+      axios.post(`${config.API_URL}/api/courses/create`,{name, description, price, image: result.data.image}, { withCredentials: true })
         .then((response) => {
           
           this.setState({
-            courses: [result.data],
+            courses: [response.data, ...this.state.courses],
           },() => {
+            console.log('hello')
               //3. Once the state is update, redirect the user to the home page
               this.props.history.push("/courses");
             }
@@ -276,24 +277,24 @@ class App extends Component {
     }
   };
 
-  handleSubmitPic(e){
-    
-    e.preventDefault();
+  handleSubmitPic = (e) => {
+    e.preventDefault()
     let img= e.target.img.files[0]
     let formData = new FormData();
     formData.append('imageUrl', img);
     
-    
-    
     axios.post(`${config.API_URL}/api/upload`, formData, {withCredentials: true})
     .then((result) => {      
-      return axios.patch(`${config.API_URL}/api/user`, {img: result.data}, {withCredentials: true} )
-      .then((result1) => {
-        console.log(result1.data)
+    axios.patch(`${config.API_URL}/api/user`, {img: result.data}, {withCredentials: true} )
+    .then((result1) => {
         let newUser = result1.data        
         this.setState({
           user: newUser
-        })
+        },
+        () => {
+          this.props.history.push("/");
+        }
+      );
       })
     }).catch((err) => {
       console.log(err)
@@ -336,33 +337,9 @@ class App extends Component {
             exact
             path="/profile"
             render={(routeProps) => {
-              return (
-                <Profile
-                  user={user}
-                  courses={courses}
-                  onDeleteCourse={this.handleDeleteCourse}
-                  onCreate={this.handleCreate}
-                  onCreatePortfolio={this.handleCreatePortfolio}
-                  {...routeProps}
-                />
-              );
+              return (<Profile user={user} courses={courses} onSubmitPic={this.handleSubmitPic} {...routeProps}/>);
             }}
           />
-
-          <Route
-            exact
-            path="/register"
-            render={(routeProps) => {
-              return (
-                <TestResgister
-                  error={error}
-                  onSubmit={this.handleRegister}
-                  {...routeProps}
-                />
-              );
-            }}
-          />
-
           <Route
             exact
             path="/login"
@@ -390,21 +367,6 @@ class App extends Component {
               );
             }}
           />
-
-          <Route
-            exact
-            path="/login"
-            render={(routeProps) => {
-              return (
-                <TestLogin
-                  error={error}
-                  onLogin={this.handleLogin}
-                  {...routeProps}
-                />
-              );
-            }}
-          />
-
           {/* <Route component={NotFound}/> */}
         </Switch>
       </div>

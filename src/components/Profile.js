@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import CoursesCreateForm from "./CoursesCreateForm";
+import MyCoursesByMentor from "./MyCoursesByMentor";
 import PortfolioForm from "./PortfolioForm";
 import config from '../config'
 
@@ -8,27 +9,26 @@ import config from '../config'
 
 class Profile extends Component {
   
-  render() {
+  render () {
 
-    const { onCreate, onCreatePortfolio, user, courses, onSubmitPic} = this.props;
-
+    const { onCreate, onCreatePortfolio, user, courses, onSubmitPic, error, onDeleteCourse} = this.props;
+    
     return (
       <div>
         <h1>Profile page</h1>
-        <img style={{width:'150px'}} src={user.image} alt="profpic"/>
-
+        <img style={{width:'150px'}} src={user.image}alt="profpic"/>
         <form onSubmit={onSubmitPic}>
         <input name="img" type="file" placeholder="Select image"/>
         <button>Submit</button>
         </form>
-        <PortfolioForm onCreatePortfolio={onCreatePortfolio} /> <br></br>
+        {/* <PortfolioForm onCreatePortfolio={onCreatePortfolio} /> <br></br>
         <CoursesCreateForm onCreate={onCreate} />
         <MyCoursesByMentor
           error={error}
           courses={courses}
           user={user}
           onDeleteCourse={onDeleteCourse}
-        />
+        /> */}
       </div>
     );
   }
