@@ -11,6 +11,11 @@ import Courses from "./components/Courses";
 import Users from "./components/Users";
 import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
+import CoursesCreateForm from "./components/CoursesCreateForm";
+import ChatPage from "./components/ChatPage";
+import Stripe from "./components/Stripe";
+import Artists from "./components/Artists";
+// import './stripe.css'
 
 class App extends Component {
   state = {
@@ -164,7 +169,7 @@ class App extends Component {
       axios.post(`${config.API_URL}/api/uploadmultiple`, formDataCover),
       axios.post(`${config.API_URL}/api/uploadmultiple`, formDataImages),
     ]);
-    console.log(coverImage, allImages);
+
     const createFormData = await axios.post(
       `${config.API_URL}/api/portfolio/create`,
       {
@@ -175,9 +180,15 @@ class App extends Component {
       },
       { withCredentials: true }
     );
+    const patchPortfolio = await axios.patch(
+      `${config.API_URL}/api/user/portfolio`,
+      { portfolio: createFormData },
+      { withCredentials: true }
+    );
 
     this.setState(
       {
+        user: patchPortfolio,
         portfolio: [createFormData.data, ...this.state.portfolio],
       },
       () => {
@@ -272,21 +283,23 @@ class App extends Component {
                 user: newUser,
               },
               () => {
-                this.props.history.push("/");
+                this.props.history.push("/profile");
               }
             );
+          })
+          .catch((err) => {
+            console.log(err);
           });
-      })
-      .catch((err) => {
-        console.log(err);
       });
   };
 
   render() {
     const { error, user, courses, userList } = this.state;
+
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
+
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/forchildren" component={ForChildren} />
@@ -304,10 +317,11 @@ class App extends Component {
             path="/artists"
             render={(routeProps) => {
               return (
-                <Users error={error} userList={userList} {...routeProps} />
+                <Artists error={error} userList={userList} {...routeProps} />
               );
             }}
           />
+
           <Route
             path="/users"
             render={(routeProps) => {

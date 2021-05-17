@@ -7,9 +7,8 @@ export default class Users extends Component {
             <div>
                 {
                     userList.map((e)=>{
-                        console.log(e)
                         return <div key={e._id}>
-                                {e.username}
+                                {e._id}
                             </div>
                     })
                 }
