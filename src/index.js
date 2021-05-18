@@ -24,6 +24,13 @@ const theme = createMuiTheme({
    
   },
   typography:{
+    fontFamily: [
+      'Nunito',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif'
+    ].join(','),
     allVariants: {
       color: "#282624"
     },
