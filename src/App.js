@@ -16,6 +16,7 @@ import ChatPage from "./components/ChatPage";
 import Stripe from "./components/Stripe";
 import Artists from "./components/Artists";
 import PortfolioDetails from "./components/PortfolioDetails";
+import CoursePaymentForm from "./components/CoursePaymentForm";
 // import './stripe.css'
 
 class App extends Component {
@@ -310,6 +311,19 @@ class App extends Component {
             render={(routeProps) => {
               return (
                 <Courses error={error} courses={courses} {...routeProps} />
+              );
+            }}
+          />
+          <Route
+            exact
+            path="/courses/:courseId"
+            render={(routeProps) => {
+              return (
+                <CoursePaymentForm
+                  error={error}
+                  courses={courses}
+                  {...routeProps}
+                />
               );
             }}
           />

@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Button,
-  Typography,
-  Grid,
-  Box,
-  IconButton,
-} from "@material-ui/core";
+import { Button, Typography, Grid, Box, IconButton } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -135,7 +129,7 @@ function ForChildren() {
               fullWidth
               style={imageStyle}
               src="../assets/mädchen_intern.jpg"
-              alt="book-reading-image"
+              alt="bookreadingimage"
               loading="lazy"
             />
           </Box>
@@ -152,7 +146,7 @@ function ForChildren() {
             <img
               style={FriedaCover}
               src="../assets/AllBooks/Frieda/cover.png"
-              alt="book-reading-image"
+              alt="bookreadingimage"
               loading="lazy"
             />
             <Box style={centerBtn}>
@@ -176,7 +170,10 @@ function ForChildren() {
                 }}
               >
                 <Fade in={openVol1}>
-                  <img src="../assets/AllBooks/Frieda/MDerenbach_Frieda_3.jpg"></img>
+                  <img
+                    src="../assets/AllBooks/Frieda/MDerenbach_Frieda_3.jpg"
+                    alt="KidsImage"
+                  ></img>
                 </Fade>
               </Modal>
             </Box>
@@ -187,7 +184,7 @@ function ForChildren() {
             fullWidth
             style={FriedaCover}
             src="../assets/AllBooks/Frieda/coverband2.png"
-            alt="book-reading-image"
+            alt="bookReadingImage"
             loading="lazy"
           />
           <Box style={centerBtn}>
@@ -213,7 +210,11 @@ function ForChildren() {
             }}
           >
             <Fade in={openVol2}>
-              <img src="../assets/AllBooks/Frieda/MDerenbach_Frieda_1.jpg"></img>
+              <img
+                src="../assets/AllBooks/Frieda/MDerenbach_Frieda_1.jpg"
+                alt="KidsImage"
+                loading="lazy"
+              ></img>
             </Fade>
           </Modal>
         </Grid>
@@ -241,7 +242,10 @@ function ForChildren() {
             }}
           >
             <Fade in={openFriedaInt}>
-              <img src="../assets/AllBooks/Frieda/MDerenbach_Frieda_8.jpg"></img>
+              <img
+                src="../assets/AllBooks/Frieda/MDerenbach_Frieda_8.jpg"
+                alt="KidsImage"
+              ></img>
             </Fade>
           </Modal>
         </Typography>
