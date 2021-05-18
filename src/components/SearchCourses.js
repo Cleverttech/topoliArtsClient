@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 export default class SearchUser extends Component {
 
     render() {
-        const {onSearchUser} = this.props
+        const {onSearchCourse} = this.props
         return (
             <div>
-                <input onChange={onSearchUser} type="text" placeholder="Course name search"></input>
+                <input onChange={onSearchCourse} type="text" placeholder="Username search"></input>
             </div>
         )
     }
