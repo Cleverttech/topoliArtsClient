@@ -16,6 +16,7 @@ import Stripe from "./components/Stripe";
 import Artists from "./components/Artists";
 import PortfolioDetails from "./components/PortfolioDetails";
 import CoursePaymentForm from "./components/CoursePaymentForm";
+import './App.css'
 
 // import './stripe.css'
 
