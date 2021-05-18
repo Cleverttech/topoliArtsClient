@@ -19,9 +19,40 @@ const theme = createMuiTheme({
       main: '#ff524e',
     },
     action:{
-      hover: "rgba(0,0,100,0.2)"
-    }
+     hover: "rgba(255,82,78,0.2)"
+   }
+   
   },
+  typography:{
+    allVariants: {
+      color: "#282624"
+    },
+    h1: {
+      fontWeight: 150,
+      fontSize: "3em"
+    },
+    h2: {
+      fontWeight: 150,
+      fontSize: "2em",
+    },
+    h3: {
+      fontWeight: 300,
+    },
+    h4: {
+      fontWeight: 150
+    },
+    subtitle1:{
+      fontWeight: 150
+    },
+    subtitle2:{
+      fontWeight: 150
+    },
+    caption:{
+      fontWeight: 150
+    }
+
+  }
+  
 });
 
 

@@ -1,4 +1,4 @@
-import { Button, Grid } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
@@ -30,7 +30,7 @@ export default class Courses extends Component {
             <h3 style={{color: 'red'}}>No courses found?...Did you paste Manish's code?</h3>
             : true
           }
-          <h1>Courses</h1>
+          <Typography variant="h2">Courses Available</Typography>
           {
           courses.map((e) => {
             return (
