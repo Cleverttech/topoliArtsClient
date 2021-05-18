@@ -370,6 +370,7 @@ handleSearchCourse =(e) => {
           
           <Route exact path="/courses/:courseId" render={(routeProps) => {
             return (<CoursePaymentForm error={error} courses={courses} userList={userList} {...routeProps}/>);}}/>
+            
           <Route exact path="/courses/:courseId/payment" render={(routeProps) => {
             return (<Stripe error={error} user={user} userList={userList} courses={courses} {...routeProps}/>);}}/>
           
