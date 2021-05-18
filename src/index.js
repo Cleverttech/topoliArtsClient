@@ -31,13 +31,9 @@ const theme = createMuiTheme({
       'Arial',
       'sans-serif'
     ].join(','),
-<<<<<<< HEAD
+    
     body1:{
       color: "#282624"
-=======
-    allVariants: {
-      // color: "#282624"
->>>>>>> d8f33334527b5a4f651b0233f91415f72b8b728a
     },
 
     h1: {
