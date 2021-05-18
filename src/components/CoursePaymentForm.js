@@ -9,9 +9,10 @@ import {
   Button,
 } from "@material-ui/core";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
-import { Field } from "formik";
+import { Formik, Field, Form, ErrorMessage } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
-import { FormControlLabel, Checkbox } from "@material-ui/core";
+import { FormControlLabel, Checkbox, FormHelperText } from "@material-ui/core";
+import * as Yup from "yup";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +38,19 @@ function CoursePaymentForm() {
   const btnStyle = {
     marginTop: "20px",
   };
+  //Validation starts here
+  const initialValues = {
+    termsAndConditions: false,
+  };
+  const validationSchema = Yup.object().shape({
+    termsAndConditions: Yup.string().oneOf(
+      ["true"],
+      "Accept terms & conditions"
+    ),
+  });
+
+  //handle Button onClick
+  const handleOnClick = {};
 
   return (
     <Grid>
@@ -50,51 +64,67 @@ function CoursePaymentForm() {
             Price goes here
           </Typography>
         </Grid>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          //add onclick event
+        >
+          <Form>
+            <TextField
+              as={TextField}
+              name="fullname"
+              fullWidth
+              label="Fullname"
+              placeholder="Enter fullname"
+            />
+            <TextField
+              as={TextField}
+              name="email"
+              fullWidth
+              label="Email"
+              placeholder="Enter Email"
+            />
+            <TextField
+              as={TextField}
+              name="areacode"
+              fullWidth
+              label="Area Code"
+              placeholder="Area Code"
+            />
+            <TextField
+              as={TextField}
+              name="telephone"
+              fullWidth
+              label="Telephone"
+              placeholder="telephone"
+            />
 
-        <form>
-          <TextField
-            as={TextField}
-            name="fullname"
-            fullWidth
-            label="Fullname"
-            placeholder="Enter fullname"
-          />
-          <TextField
-            as={TextField}
-            name="email"
-            fullWidth
-            label="Email"
-            placeholder="Enter Email"
-          />
-          <TextField
-            as={TextField}
-            name="telephone"
-            fullWidth
-            label="Telephone"
-            placeholder="Enter email"
-          />
-          <TextField as={TextField} name="message" fullWidth label="Message" />
-
-          <TextField
-            as={TextField}
-            name="message"
-            fullWidth
-            label="Message"
-            type="text"
-          />
-          <FormControlLabel
-            control={<Field as={Checkbox} name="termsAndConditions" />}
-            label="I accept the terms and conditions"
-          />
-          <Button
-            style={btnStyle}
-            type="submit"
-            variant="contained"
-            color="primary"
-          >
-            Continue
-          </Button>
-        </form>
+            <TextField
+              as={TextField}
+              name="message"
+              fullWidth
+              label="Message"
+              type="text"
+            />
+            <FormControlLabel
+              control={<Field as={Checkbox} name="termsAndConditions" />}
+              label="I accept the terms and conditions"
+            />
+            <FormHelperText>
+              <ErrorMessage name="termsAndConditions">
+                {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+              </ErrorMessage>
+            </FormHelperText>
+            <Button
+              style={btnStyle}
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
+              Continue
+            </Button>
+          </Form>
+        </Formik>
       </Paper>
     </Grid>
   );
