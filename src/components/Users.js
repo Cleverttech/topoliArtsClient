@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import config from '../config'
-
+import SearchUser from './SearchUser'
 export default class Users extends Component {
-    
-    
-
-    
+       
     render() {
-
-
-        const {onPatchRole , user, userList } = this.props
+        const {onPatchRole , user, userList, onSearchUser} = this.props
         return (
             <div>
+                <SearchUser onSearchUser={onSearchUser}/>
+                {
+                    !userList.length ?
+                    <h3 style={{color: 'red'}}>No user found?...Did you paste Manish's code?</h3>
+                    : true
+                }
                 {
                     userList.map((e)=>{
                         return <div key={e._id}>

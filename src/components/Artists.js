@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 export default class Artists extends Component {
+
   render() {
-    const { userList } = this.props;
+    const {userList } = this.props;
 
     if (!userList) {
       return <p>Loading...</p>;

@@ -4,12 +4,16 @@ import axios from "axios";
 import config from "../config";
 import { Link } from "react-router-dom";
 
+import SearchCourses from './SearchCourses'
+
 export default class Courses extends Component {
   render() {
-    const { courses, userList } = this.props;
+    const { courses, userList, onSearchCourse  } = this.props;
+    
     const buttonStyle = {
       color: "white",
     };
+    
     if (!userList) {
       return <p>Loading...</p>;
     } else {
@@ -21,8 +25,15 @@ export default class Courses extends Component {
             alignItems: "center",
           }}
         >
+          <SearchCourses  onSearchCourse={onSearchCourse} />
+          {
+            !courses.length ?
+            <h3 style={{color: 'red'}}>No courses found?...Did you paste Manish's code?</h3>
+            : true
+          }
           <h1>Courses</h1>
-          {courses.map((e) => {
+          {
+          courses.map((e) => {
             return (
               <div key={e._id}>
                 <div>
