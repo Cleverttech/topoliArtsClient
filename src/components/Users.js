@@ -4,10 +4,10 @@ import SearchUser from './SearchUser'
 export default class Users extends Component {
        
     render() {
-        const {onPatchRole , user, filteredUserList,onSearchUser} = this.props
+        const {onPatchRole , user, filteredUserList, onSearchUser} = this.props
         return (
             <div>
-                <SearchUser onSearch={onSearchUser}/>
+                <SearchUser onSearchUser={onSearchUser}/>
                 {
                     filteredUserList.map((e)=>{
                         return <div key={e._id}>

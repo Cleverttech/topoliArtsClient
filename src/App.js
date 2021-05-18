@@ -68,6 +68,7 @@ class App extends Component {
       .then((response) => {
         this.setState({
           userList: response.data,
+          filteredUserList: response.data
         });
       })
       .catch((err) => {
@@ -80,7 +81,6 @@ class App extends Component {
   handleSearchUser =(e) => {
     let input = e.target.value
     const {userList} = this.state
-    console.log(input, userList, filteredUserList)
     let filteredUserList = userList.filter((e)=>{
       console.log(e)
       return e.username.toLowerCase().includes(input.toLowerCase())
