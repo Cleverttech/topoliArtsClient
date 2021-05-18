@@ -43,11 +43,11 @@ class App extends Component {
         });
       })
       .catch((error) => {
-        console.log(error);
-        // this.setState({
-        //   error: error.response.data,
-        //   fetchingUser: false,
-        // });
+        
+        this.setState({
+          error: error.response.data,
+          fetchingUser: false,
+        });
       });
 
     axios
@@ -345,7 +345,7 @@ class App extends Component {
           />
 
           <Route exact path='/artists' render={(routeProps)=>{
-            return (<Artists error={error} userList={userList} {...routeProps}/>)}}/>
+            return (<Artists error={error} user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
           
           <Route exact path='/artists/:artistId' render={(routeProps)=>{
             return (<PortfolioDetails user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
