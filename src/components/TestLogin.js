@@ -12,9 +12,6 @@ function TestLogin(props) {
   margin: "30px auto",
  };
 
- const avatarStyle = {
-  backgroundColor: "#799cc6",
- };
  //Validation starts here
  const initialValues = {
   username: "",
@@ -32,7 +29,7 @@ function TestLogin(props) {
   <Grid>
    <Paper elevation={20} style={paperStyle}>
     <Grid align="center">
-     <Avatar style={avatarStyle}>
+     <Avatar >
       <LockIcon />
      </Avatar>
      <h2>Login</h2>
@@ -58,7 +55,7 @@ function TestLogin(props) {
         placeholder="Enter password"
         helperText={<ErrorMessage name="password">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
        />
-       <Button fullWidth type="submit" variant="contained" color="primary">
+       <Button fullWidth type="submit" variant="contained" color="secondary">
         Login
        </Button>
       </Form>

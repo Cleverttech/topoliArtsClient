@@ -159,10 +159,11 @@ function BookReadingForm() {
             </RadioGroup>
           </FormControl>
           <Button
+            fullWidth
             style={btnStyle}
             type="submit"
             variant="contained"
-            color="primary"
+            color="secondary"
           >
             Request Booking
           </Button>

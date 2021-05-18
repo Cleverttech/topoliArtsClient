@@ -1,7 +1,5 @@
 import { Button, Grid } from "@material-ui/core";
 import React, { Component } from "react";
-import axios from "axios";
-import config from "../config";
 import { Link } from "react-router-dom";
 
 import SearchCourses from './SearchCourses'
@@ -10,8 +8,9 @@ export default class Courses extends Component {
   render() {
     const { courses, userList, onSearchCourse  } = this.props;
     
-    const buttonStyle = {
+    const linkStyle = {
       color: "white",
+      textDecoration:"none"
     };
     
     if (!userList) {
@@ -46,8 +45,8 @@ export default class Courses extends Component {
                   <div>
                     <h3>{e.name}</h3>
 
-                    <Button variant="contained" color="primary">
-                      <Link to={`/courses/${e._id}`} style={buttonStyle}>
+                    <Button variant="contained" color="secondary">
+                      <Link to={`/courses/${e._id}`} style={linkStyle}>
                         Enroll
                       </Link>
                     </Button>

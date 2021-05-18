@@ -11,13 +11,12 @@ import Courses from "./components/Courses";
 import Users from "./components/Users";
 import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
-import CoursesCreateForm from "./components/CoursesCreateForm";
 import ChatPage from "./components/ChatPage";
 import Stripe from "./components/Stripe";
 import Artists from "./components/Artists";
 import PortfolioDetails from "./components/PortfolioDetails";
 import CoursePaymentForm from "./components/CoursePaymentForm";
-import CheckoutForm from "./components/CheckoutForm";
+
 // import './stripe.css'
 
 class App extends Component {
@@ -33,7 +32,6 @@ class App extends Component {
     userList: [],
     filteredUserList: [],
   };
-
   componentDidMount = () => {
     axios
       .get(`${config.API_URL}/api/user`, { withCredentials: true })
@@ -79,7 +77,6 @@ class App extends Component {
         // });
       });
   };
-
   handleSearchUser =(e) => {
     let input = e.target.value
     const {userList} = this.state
@@ -91,8 +88,8 @@ class App extends Component {
     this.setState({
       filteredUserList: filteredUserList
     })
-}
-handleSearchCourse =(e) => {
+  }
+  handleSearchCourse =(e) => {
   let input = e.target.value
 
   const {courses} = this.state
@@ -103,8 +100,7 @@ handleSearchCourse =(e) => {
   this.setState({
     filteredCourses: filteredCourses
   })
-}
-
+  }
   handleRegister = (values) => {
     const { username, email, password } = values;
 
@@ -134,7 +130,6 @@ handleSearchCourse =(e) => {
         });
       });
   };
-
   handleLogin = (values) => {
     const { email, password } = values;
     let newUser = {
@@ -163,7 +158,6 @@ handleSearchCourse =(e) => {
         // });
       });
   };
-
   handleLogout = () => {
     axios
       .post(`${config.API_URL}/api/logout`, {}, { withCredentials: true })
@@ -179,7 +173,6 @@ handleSearchCourse =(e) => {
         });
       });
   };
-
   handleCreatePortfolio = async (e) => {
     e.preventDefault();
 
@@ -226,7 +219,6 @@ handleSearchCourse =(e) => {
       }
     );
   };
-
   handleCreate = (e) => {
     e.preventDefault();
     let name = e.target.name.value;
@@ -317,7 +309,6 @@ handleSearchCourse =(e) => {
         });
     }
   };
-
   handleSubmitPic = (e) => {
     e.preventDefault();
     let img = e.target.img.files[0];
@@ -349,7 +340,6 @@ handleSearchCourse =(e) => {
           });
       });
   };
-
   render() {
     const { error, user, courses, userList, filteredCourses, filteredUserList } = this.state;
 

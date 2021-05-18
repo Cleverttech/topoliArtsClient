@@ -98,7 +98,7 @@ function ForChildren() {
             voluptua.
           </p>
           <Box style={centerBtn}>
-            <Button type="button" onClick={handleOpen} color="primary">
+            <Button variant="outlined" type="button" onClick={handleOpen} color="secondary">
               Schedule a Book Reading
             </Button>
           </Box>
@@ -153,8 +153,8 @@ function ForChildren() {
               <Button
                 type="button"
                 onClick={handleOpenVol1}
-                variant="outlined"
-                color="primary"
+                variant="contained"
+                color="secondary"
               >
                 View Frieda Vol.1
               </Button>
@@ -191,8 +191,8 @@ function ForChildren() {
             <Button
               type="button"
               onClick={handleOpenVol2}
-              variant="outlined"
-              color="primary"
+              variant="contained"
+              color="secondary"
             >
               View Frieda Vol.2
             </Button>
@@ -226,7 +226,7 @@ function ForChildren() {
             et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
           </Box>
           <Box style={centerBtn}>
-            <Button type="button" onClick={handleOpenFriedaInt} color="primary">
+            <Button variant="contained" type="button" onClick={handleOpenFriedaInt} color="secondary">
               Frieda from the kids Perspective
             </Button>
           </Box>

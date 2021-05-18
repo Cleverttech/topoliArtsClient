@@ -125,7 +125,7 @@ function CoursePaymentForm(props){
 							<FormHelperText>
 								<ErrorMessage name="termsAndConditions">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>
 							</FormHelperText>
-							<Button style={btnStyle} type="submit" variant="contained" color="primary">
+							<Button style={btnStyle} type="submit" variant="contained" color="secondary">
                                continue	
 							</Button>
 						</Form>

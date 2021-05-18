@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,6 +9,7 @@ import Menu from "@material-ui/core/Menu";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Link , withRouter} from "react-router-dom";
 import { Button } from "@material-ui/core";
+
 
 const useStyles = makeStyles((theme) => ({
   btn: {
@@ -44,6 +45,8 @@ const useStyles = makeStyles((theme) => ({
 export default function PrimarySearchAppBar(props) {
   const { user, onLogout } = props;
   const classes = useStyles();
+  const theme = useTheme()
+  console.log(theme)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -158,12 +161,12 @@ export default function PrimarySearchAppBar(props) {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <MenuItem>
-              <Link className={classes.btn} to="/artists" color="inherit">
+              <Link className={classes.btn} to="/artists" color="primary">
                 Artists
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link className={classes.btn} to="/courses" color="inherit">
+              <Link className={classes.btn} to="/courses" color="secondary">
                 Courses
               </Link>
             </MenuItem>
