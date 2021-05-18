@@ -6,18 +6,18 @@ import config from "./config";
 import ForChildren from "./components/ForChildren";
 import LandingPage from "./components/LandingPage";
 import TestLogin from "./components/TestLogin";
-import TestResgister from "./components/TestResgister";
+import TestRegister from "./components/TestRegister";
 import Courses from "./components/Courses";
 import Users from "./components/Users";
 import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
-import CoursesCreateForm from "./components/CoursesCreateForm";
-import ChatPage from "./components/ChatPage";
 import Stripe from "./components/Stripe";
 import Artists from "./components/Artists";
 import PortfolioDetails from "./components/PortfolioDetails";
 import CoursePaymentForm from "./components/CoursePaymentForm";
-import CheckoutForm from "./components/CheckoutForm";
+
+import ProfileTest from "./components/ProfileTest";
+
 // import './stripe.css'
 
 class App extends Component {
@@ -91,8 +91,9 @@ class App extends Component {
     this.setState({
       filteredUserList: filteredUserList
     })
-}
-handleSearchCourse =(e) => {
+  };
+
+  handleSearchCourse =(e) => {
   let input = e.target.value
 
   const {courses} = this.state
@@ -103,7 +104,7 @@ handleSearchCourse =(e) => {
   this.setState({
     filteredCourses: filteredCourses
   })
-}
+  };
 
   handleRegister = (values) => {
     const { username, email, password } = values;
@@ -259,26 +260,21 @@ handleSearchCourse =(e) => {
         });
     });
   };
+
   handleDeleteCourse = (courseId) => {
     //1. Make an API call to the server side Route to delete that specific course
     let filteredCourseid = this.state.courses.filter((course) => {
       return course._id === courseId;
     });
     if (filteredCourseid) {
-      axios
-        .delete(`${config.API_URL}/api/courses/${courseId}`, {
-          withCredentials: true,
-        })
-        .then(() => {
-          let filteredCourses = this.state.courses.filter((course) => {
-            return course._id !== courseId;
+      axios.delete(`${config.API_URL}/api/courses/${courseId}`, {withCredentials: true})
+      .then(() => {
+        let filteredCourses = this.state.courses.filter((course) => {
+          return course._id !== courseId;
           });
-
-          this.setState(
-            {
-              courses: filteredCourses,
-            },
-            () => {
+          this.setState({
+            courses: filteredCourses,
+            },() => {
               this.props.history.push("/");
             }
           );
@@ -290,6 +286,7 @@ handleSearchCourse =(e) => {
       console.log("delete failed");
     }
   };
+  
   handleSubmitAdmin = (id, e) => {
     e.preventDefault();
     let role = e.target.student.checked;
@@ -381,13 +378,14 @@ handleSearchCourse =(e) => {
             return (<PortfolioDetails user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
           
           <Route exact path="/profile" render={(routeProps) => {
-            return (<Profile user={user} userList={userList} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={courses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
+            return (<ProfileTest user={user} userList={filteredUserList} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={filteredCourses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
+            
           
           <Route exact path="/login" render={(routeProps) => {
             return (<TestLogin error={error} onLogin={this.handleLogin} {...routeProps} />);}}/>
           
           <Route exact path="/register" render={(routeProps) => {
-            return (<TestResgister error={error} onSubmit={this.handleRegister} {...routeProps}/>);}}/>
+            return (<TestRegister error={error} onSubmit={this.handleRegister} {...routeProps}/>);}}/>
             
           <Route component={NotFound} />
         </Switch>

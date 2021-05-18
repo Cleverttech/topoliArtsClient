@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import CoursesCreateForm from "./CoursesCreateForm";
 import MyCoursesByMentor from "./MyCoursesByMentor";
 import PortfolioForm from "./PortfolioForm";
-import MyCoursesByBuyer from "./MyCoursesByBuyer";
 
 class Profile extends Component {
   render() {
@@ -11,6 +10,7 @@ class Profile extends Component {
       onCreatePortfolio,
       user,
       courses,
+      userList,
       onSubmitPic,
       error,
       onDeleteCourse,
@@ -25,16 +25,10 @@ class Profile extends Component {
           <form onSubmit={onSubmitPic}>
             <input name="img" type="file" placeholder="Select image" />
             <button>Submit</button>
-          </form>
-          <PortfolioForm onCreatePortfolio={onCreatePortfolio} /> <br></br>
+          </form>          
+          <PortfolioForm onCreatePortfolio={onCreatePortfolio} />
           <CoursesCreateForm onCreate={onCreate} />
-          <MyCoursesByMentor
-            error={error}
-            courses={courses}
-            user={user}
-            onDeleteCourse={onDeleteCourse}
-          />
-          <MyCoursesByBuyer />
+          <MyCoursesByMentor error={error} courses={courses} user={user} onDeleteCourse={onDeleteCourse}/>
         </div>
       );
     }
