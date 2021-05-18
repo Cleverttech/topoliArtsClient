@@ -40,12 +40,30 @@ function CoursePaymentForm() {
   };
   //Validation starts here
   const initialValues = {
+    fullname: "",
+    countrycode: "",
+    email: "",
+    telephone: "",
     termsAndConditions: false,
   };
   const validationSchema = Yup.object().shape({
+    fullname: Yup.string()
+      .min(3, "username too short")
+      .required("Full name is required!"),
+    email: Yup.string()
+      .email("Enter valid email")
+      .required("Email is required!"),
+    countrycode: Yup.number()
+      .max(4, "Enter a minimum phone number")
+      .required("Country code is required!"),
+    telephone: Yup.number()
+      .typeError("That doesn't look like a phone number")
+      .required("Telephone number is required!")
+      .positive()
+      .min(7),
     termsAndConditions: Yup.string().oneOf(
       ["true"],
-      "Accept terms & conditions"
+      "Please accept terms & conditions!"
     ),
   });
 
@@ -76,6 +94,11 @@ function CoursePaymentForm() {
               fullWidth
               label="Fullname"
               placeholder="Enter fullname"
+              helperText={
+                <ErrorMessage name="fullname">
+                  {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                </ErrorMessage>
+              }
             />
             <TextField
               as={TextField}
@@ -83,13 +106,18 @@ function CoursePaymentForm() {
               fullWidth
               label="Email"
               placeholder="Enter Email"
+              helperText={
+                <ErrorMessage name="email">
+                  {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                </ErrorMessage>
+              }
             />
             <TextField
               as={TextField}
-              name="areacode"
+              name="countrycode"
               fullWidth
-              label="Area Code"
-              placeholder="Area Code"
+              label="Country Code"
+              placeholder="Country Code"
             />
             <TextField
               as={TextField}
@@ -97,6 +125,11 @@ function CoursePaymentForm() {
               fullWidth
               label="Telephone"
               placeholder="telephone"
+              helperText={
+                <ErrorMessage name="telephone">
+                  {(msg) => <div style={{ color: "red" }}>{msg}</div>}
+                </ErrorMessage>
+              }
             />
 
             <TextField
