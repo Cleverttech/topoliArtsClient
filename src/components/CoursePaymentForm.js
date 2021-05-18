@@ -6,7 +6,6 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
 import { FormControlLabel, Checkbox, FormHelperText } from "@material-ui/core";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -17,17 +16,17 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-class CoursePaymentForm extends Component {
+function CoursePaymentForm(props){
 
+    const classes = useStyles()
 
-    handleOnSubmit =(e)=> {
-
+   const handleOnSubmit =(e)=> {
        e.preventDefault()
-
-       const {courseId} = this.props.match.params
-       this.props.history.push(`/courses/${courseId}/payment`)
+       const {courseId} = props.match.params
+      props.history.push(`/courses/${courseId}/payment`)
     }
-	render() {
+
+
 		const paperStyle = {
 			padding: "30px 20px",
 			width: 375,
@@ -56,9 +55,9 @@ class CoursePaymentForm extends Component {
 			termsAndConditions: Yup.string().oneOf(["true"], "Please accept terms & conditions!"),
 		});
 
-		const { courses, userId } = this.props
+		const { courses } = props
 
-        const {courseId} = this.props.match.params
+        const {courseId} = props.match.params
 
 
 
@@ -92,7 +91,7 @@ class CoursePaymentForm extends Component {
 						initialValues={initialValues}
 						validationSchema={validationSchema}
 						//add onclick event
-                        onSubmit={this.handleOnSubmit}
+                        onSubmit={handleOnSubmit}
 					>
 						<Form>
 							<TextField
@@ -127,8 +126,7 @@ class CoursePaymentForm extends Component {
 								<ErrorMessage name="termsAndConditions">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>
 							</FormHelperText>
 							<Button style={btnStyle} type="submit" variant="contained" color="primary">
-                            continue
-								
+                               continue	
 							</Button>
 						</Form>
 					</Formik>
@@ -137,6 +135,6 @@ class CoursePaymentForm extends Component {
         )
 
 	}
-}
+
 
 export default CoursePaymentForm;
