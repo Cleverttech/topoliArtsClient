@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Avatar,
-  Grid,
-  Paper,
-  Typography,
-  TextField,
-  Button,
-  FormControlLabel,
-  Checkbox,
-  FormHelperText,
-} from "@material-ui/core";
+import { Avatar, Grid, Paper, Typography, TextField, Button, FormControlLabel, Checkbox, FormHelperText } from "@material-ui/core";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import * as Yup from "yup";
@@ -34,25 +24,15 @@ function TestResgister(props) {
     termsAndConditions: false,
   };
   const validationSchema = Yup.object().shape({
-    username: Yup.string()
-      .min(3, "username too short")
-      .required("Username is required!"),
-    email: Yup.string()
-      .email("Enter valid email")
-      .required("Email is required!"),
+    username: Yup.string().min(3, "username too short").required("Username is required!"),
+    email: Yup.string().email("Enter valid email").required("Email is required!"),
     password: Yup.string()
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-        "Must contain 8 characters, a number and an Uppercase"
-      )
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, "Must contain 8 characters, a number and an Uppercase")
       .required("Password is required!"),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password")], "Passwords do not match")
       .required("Please confirm password!"),
-    termsAndConditions: Yup.string().oneOf(
-      ["true"],
-      "Please accept terms & conditions"
-    ),
+    termsAndConditions: Yup.string().oneOf(["true"], "Please accept terms & conditions"),
   });
 
   //handle client side onsubmit
@@ -60,6 +40,7 @@ function TestResgister(props) {
   return (
     <Grid>
       <Paper elevation={20} style={paperStyle}>
+        {" "}
         <Grid align="center">
           <Avatar style={avatarStyle}>
             <AddBoxIcon />
@@ -69,12 +50,7 @@ function TestResgister(props) {
             Please enter all fields to register
           </Typography>
         </Grid>
-
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={onSubmit}
-        >
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
           {(props) => (
             <Form>
               <Field
@@ -83,11 +59,7 @@ function TestResgister(props) {
                 fullWidth
                 label="Username"
                 placeholder="Enter username"
-                helperText={
-                  <ErrorMessage name="name">
-                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
-                  </ErrorMessage>
-                }
+                helperText={<ErrorMessage name="name">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
               />
               <Field
                 as={TextField}
@@ -95,11 +67,7 @@ function TestResgister(props) {
                 fullWidth
                 label="Email"
                 placeholder="Enter email"
-                helperText={
-                  <ErrorMessage name="email">
-                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
-                  </ErrorMessage>
-                }
+                helperText={<ErrorMessage name="email">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
               />
               <Field
                 as={TextField}
@@ -108,11 +76,7 @@ function TestResgister(props) {
                 label="Password"
                 type="password"
                 placeholder="Enter password"
-                helperText={
-                  <ErrorMessage name="password">
-                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
-                  </ErrorMessage>
-                }
+                helperText={<ErrorMessage name="password">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
               />
               <Field
                 as={TextField}
@@ -121,20 +85,11 @@ function TestResgister(props) {
                 label="Confirm Password"
                 type="password"
                 placeholder="Confirm Password"
-                helperText={
-                  <ErrorMessage name="confirmPassword">
-                    {(msg) => <div style={{ color: "red" }}>{msg}</div>}
-                  </ErrorMessage>
-                }
+                helperText={<ErrorMessage name="confirmPassword">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
               />
-              <FormControlLabel
-                control={<Field as={Checkbox} name="termsAndConditions" />}
-                label="I accept the terms and conditions"
-              />
+              <FormControlLabel control={<Field as={Checkbox} name="termsAndConditions" />} label="I accept the terms and conditions" />
               <FormHelperText>
-                <ErrorMessage name="termsAndConditions">
-                  {(msg) => <div style={{ color: "red" }}>{msg}</div>}
-                </ErrorMessage>
+                <ErrorMessage name="termsAndConditions">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>
               </FormHelperText>
               <Button type="submit" variant="contained" color="primary">
                 Submit

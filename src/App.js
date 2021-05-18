@@ -117,7 +117,7 @@ class App extends Component {
     axios
       .post(`${config.API_URL}/api/login`, newUser, { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
+
         this.setState(
           {
             user: response.data,
@@ -353,6 +353,8 @@ class App extends Component {
               return (
                 <CoursePaymentForm
                   error={error}
+                  user={user}
+                  userList={userList}
                   courses={courses}
                   {...routeProps}
                 />
