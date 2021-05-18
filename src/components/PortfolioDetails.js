@@ -34,11 +34,12 @@ export default class PortfolioDetails extends Component {
     return (
       <div>
         <h1>This is the specific portfolio</h1>
-        <img src={portfolio.cover} alt={portfolio.cover} />
+        <img src={portfolio.cover} alt={portfolio.cover} width="200px" />
+        <h3>Pictures for Carousel</h3>
         {portfolio.images.map((e, i) => {
           return (
             <div key={e[i]}>
-              <img src={e} />
+              <p>{e}</p>
             </div>
           );
         })}

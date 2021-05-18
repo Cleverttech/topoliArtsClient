@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 export default class Artists extends Component {
 
-
   render() {
     const {userList } = this.props;
 

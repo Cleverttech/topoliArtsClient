@@ -14,12 +14,12 @@ import Profile from "./components/Profile";
 import CoursesCreateForm from "./components/CoursesCreateForm";
 import ChatPage from "./components/ChatPage";
 import Stripe from "./components/Stripe";
-import Artists from './components/Artists'
-import PortfolioDetails from './components/PortfolioDetails'
+import Artists from "./components/Artists";
+import PortfolioDetails from "./components/PortfolioDetails";
+import CoursePaymentForm from "./components/CoursePaymentForm";
 // import './stripe.css'
 
 class App extends Component {
-  
   state = {
     user: null,
     newUser: null,
@@ -262,35 +262,33 @@ class App extends Component {
       console.log("delete failed");
     }
   };
-  handleSubmitAdmin = (id,e) => {
-    e.preventDefault()
-    let role = e.target.student.checked
+  handleSubmitAdmin = (id, e) => {
+    e.preventDefault();
+    let role = e.target.student.checked;
     let newRole = {};
-    if(role) {
-        newRole.role = 'mentor'
-        axios.patch(`${config.API_URL}/api/users/${id}`, newRole, {withCredentials:true})
+    if (role) {
+      newRole.role = "mentor";
+      axios
+        .patch(`${config.API_URL}/api/users/${id}`, newRole, {
+          withCredentials: true,
+        })
         .then((result) => {
-          let updatedUserList = this.state.userList.map((e)=>{
-            if(e._id == result.data._id){
-              return result.data
-            }else{
-              return e
+          let updatedUserList = this.state.userList.map((e) => {
+            if (e._id == result.data._id) {
+              return result.data;
+            } else {
+              return e;
             }
-          })
-            this.setState({
-              userList: updatedUserList              
-            })
-        }).catch((err) => {
-            console.log(err)
+          });
+          this.setState({
+            userList: updatedUserList,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
-    
-
-    
-
-}
-
-
+  };
 
   handleSubmitPic = (e) => {
     e.preventDefault();
@@ -339,7 +337,35 @@ class App extends Component {
             path="/courses"
             render={(routeProps) => {
               return (
-                <Courses error={error} courses={courses} {...routeProps} />
+                <Courses
+                  error={error}
+                  courses={courses}
+                  {...routeProps}
+                  userList={userList}
+                />
+              );
+            }}
+          />
+          <Route
+            exact
+            path="/courses/:courseId"
+            render={(routeProps) => {
+              return (
+                <CoursePaymentForm
+                  error={error}
+                  courses={courses}
+                  {...routeProps}
+                />
+              );
+            }}
+          />
+
+          <Route
+            exact
+            path="/artists"
+            render={(routeProps) => {
+              return (
+                <Artists error={error} userList={userList} {...routeProps} />
               );
             }}
           />
@@ -354,7 +380,13 @@ class App extends Component {
             path="/users"
             render={(routeProps) => {
               return (
-                <Users onPatchRole={this.handleSubmitAdmin} error={error} user= {user} userList={userList} {...routeProps} />
+                <Users
+                  onPatchRole={this.handleSubmitAdmin}
+                  error={error}
+                  user={user}
+                  userList={userList}
+                  {...routeProps}
+                />
               );
             }}
           />
