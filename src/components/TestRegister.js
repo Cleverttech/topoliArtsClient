@@ -91,7 +91,7 @@ function TestResgister(props) {
               <FormHelperText>
                 <ErrorMessage name="termsAndConditions">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>
               </FormHelperText>
-              <Button type="submit" variant="contained" color="primary">
+              <Button fullWidth type="submit" variant="contained" color="secondary">
                 Submit
               </Button>
             </Form>

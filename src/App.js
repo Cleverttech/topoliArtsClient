@@ -11,6 +11,7 @@ import Courses from "./components/Courses";
 import Users from "./components/Users";
 import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
+import ChatPage from "./components/ChatPage";
 import Stripe from "./components/Stripe";
 import Artists from "./components/Artists";
 import PortfolioDetails from "./components/PortfolioDetails";
@@ -33,7 +34,6 @@ class App extends Component {
     userList: [],
     filteredUserList: [],
   };
-
   componentDidMount = () => {
     axios
       .get(`${config.API_URL}/api/user`, { withCredentials: true })
@@ -79,7 +79,6 @@ class App extends Component {
         // });
       });
   };
-
   handleSearchUser =(e) => {
     let input = e.target.value
     const {userList} = this.state
@@ -105,6 +104,7 @@ class App extends Component {
     filteredCourses: filteredCourses
   })
   };
+
 
   handleRegister = (values) => {
     const { username, email, password } = values;
@@ -135,7 +135,6 @@ class App extends Component {
         });
       });
   };
-
   handleLogin = (values) => {
     const { email, password } = values;
     let newUser = {
@@ -164,7 +163,6 @@ class App extends Component {
         // });
       });
   };
-
   handleLogout = () => {
     axios
       .post(`${config.API_URL}/api/logout`, {}, { withCredentials: true })
@@ -180,7 +178,6 @@ class App extends Component {
         });
       });
   };
-
   handleCreatePortfolio = async (e) => {
     e.preventDefault();
 
@@ -227,7 +224,6 @@ class App extends Component {
       }
     );
   };
-
   handleCreate = (e) => {
     e.preventDefault();
     let name = e.target.name.value;
@@ -314,7 +310,6 @@ class App extends Component {
         });
     }
   };
-
   handleSubmitPic = (e) => {
     e.preventDefault();
     let img = e.target.img.files[0];
@@ -345,8 +340,7 @@ class App extends Component {
             console.log(err);
           });
       });
-  };
-
+  }
   render() {
     const { error, user, courses, userList, filteredCourses, filteredUserList } = this.state;
 
