@@ -6,7 +6,7 @@ import config from "./config";
 import ForChildren from "./components/ForChildren";
 import LandingPage from "./components/LandingPage";
 import TestLogin from "./components/TestLogin";
-import TestResgister from "./components/TestResgister";
+import TestRegister from "./components/TestRegister";
 import Courses from "./components/Courses";
 import Users from "./components/Users";
 import NotFound from "./components/NotFound";
@@ -17,6 +17,8 @@ import Artists from "./components/Artists";
 import PortfolioDetails from "./components/PortfolioDetails";
 import CoursePaymentForm from "./components/CoursePaymentForm";
 import './App.css'
+
+import ProfileTest from "./components/ProfileTest";
 
 // import './stripe.css'
 
@@ -89,7 +91,8 @@ class App extends Component {
     this.setState({
       filteredUserList: filteredUserList
     })
-  }
+  };
+
   handleSearchCourse =(e) => {
   let input = e.target.value
 
@@ -101,7 +104,9 @@ class App extends Component {
   this.setState({
     filteredCourses: filteredCourses
   })
-  }
+  };
+
+
   handleRegister = (values) => {
     const { username, email, password } = values;
 
@@ -252,26 +257,21 @@ class App extends Component {
         });
     });
   };
+
   handleDeleteCourse = (courseId) => {
     //1. Make an API call to the server side Route to delete that specific course
     let filteredCourseid = this.state.courses.filter((course) => {
       return course._id === courseId;
     });
     if (filteredCourseid) {
-      axios
-        .delete(`${config.API_URL}/api/courses/${courseId}`, {
-          withCredentials: true,
-        })
-        .then(() => {
-          let filteredCourses = this.state.courses.filter((course) => {
-            return course._id !== courseId;
+      axios.delete(`${config.API_URL}/api/courses/${courseId}`, {withCredentials: true})
+      .then(() => {
+        let filteredCourses = this.state.courses.filter((course) => {
+          return course._id !== courseId;
           });
-
-          this.setState(
-            {
-              courses: filteredCourses,
-            },
-            () => {
+          this.setState({
+            courses: filteredCourses,
+            },() => {
               this.props.history.push("/");
             }
           );
@@ -283,6 +283,7 @@ class App extends Component {
       console.log("delete failed");
     }
   };
+  
   handleSubmitAdmin = (id, e) => {
     e.preventDefault();
     let role = e.target.student.checked;
@@ -340,7 +341,7 @@ class App extends Component {
             console.log(err);
           });
       });
-  };
+  }
   render() {
     const { error, user, courses, userList, filteredCourses, filteredUserList } = this.state;
 
@@ -361,6 +362,7 @@ class App extends Component {
           
           <Route exact path="/courses/:courseId" render={(routeProps) => {
             return (<CoursePaymentForm error={error} courses={courses} userList={userList} {...routeProps}/>);}}/>
+            
           <Route exact path="/courses/:courseId/payment" render={(routeProps) => {
             return (<Stripe error={error} user={user} userList={userList} courses={courses} {...routeProps}/>);}}/>
           
@@ -371,13 +373,14 @@ class App extends Component {
             return (<PortfolioDetails user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
           
           <Route exact path="/profile" render={(routeProps) => {
-            return (<Profile user={user} userList={userList} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={courses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
+            return (<ProfileTest user={user} userList={filteredUserList} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={filteredCourses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
+            
           
           <Route exact path="/login" render={(routeProps) => {
             return (<TestLogin error={error} onLogin={this.handleLogin} {...routeProps} />);}}/>
           
           <Route exact path="/register" render={(routeProps) => {
-            return (<TestResgister error={error} onSubmit={this.handleRegister} {...routeProps}/>);}}/>
+            return (<TestRegister error={error} onSubmit={this.handleRegister} {...routeProps}/>);}}/>
             
           <Route component={NotFound} />
         </Switch>
