@@ -17,6 +17,7 @@ import Stripe from "./components/Stripe";
 import Artists from "./components/Artists";
 import PortfolioDetails from "./components/PortfolioDetails";
 import CoursePaymentForm from "./components/CoursePaymentForm";
+import CheckoutForm from "./components/CheckoutForm";
 // import './stripe.css'
 
 class App extends Component {
@@ -352,6 +353,21 @@ class App extends Component {
             render={(routeProps) => {
               return (
                 <CoursePaymentForm
+                  error={error}
+                  user={user}
+                  userList={userList}
+                  courses={courses}
+                  {...routeProps}
+                />
+              );
+            }}
+          />
+          <Route
+            exact
+            path="/courses/:courseId/payment"
+            render={(routeProps) => {
+              return (
+                <Stripe
                   error={error}
                   user={user}
                   userList={userList}

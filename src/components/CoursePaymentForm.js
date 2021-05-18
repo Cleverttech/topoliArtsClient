@@ -6,6 +6,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
 import { FormControlLabel, Checkbox, FormHelperText } from "@material-ui/core";
 import * as Yup from "yup";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -17,6 +18,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 class CoursePaymentForm extends Component {
+
+
+    handleOnSubmit =(e)=> {
+
+       e.preventDefault()
+
+       const {courseId} = this.props.match.params
+       this.props.history.push(`/courses/${courseId}/payment`)
+    }
 	render() {
 		const paperStyle = {
 			padding: "30px 20px",
@@ -51,6 +61,7 @@ class CoursePaymentForm extends Component {
         const {courseId} = this.props.match.params
 
 
+
 		return (
 			     <Grid>
 				<Paper elevation={20} style={paperStyle}>
@@ -66,7 +77,7 @@ class CoursePaymentForm extends Component {
                                    <h3>{el.name}</h3>
                                    <p>Offered by {el.mentor.username}</p>
                                  <Typography variant="subTitle" gutterBottom>
-                                 €  {el.price}
+                                Price : €  {el.price}
                                  </Typography>
                                </div>
                               )
@@ -81,6 +92,7 @@ class CoursePaymentForm extends Component {
 						initialValues={initialValues}
 						validationSchema={validationSchema}
 						//add onclick event
+                        onSubmit={this.handleOnSubmit}
 					>
 						<Form>
 							<TextField
@@ -115,7 +127,8 @@ class CoursePaymentForm extends Component {
 								<ErrorMessage name="termsAndConditions">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>
 							</FormHelperText>
 							<Button style={btnStyle} type="submit" variant="contained" color="primary">
-								Continue
+                            continue
+								
 							</Button>
 						</Form>
 					</Formik>
