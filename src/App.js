@@ -14,12 +14,18 @@ import Profile from "./components/Profile";
 import CoursesCreateForm from "./components/CoursesCreateForm";
 import ChatPage from "./components/ChatPage";
 import Stripe from "./components/Stripe";
+<<<<<<< HEAD
 import Artists from "./components/Artists";
 import PortfolioDetails from "./components/PortfolioDetails";
 import CoursePaymentForm from "./components/CoursePaymentForm";
+=======
+import Artists from './components/Artists'
+import PortfolioDetails from './components/PortfolioDetails'
+>>>>>>> 97f650ee53d507b2c3a191eb7e135eb22a2a8079
 // import './stripe.css'
 
 class App extends Component {
+  
   state = {
     user: null,
     newUser: null,
@@ -262,6 +268,35 @@ class App extends Component {
       console.log("delete failed");
     }
   };
+  handleSubmitAdmin = (id,e) => {
+    e.preventDefault()
+    let role = e.target.student.checked
+    let newRole = {};
+    if(role) {
+        newRole.role = 'mentor'
+        axios.patch(`${config.API_URL}/api/users/${id}`, newRole, {withCredentials:true})
+        .then((result) => {
+          let updatedUserList = this.state.userList.map((e)=>{
+            if(e._id == result.data._id){
+              return result.data
+            }else{
+              return e
+            }
+          })
+            this.setState({
+              userList: updatedUserList              
+            })
+        }).catch((err) => {
+            console.log(err)
+        });
+    }
+    
+
+    
+
+}
+
+
 
   handleSubmitPic = (e) => {
     e.preventDefault();
@@ -357,7 +392,7 @@ class App extends Component {
             path="/users"
             render={(routeProps) => {
               return (
-                <Users error={error} userList={userList} {...routeProps} />
+                <Users onPatchRole={this.handleSubmitAdmin} error={error} user= {user} userList={userList} {...routeProps} />
               );
             }}
           />
