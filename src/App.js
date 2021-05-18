@@ -44,10 +44,10 @@ class App extends Component {
       })
       .catch((error) => {
         
-        this.setState({
-          error: error.response.data,
-          fetchingUser: false,
-        });
+        // this.setState({
+        //   error: error.response.data,
+        //   fetchingUser: false,
+        // });
       });
 
     axios
@@ -71,11 +71,25 @@ class App extends Component {
         });
       })
       .catch((err) => {
-        this.setState({
-          error: err.data,
-        });
+        // this.setState({
+        //   error: err.data,
+        // });
       });
   };
+
+  handleSearchUser =(e) => {
+    let input = e.target.value
+    const {userList} = this.state
+    console.log(input, userList, filteredUserList)
+    let filteredUserList = userList.filter((e)=>{
+      console.log(e)
+      return e.username.toLowerCase().includes(input.toLowerCase())
+    })
+
+    this.setState({
+      filteredUserList: filteredUserList
+    })
+}
 
   handleRegister = (values) => {
     const { username, email, password } = values;
@@ -323,7 +337,7 @@ class App extends Component {
   };
 
   render() {
-    const { error, user, courses, userList } = this.state;
+    const { error, user, courses, userList, filteredUserList } = this.state;
 
     return (
       <div className="App">
@@ -331,110 +345,33 @@ class App extends Component {
 
         <Switch>
           <Route exact path="/" component={LandingPage} />
+          
           <Route path="/forchildren" component={ForChildren} />
-          <Route
-            exact
-            path="/courses"
-            render={(routeProps) => {
-              return (
-                <Courses
-                  error={error}
-                  courses={courses}
-                  {...routeProps}
-                  userList={userList}
-                />
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/courses/:courseId"
-            render={(routeProps) => {
-              return (
-                <CoursePaymentForm
-                  error={error}
-                  courses={courses}
-                  {...routeProps}
-                />
-              );
-            }}
-          />
-
-          <Route
-            exact
-            path="/artists"
-            render={(routeProps) => {
-              return (
-                <Artists error={error} userList={userList} {...routeProps} />
-              );
-            }}
-          />
-
+          
+          <Route exact path="/courses" render={(routeProps) => {
+            return (<Courses error={error} courses={courses} {...routeProps} userList={userList}/>);}}/>
+          
+          <Route exact path="/courses/:courseId" render={(routeProps) => {
+            return (<CoursePaymentForm error={error} courses={courses}{...routeProps}/>);}}/>
+          
           <Route exact path='/artists' render={(routeProps)=>{
             return (<Artists error={error} user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
           
           <Route exact path='/artists/:artistId' render={(routeProps)=>{
             return (<PortfolioDetails user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
 
-          <Route
-            path="/users"
-            render={(routeProps) => {
-              return (
-                <Users
-                  onPatchRole={this.handleSubmitAdmin}
-                  error={error}
-                  user={user}
-                  userList={userList}
-                  {...routeProps}
-                />
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/profile"
-            render={(routeProps) => {
-              return (
-                <Profile
-                  user={user}
-                  userList={userList}
-                  onCreate={this.handleCreate}
-                  onDeleteCourse={this.handleDeleteCourse}
-                  onCreatePortfolio={this.handleCreatePortfolio}
-                  courses={courses}
-                  onSubmitPic={this.handleSubmitPic}
-                  onDeleteCourse={this.handleDeleteCourse}
-                  {...routeProps}
-                />
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/login"
-            render={(routeProps) => {
-              return (
-                <TestLogin
-                  error={error}
-                  onLogin={this.handleLogin}
-                  {...routeProps}
-                />
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/register"
-            render={(routeProps) => {
-              return (
-                <TestResgister
-                  error={error}
-                  onSubmit={this.handleRegister}
-                  {...routeProps}
-                />
-              );
-            }}
-          />
+          <Route path="/users" render={(routeProps) => {
+            return (<Users onSearchUser={this.handleSearchUser} onPatchRole={this.handleSubmitAdmin} error={error} user={user} filteredUserList={filteredUserList} {...routeProps}/>);}}/>
+          
+          <Route exact path="/profile" render={(routeProps) => {
+            return (<Profile user={user} userList={userList} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={courses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
+          
+          <Route exact path="/login" render={(routeProps) => {
+            return (<TestLogin error={error} onLogin={this.handleLogin} {...routeProps} />);}}/>
+          
+          <Route exact path="/register" render={(routeProps) => {
+            return (<TestResgister error={error} onSubmit={this.handleRegister} {...routeProps}/>);}}/>
+            
           <Route component={NotFound} />
         </Switch>
       </div>
