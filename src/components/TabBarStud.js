@@ -50,9 +50,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-
-
-  },
+   },
 }));
 
 export default function FullWidthTabs(props) {  
