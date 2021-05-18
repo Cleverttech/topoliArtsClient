@@ -131,7 +131,7 @@ class App extends Component {
     axios
       .post(`${config.API_URL}/api/login`, newUser, { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
+
         this.setState(
           {
             user: response.data,
@@ -352,7 +352,7 @@ class App extends Component {
             return (<Courses error={error} courses={courses} {...routeProps} userList={userList}/>);}}/>
           
           <Route exact path="/courses/:courseId" render={(routeProps) => {
-            return (<CoursePaymentForm error={error} courses={courses}{...routeProps}/>);}}/>
+            return (<CoursePaymentForm error={error} courses={courses} userList={userList} {...routeProps}/>);}}/>
           
           <Route exact path='/artists' render={(routeProps)=>{
             return (<Artists error={error} user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
