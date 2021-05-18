@@ -34,20 +34,24 @@ function TestResgister(props) {
     termsAndConditions: false,
   };
   const validationSchema = Yup.object().shape({
-    username: Yup.string().min(3, "username too short").required("Required"),
-    email: Yup.string().email("Enter valid email").required("Required"),
+    username: Yup.string()
+      .min(3, "username too short")
+      .required("Username is required!"),
+    email: Yup.string()
+      .email("Enter valid email")
+      .required("Email is required!"),
     password: Yup.string()
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
         "Must contain 8 characters, a number and an Uppercase"
       )
-      .required("Required"),
+      .required("Password is required!"),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password")], "Passwords do not match")
-      .required("Required"),
+      .required("Please confirm password!"),
     termsAndConditions: Yup.string().oneOf(
       ["true"],
-      "Accept terms & conditions"
+      "Please accept terms & conditions"
     ),
   });
 
