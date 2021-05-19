@@ -11,9 +11,7 @@ function TestResgister(props) {
     width: 375,
     margin: "30px auto",
   };
-  const headerStyle = {
-    margin: 0,
-  };
+
   
   const theme = useTheme()
   const avatarStyle = {
