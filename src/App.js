@@ -179,7 +179,7 @@ class App extends Component {
       this.setState({
           user: result.data,
       },() => {
-      this.props.history.push("/");
+      this.props.history.push("/profile");
         });
     })
     .catch((error) => {
@@ -378,7 +378,6 @@ class App extends Component {
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
-        <Settings user={user} onSubmitSettings={this.handleSubmitSettings}/>
 
         <Switch>
           <Route exact path="/" component={LandingPage} />
@@ -404,7 +403,7 @@ class App extends Component {
             return (<PortfolioDetails user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
           
           <Route exact path="/profile" render={(routeProps) => {
-            return (<ProfileTest user={user} userList={filteredUserList} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={filteredCourses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
+            return (<ProfileTest user={user} userList={filteredUserList} onSubmitSettings={this.handleSubmitSettings} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={filteredCourses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
             
           <Route path='/chat/:conversationId' render={(routeProps)=>{
             return (<ChatPage user={user} {...routeProps}/>)
@@ -415,7 +414,9 @@ class App extends Component {
           
           <Route exact path="/register" render={(routeProps) => {
             return (<TestRegister error={error} onSubmit={this.handleRegister} {...routeProps}/>);}}/>
-            
+
+          <Route path='/settings' render={(routeProps)=>{
+            return (<Settings error={error} user={user} onSubmitSettings={this.handleSubmitSettings} {...routeProps}/>);}}/>
           <Route component={NotFound} />
         </Switch>
       </div>

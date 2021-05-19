@@ -20,6 +20,11 @@ function Settings (props) {
     backgroundColor: "#7f7f7f",
   };
   //Validation starts here
+  const initialValues={
+    username: '',
+    email: '',
+    password: '',
+  }
   
   const validationSchema = Yup.object().shape({
     username: Yup.string().min(3, "username too short"),
@@ -44,7 +49,7 @@ function Settings (props) {
             Only fill out fields you want to update
           </Typography>
         </Grid>
-        <Formik validationSchema={validationSchema} onSubmit={onSubmitSettings}>
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmitSettings}>
           {(props) => (
             <Form>
               <Field
