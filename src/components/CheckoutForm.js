@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {  CardElement,  useStripe,  useElements} from "@stripe/react-stripe-js";
 import config from '../config'
 import io from "socket.io-client";
+import axios from 'axios'
 
 let socket = ''
 
@@ -71,27 +72,27 @@ export default function CheckoutForm() {
 
       // message part
       // do the socket connection
-      socket = io(`${config.API_URL}`);
+      // socket = io(`${config.API_URL}`);
 
       
-      const {user, courses } = props
-      let data = {
-        participants: [user._id, courses.mentor._id]
-      }
-      axios.post(`${config.API_URL}/api/conversation`, data, {withCredentials: true})
-                .then((response) => {
-                     socket.emit("join_chat", conversationId);
-                      let messageContent = {
-                        chatId: this.props.match.params.conversationId,
-                          content: {
-                          sender: this.props.user,
-                          message: this.state.currentMessage,
-                        },
-                      };
-                      
-                  // emit it so that everyone connected to the same chat receives the message
-                   socket.emit("send_message", messageContent);
-                })
+      // const {user, courses } = this.props
+      // let data = {
+      //   participants: [user._id, courses.mentor._id]
+      // }
+      // axios.post(`${config.API_URL}/api/conversation`, data, {withCredentials: true})
+      //   .then((response) => {
+      //         socket.emit("join_chat", conversationId);
+      //         let messageContent = {
+      //             chatId: this.props.match.params.conversationId,
+      //             content: {
+      //                   sender: this.props.user,
+      //                   message: this.state.currentMessage,
+      //             },
+      //         };
+              
+      //     // emit it so that everyone connected to the same chat receives the message
+      //       socket.emit("send_message", messageContent);
+      //   })
 
 
     }
