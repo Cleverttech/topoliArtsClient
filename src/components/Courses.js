@@ -11,9 +11,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import SearchCourses from './SearchCourses'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
+  // root: {
+  //   flexGrow: 1,
+  // },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
@@ -31,17 +31,66 @@ function Courses(props){
       color: "white",
       textDecoration:"none"
     };
-    
+    const boxStyle = {
+      maxHeight : "80vh",
+      height : "60vh",
+      display: "flex",
+      margin: "25px auto "
+   }
+  const gridStyle = {
+     minHeight : "100%",
+     display: "flex",
+     flexWrap : "wrap",
+     flexDirection : "row"
+   }
+    const arrangeCards =(card, index)=>{
+
+
+      return (  
+       <div style={boxStyle}>
+          <Card style={{width:"18rem" }} key={card.index}>
+        <CardActionArea>
+          <CardMedia
+            className={classes.media}
+            image={card.image}
+            title={card.name}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {card.name}
+            </Typography>
+            <Typography gutterBottom variant="caption" component="h2">
+              Created by : {card.mentor.username}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+            {card.description}
+             
+            </Typography>
+      
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button fullWidth variant="contained" color="secondary">
+            <Link to={`/courses/${card._id}`} style={linkStyle}>
+              Enroll
+            </Link>
+        </Button>
+        </CardActions>
+      </Card> 
+       </div>
+      
+      )
+    }
     if (!userList) {
       return <p>Loading...</p>;
     } else {
       return (
         <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+          // style={{
+          //   display: "flex",
+          //   flexDirection: "column",
+          //   alignItems: "center",
+          // }}
         >
           <SearchCourses  onSearchCourse={onSearchCourse} />
           {
@@ -51,45 +100,13 @@ function Courses(props){
           }
           <Typography variant="h2">Courses Available</Typography>
           {
-              <Grid container spacing={3}  s>
-              <Grid item xs={12} sm={6} lg={4}>
-                  { courses.map((e) => {
-                      return (
-                        
-                        <Card className={classes.root}>
-                          <CardActionArea>
-                            <CardMedia
-                              className={classes.media}
-                              image={e.image}
-                              title={e.name}
-                            />
-                            <CardContent>
-                              <Typography gutterBottom variant="h5" component="h2">
-                                {e.name}
-                              </Typography>
-                              <Typography gutterBottom variant="caption" component="h2">
-                                Created by : {e.mentor.username}
-                              </Typography>
-                              <Typography variant="body2" color="textSecondary" component="p">
-                              {e.description}
-                               
-                              </Typography>
-                        
-                            </CardContent>
-                          </CardActionArea>
-                          <CardActions>
-                            <Button fullWidth variant="contained" color="secondary">
-                              <Link to={`/courses/${e._id}`} style={linkStyle}>
-                                Enroll
-                              </Link>
-                          </Button>
-                          </CardActions>
-                        </Card> 
-                      )
-                    })
-                    }
-                </Grid>
-            </Grid> 
+              <Grid style={gridStyle} spacing={4}>
+
+                 {
+                  courses.map(arrangeCards)
+                 }               
+            </Grid>
+
           }
         </div>
       );
