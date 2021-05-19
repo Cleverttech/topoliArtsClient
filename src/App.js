@@ -10,15 +10,18 @@ import TestRegister from "./components/TestRegister";
 import Courses from "./components/Courses";
 import Users from "./components/Users";
 import NotFound from "./components/NotFound";
-import Profile from "./components/Profile";
+
 import ChatPage from "./components/ChatPage";
 import Stripe from "./components/Stripe";
 import Artists from "./components/Artists";
 import PortfolioDetails from "./components/PortfolioDetails";
 import CoursePaymentForm from "./components/CoursePaymentForm";
+import Loader from './components/Loader'
 import './App.css'
 
 import ProfileTest from "./components/ProfileTest";
+import Settings from "./components/Settings";
+import CheckoutForm from "./components/CheckoutForm";
 
 // import './stripe.css'
 
@@ -34,52 +37,52 @@ class App extends Component {
     artists: [],
     userList: [],
     filteredUserList: [],
+    loading: true,
   };
-  componentDidMount = () => {
-    axios
-      .get(`${config.API_URL}/api/user`, { withCredentials: true })
-      .then((response) => {
-        this.setState({
-          user: response.data,
-          fetchingUser: false,
-        });
-      })
-      .catch((error) => {
-        
-        // this.setState({
-        //   error: error.response.data,
-        //   fetchingUser: false,
-        // });
-      });
 
-    axios
-      .get(`${config.API_URL}/api/courses`, { withCredentials: true })
-      .then((response) => {
-        this.setState({
-          courses: response.data,
-          filteredCourses: response.data,
-        });
-      })
-      .catch((err) => {
-        this.setState({
-          error: err.data,
-        });
+  fetchFromDB=()=>{
+    axios.get(`${config.API_URL}/api/user`, { withCredentials: true })
+    .then((response) => {
+      this.setState({
+        user: response.data,
+        fetchingUser: false,
       });
+    })
+    .catch((error) => {
+      this.setState({
+        error: error.data,
+        fetchingUser: false,
+      });
+    });
 
-    axios
-      .get(`${config.API_URL}/api/users`, { withCredentials: true })
-      .then((response) => {
-        this.setState({
+  axios.get(`${config.API_URL}/api/courses`, { withCredentials: true })
+  .then((response) => {
+    this.setState({
+      courses: response.data,
+      filteredCourses: response.data,
+    });
+      return axios.get(`${config.API_URL}/api/users`, { withCredentials: true })
+    })
+    .then((response) => {
+      this.setState({
           userList: response.data,
-          filteredUserList: response.data
+          filteredUserList: response.data,
+          loading: false,
         });
-      })
-      .catch((err) => {
-        // this.setState({
-        //   error: err.data,
-        // });
+    })
+    .catch((error) => {
+      this.setState({
+        loading:false,
+        error: error.data,
       });
+    });
+  }
+
+
+  componentDidMount = () => {
+    this.fetchFromDB()
   };
+
   handleSearchUser =(e) => {
     let input = e.target.value
     const {userList} = this.state
@@ -106,7 +109,6 @@ class App extends Component {
   })
   };
 
-
   handleRegister = (values) => {
     const { username, email, password } = values;
 
@@ -115,15 +117,14 @@ class App extends Component {
       email,
       password,
     };
-    axios
-      .post(`${config.API_URL}/api/register`, newUser, {
+    axios.post(`${config.API_URL}/api/register`, newUser, {
         withCredentials: true,
       })
       .then((result) => {
-        this.setState(
-          {
-            user: result.data,
-          },
+        this.fetchFromDB()
+        this.setState({
+          user: result.data,
+        },
           () => {
             this.props.history.push("/");
           }
@@ -132,10 +133,11 @@ class App extends Component {
       .catch((error) => {
         console.log(error.data);
         this.setState({
-          error: error.response.data,
+          error: error.data,
         });
       });
   };
+
   handleLogin = (values) => {
     const { email, password } = values;
     let newUser = {
@@ -143,27 +145,47 @@ class App extends Component {
       password,
     };
 
-    axios
-      .post(`${config.API_URL}/api/login`, newUser, { withCredentials: true })
-      .then((response) => {
-
-        this.setState(
-          {
+    axios.post(`${config.API_URL}/api/login`, newUser, { withCredentials: true })
+    .then((response) => {
+      this.fetchFromDB()
+        this.setState({
             user: response.data,
             error: null,
-          },
-          () => {
+        },() => {
             this.props.history.push("/");
-          }
-        );
+        });
       })
       .catch((error) => {
-        console.log(error);
-        // this.setState({
-        //   error: error.response.data.error,
-        // });
+         this.setState({
+          error: error.data,
+        });
       });
   };
+
+  handleSubmitSettings = (values) => {
+    console.log('hello submit settings')
+    const { username, email, password } = values;
+
+    let newUser = {
+      username,
+      email,
+      password,
+    };
+    axios.patch(`${config.API_URL}/api/settings`, newUser, {withCredentials: true})
+    .then((result) => {
+      this.setState({
+          user: result.data,
+      },() => {
+      this.props.history.push("/profile");
+        });
+    })
+    .catch((error) => {
+      this.setState({
+        error: error.data,
+      });
+    });
+  };
+
   handleLogout = () => {
     axios
       .post(`${config.API_URL}/api/logout`, {}, { withCredentials: true })
@@ -175,10 +197,11 @@ class App extends Component {
       .catch((error) => {
         // the real error json is always is the .response.data
         this.setState({
-          error: error.response.data,
+          error: error.data,
         });
       });
   };
+
   handleCreatePortfolio = async (e) => {
     e.preventDefault();
 
@@ -225,6 +248,7 @@ class App extends Component {
       }
     );
   };
+
   handleCreate = (e) => {
     e.preventDefault();
     let name = e.target.name.value;
@@ -291,9 +315,7 @@ class App extends Component {
     if (role) {
       newRole.role = "mentor";
       axios
-        .patch(`${config.API_URL}/api/users/${id}`, newRole, {
-          withCredentials: true,
-        })
+        .patch(`${config.API_URL}/api/users/${id}`, newRole, {withCredentials: true})
         .then((result) => {
           let updatedUserList = this.state.userList.map((e) => {
             if (e._id == result.data._id) {
@@ -304,6 +326,7 @@ class App extends Component {
           });
           this.setState({
             userList: updatedUserList,
+            filteredUserList: updatedUserList,
           });
         })
         .catch((err) => {
@@ -311,17 +334,16 @@ class App extends Component {
         });
     }
   };
+
   handleSubmitPic = (e) => {
     e.preventDefault();
     let img = e.target.img.files[0];
     let formData = new FormData();
     formData.append("imageUrl", img);
 
-    axios
-      .post(`${config.API_URL}/api/upload`, formData, { withCredentials: true })
-      .then((result) => {
-        axios
-          .patch(
+    axios.post(`${config.API_URL}/api/upload`, formData, { withCredentials: true })
+    .then((result) => {
+        axios.patch(
             `${config.API_URL}/api/user`,
             { img: result.data },
             { withCredentials: true }
@@ -341,17 +363,23 @@ class App extends Component {
             console.log(err);
           });
       });
-  }
+  };
+  
   render() {
-    const { error, user, courses, userList, filteredCourses, filteredUserList } = this.state;
+    const {loading, error, user, courses, userList, filteredCourses, filteredUserList } = this.state;
+    if(loading){
+      return (<Loader/>)
+    }else{
 
+    
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
+        {/* <Stripe/> */}
 
         <Switch>
           <Route exact path="/" component={LandingPage} />
-          
+
           <Route path="/forchildren" component={ForChildren} />
     
           <Route path="/users" render={(routeProps) => {
@@ -364,7 +392,7 @@ class App extends Component {
             return (<CoursePaymentForm error={error} courses={courses} userList={userList} {...routeProps}/>);}}/>
             
           <Route exact path="/courses/:courseId/payment" render={(routeProps) => {
-            return (<Stripe error={error} user={user} userList={userList} courses={courses} {...routeProps}/>);}}/>
+            return (<Stripe error={error} user={user} userList={filteredUserList} courses={courses} {...routeProps}/>);}}/>
           
           <Route exact path='/artists' render={(routeProps)=>{
             return (<Artists error={error} user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
@@ -373,20 +401,26 @@ class App extends Component {
             return (<PortfolioDetails user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
           
           <Route exact path="/profile" render={(routeProps) => {
-            return (<ProfileTest user={user} userList={filteredUserList} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={filteredCourses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
+            return (<ProfileTest user={user} userList={filteredUserList} onSubmitSettings={this.handleSubmitSettings} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={filteredCourses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
             
+          <Route path='/chat/:conversationId' render={(routeProps)=>{
+            return (<ChatPage user={user} {...routeProps}/>)
+          }}/>
           
           <Route exact path="/login" render={(routeProps) => {
             return (<TestLogin error={error} onLogin={this.handleLogin} {...routeProps} />);}}/>
           
           <Route exact path="/register" render={(routeProps) => {
             return (<TestRegister error={error} onSubmit={this.handleRegister} {...routeProps}/>);}}/>
-            
+
+          <Route path='/settings' render={(routeProps)=>{
+            return (<Settings error={error} user={user} onSubmitSettings={this.handleSubmitSettings} {...routeProps}/>);}}/>
           <Route component={NotFound} />
         </Switch>
       </div>
     );
   }
+}
 }
 
 export default withRouter(App);

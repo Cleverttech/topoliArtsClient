@@ -23,6 +23,15 @@ function CoursePaymentForm(props){
 	  backgroundColor:theme.palette.primary.main,
 	};
   
+    const classes = useStyles()
+
+
+	const handleOnSubmit =(e)=> {
+		e.preventDefault()
+		const {courseId} = props.match.params
+		props.history.push(`/courses/${courseId}/payment`)
+    }
+
 		const paperStyle = {
 			padding: "30px 20px",
 			width: 375,
@@ -49,16 +58,7 @@ function CoursePaymentForm(props){
 		const { courses } = props
 
         const {courseId} = props.match.params
-		console.log(validationSchema)
-		const handleOnSubmit =(e)=> {
 	
-			const {courseId} = props.match.params
-			// const { fullname, email,telephone , message} = values;
-			// console.log(values)
-            // console.log(fullname, email,telephone , message)
-		   props.history.push(`/courses/${courseId}/payment`)
-		 }
-          console.log(initialValues )
 		return (
 			     <Grid>
 				<Paper elevation={20} style={paperStyle}>
@@ -103,7 +103,7 @@ function CoursePaymentForm(props){
 								placeholder="Enter fullname"
 								helperText={<ErrorMessage name="fullname">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
 							/>
-							<TextFieldnpm start
+							<TextField
 								as={TextField}
 								name="email"
 								fullWidth

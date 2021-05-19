@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import config from '../config'
-
+// import './ChatPage.css'
 import io from "socket.io-client";
 
 let socket = ''
@@ -23,7 +23,7 @@ class ChatPage extends Component {
         //setup your socket connection with the server
         socket = io(`${config.API_URL}`);
 
-        let conversationId = '609e8aa3811b191c508b01b7'
+        let conversationId = this.props.match.params.conversationId
         axios.get(`${config.API_URL}/api/messages/${conversationId}`)
             .then((response) => {
                 this.setState({
@@ -56,7 +56,7 @@ class ChatPage extends Component {
     sendMessage = async () => {
         // Create the object structure
         let messageContent = {
-            chatId: this.props.match.params.chatId,
+            chatId: this.props.match.params.conversationId,
             content: {
               sender: this.props.user,
               message: this.state.currentMessage,
@@ -90,9 +90,9 @@ class ChatPage extends Component {
                         {
                             messageList.map((val) => {
                                 return (
-                                    <div key={val._id} className="messageContainer" id={val.sender.name == user.name ?"You" : "Other"}>
+                                    <div key={val._id} className="messageContainer" id={val.sender.username == user.username ?"You" : "Other"}>
                                         <div className="messageIndividual">
-                                            {val.sender.name}: {val.message}
+                                            {val.sender.username}: {val.message}
                                         </div>
                                     </div>
                                 );

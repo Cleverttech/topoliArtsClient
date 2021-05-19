@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {  CardElement,  useStripe,  useElements} from "@stripe/react-stripe-js";
 import config from '../config'
+import io from "socket.io-client";
+import axios from 'axios'
+
+let socket = ''
 
 export default function CheckoutForm() {
   const [succeeded, setSucceeded] = useState(false);
@@ -11,9 +15,10 @@ export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
 
-  useEffect(() => {
+  useEffect((props) => {
+    const { courseId } = props.match.params
     // Create PaymentIntent as soon as the page loads
-    window.fetch(`${config.API_URL}/api/create-payment-intent`, {method: "POST",headers: {"Content-Type": "application/json"}, body: JSON.stringify({items: [{ id: "xl-tshirt" }]})})
+    window.fetch(`${config.API_URL}/api/create-payment-intent`, {method: "POST",headers: {"Content-Type": "application/json"}, body: JSON.stringify({items: [{ id: "xl-tshirt" }]}, {courseId: `${courseId}`} )}, {withCredentials: true})
       .then(res => {
         return res.json();
       })
@@ -64,6 +69,32 @@ export default function CheckoutForm() {
       setError(null);
       setProcessing(false);
       setSucceeded(true);
+
+      // message part
+      // do the socket connection
+      // socket = io(`${config.API_URL}`);
+
+      
+      // const {user, courses } = this.props
+      // let data = {
+      //   participants: [user._id, courses.mentor._id]
+      // }
+      // axios.post(`${config.API_URL}/api/conversation`, data, {withCredentials: true})
+      //   .then((response) => {
+      //         socket.emit("join_chat", conversationId);
+      //         let messageContent = {
+      //             chatId: this.props.match.params.conversationId,
+      //             content: {
+      //                   sender: this.props.user,
+      //                   message: this.state.currentMessage,
+      //             },
+      //         };
+              
+      //     // emit it so that everyone connected to the same chat receives the message
+      //       socket.emit("send_message", messageContent);
+      //   })
+
+
     }
   };
 
