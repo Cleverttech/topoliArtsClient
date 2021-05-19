@@ -6,7 +6,7 @@ import SearchCourses from './SearchCourses'
 
 export default class Courses extends Component {
   render() {
-    const { courses, userList, onSearchCourse  } = this.props;
+    const { courses, userList, onSearchCourse } = this.props;
     
     const linkStyle = {
       color: "white",

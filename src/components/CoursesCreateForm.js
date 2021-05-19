@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 function CoursesCreateForm(props) {
   const classes = useStyles();
-  const { onCreate } = props;
+  const { onCreate, disableSubmit } = props;
   const theme = useTheme()
 
   const paperStyle = {
@@ -108,6 +108,7 @@ function CoursesCreateForm(props) {
             fullWidth
             style={btnStyle}
             type="submit"
+            disabled={disableSubmit}
             variant="contained"
             color="secondary"
           >

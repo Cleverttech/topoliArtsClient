@@ -20,11 +20,7 @@ function CoursePaymentForm(props){
 
     const classes = useStyles()
 
-	const handleOnSubmit =(e)=> {
-		e.preventDefault()
-		const {courseId} = props.match.params
-		props.history.push(`/courses/${courseId}/payment`)
-    }
+	
 
 
 		const paperStyle = {
@@ -40,25 +36,31 @@ function CoursePaymentForm(props){
 			marginTop: "20px",
 		};
 		//Validation starts here
-		const initialValues = {
-			fullname: "",
-			countrycode: "",
-			email: "",
-			telephone: "",
-			termsAndConditions: false,
-		};
-		const validationSchema = Yup.object().shape({
-			fullname: Yup.string().min(3, "username too short").required("Full name is required!"),
-			email: Yup.string().email("Enter valid email").required("Email is required!"),
-			countrycode: Yup.number().max(4, "Enter a minimum phone number").required("Country code is required!"),
-			telephone: Yup.number().typeError("That doesn't look like a phone number").required("Telephone number is required!").positive().min(7),
-			termsAndConditions: Yup.string().oneOf(["true"], "Please accept terms & conditions!"),
-		});
+		// const initialValues = {
+		// 	fullname: "",
+		// 	telephone: "",
+		// 	message: "",
+		// 	termsAndConditions: false,
+		// };
+		// const validationSchema = Yup.object().shape({
+		// 	fullname: Yup.string().min(3, "username too short").required("Full name is required!"),
+		// 	telephone: Yup.number().typeError("That doesn't look like a phone number").required("Telephone number is required!").positive().min(7),
+		// 	termsAndConditions: Yup.string().oneOf(["true"], "Please accept terms & conditions!"),
+		// });
 
-		const { courses } = props
+		const { courses, disableSubmit } = props
 
         const {courseId} = props.match.params
-
+		
+		const handleOnSubmit =(e)=> {
+			// e.preventDefault()
+			// const { user } = props
+			const {courseId} = props.match.params
+			// const {fullname, telephone, message} = values
+			
+			// let msgForm = `${user.username} also know as ${fullname} just bought ${courseId.name} course. In case he doesn't reach out, you can call him at ${telephone}. He also left this as a message: ${message}`
+			props.history.push(`/courses/${courseId}/payment`)
+		}
 
 
 		return (
@@ -88,11 +90,12 @@ function CoursePaymentForm(props){
      	
 					</Grid>
 					<Formik
-						initialValues={initialValues}
-						validationSchema={validationSchema}
+						// initialValues={initialValues}
+						// validationSchema={validationSchema}
 						//add onclick event
                         onSubmit={handleOnSubmit}
 					>
+						{/* {(props) => ( */}
 						<Form>
 							<TextField
 								as={TextField}
@@ -102,15 +105,7 @@ function CoursePaymentForm(props){
 								placeholder="Enter fullname"
 								helperText={<ErrorMessage name="fullname">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
 							/>
-							<TextField
-								as={TextField}
-								name="email"
-								fullWidth
-								label="Email"
-								placeholder="Enter Email"
-								helperText={<ErrorMessage name="email">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
-							/>
-							<TextField as={TextField} name="countrycode" fullWidth label="Country Code" placeholder="Country Code" />
+							
 							<TextField
 								as={TextField}
 								name="telephone"
@@ -121,14 +116,15 @@ function CoursePaymentForm(props){
 							/>
 
 							<TextField as={TextField} name="message" fullWidth label="Message" type="text" />
-							<FormControlLabel control={<Field as={Checkbox} name="termsAndConditions" />} label="I accept the terms and conditions" />
+							{/* <FormControlLabel control={<Field as={Checkbox} name="termsAndConditions" />} label="I accept the terms and conditions" />
 							<FormHelperText>
 								<ErrorMessage name="termsAndConditions">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>
-							</FormHelperText>
+							</FormHelperText> */}
 							<Button style={btnStyle} type="submit" variant="contained" color="secondary">
                                continue	
 							</Button>
 						</Form>
+					{/* )} */}
 					</Formik>
 				</Paper>
 			</Grid>

@@ -14,11 +14,13 @@ export default function CheckoutForm() {
   const [clientSecret, setClientSecret] = useState('');
   const stripe = useStripe();
   const elements = useElements();
-
-  useEffect((props) => {
-    const { courseId } = props.match.params
+  
+  useEffect(() => {
+    // const { courseId } = this.props.match.params
+    
+    // const {msgForm} = props
     // Create PaymentIntent as soon as the page loads
-    window.fetch(`${config.API_URL}/api/create-payment-intent`, {method: "POST",headers: {"Content-Type": "application/json"}, body: JSON.stringify({items: [{ id: "xl-tshirt" }]}, {courseId: `${courseId}`} )}, {withCredentials: true})
+    window.fetch(`${config.API_URL}/api/create-payment-intent`, {method: "POST",headers: {"Content-Type": "application/json"}, body: JSON.stringify({items: [{ id: "xl-tshirt" }]})}, {withCredentials: true})
       .then(res => {
         return res.json();
       })
@@ -71,22 +73,22 @@ export default function CheckoutForm() {
       setSucceeded(true);
 
       // message part
-      // do the socket connection
+      //do the socket connection
       // socket = io(`${config.API_URL}`);
 
       
-      // const {user, courses } = this.props
+      // const {user, courses, msgForm } = this.props
       // let data = {
       //   participants: [user._id, courses.mentor._id]
       // }
       // axios.post(`${config.API_URL}/api/conversation`, data, {withCredentials: true})
       //   .then((response) => {
-      //         socket.emit("join_chat", conversationId);
+      //         socket.emit("join_chat", response.data._id);
       //         let messageContent = {
-      //             chatId: this.props.match.params.conversationId,
+      //             chatId: response.data._id,
       //             content: {
       //                   sender: this.props.user,
-      //                   message: this.state.currentMessage,
+      //                   message: this.props.msgForm,
       //             },
       //         };
               
