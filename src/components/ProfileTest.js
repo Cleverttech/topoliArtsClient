@@ -8,7 +8,7 @@ class ProfileTest extends Component {
   state ={
     fileValue : false,
   }
-  
+
   handleChange=(e)=>{
     e.preventDefault()
     console.log(e.target.value)
@@ -18,7 +18,6 @@ class ProfileTest extends Component {
         fileValue: true
       })
     }
-
   }
 
   

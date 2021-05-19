@@ -374,6 +374,9 @@ class App extends Component {
           <Route exact path="/profile" render={(routeProps) => {
             return (<ProfileTest user={user} userList={filteredUserList} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={filteredCourses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
             
+          <Route path='/chat/:conversationId' render={(routeProps)=>{
+            return (<ChatPage user={user} {...routeProps}/>)
+          }}/>
           
           <Route exact path="/login" render={(routeProps) => {
             return (<TestLogin error={error} onLogin={this.handleLogin} {...routeProps} />);}}/>
