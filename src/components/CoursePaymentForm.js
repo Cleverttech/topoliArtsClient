@@ -41,7 +41,7 @@ function CoursePaymentForm(props){
 			message: "",
 			termsAndConditions: false,
 		};
-		console.log(initialValues)
+		
 
 		const validationSchema = Yup.object().shape({
 			fullname: Yup.string().min(3, "username too short").required("Full name is required!"),

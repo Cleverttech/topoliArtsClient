@@ -90,7 +90,7 @@ class ChatPage extends Component {
                         {
                             messageList.map((val) => {
                                 return (
-                                    <div key={val._id} className="messageContainer" id={val.sender.username == user.username ?"You" : "Other"}>
+                                    <div key={val._id} className="messageContainer" id={val.sender.username == user.username ? "You" : "Other"}>
                                         <div className="messageIndividual">
                                             {val.sender.username}: {val.message}
                                         </div>
