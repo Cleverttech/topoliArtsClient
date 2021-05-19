@@ -11,7 +11,6 @@ class ProfileTest extends Component {
 
   handleChange=(e)=>{
     e.preventDefault()
-    console.log(e.target.value)
     let fileVal = e.target.value
     if(fileVal){
       this.setState({

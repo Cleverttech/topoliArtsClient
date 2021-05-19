@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     margin:'auto',
-    width: 650,
+    width: 500,
   },
 }));
 
@@ -86,7 +86,7 @@ export default function FullWidthTabs(props) {
           <Tab label="My Courses" {...a11yProps(0)} />
           <Tab label="New Course" {...a11yProps(1)} />
           <Tab label="New Portfolio" {...a11yProps(2)} />
-          <Tab label="Settings"  {...a11yProps(3)} />
+          
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -103,10 +103,6 @@ export default function FullWidthTabs(props) {
           <TabPanel value={value} index={2} dir={theme.direction}>
             <PortfolioForm onCreatePortfolio={onCreatePortfolio} />
           </TabPanel>
-          <TabPanel value={value} index={3} dir={theme.direction}>
-            <TestRegister courses={courses}  userList={userList} user={user}/>
-          </TabPanel>
-
       </SwipeableViews>
     </div>
   );

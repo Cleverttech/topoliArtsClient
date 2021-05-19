@@ -18,6 +18,7 @@ import PortfolioDetails from "./components/PortfolioDetails";
 import CoursePaymentForm from "./components/CoursePaymentForm";
 
 import ProfileTest from "./components/ProfileTest";
+import Settings from "./components/Settings";
 
 // import './stripe.css'
 
@@ -105,7 +106,6 @@ class App extends Component {
   })
   };
 
-
   handleRegister = (values) => {
     const { username, email, password } = values;
 
@@ -135,6 +135,7 @@ class App extends Component {
         });
       });
   };
+
   handleLogin = (values) => {
     const { email, password } = values;
     let newUser = {
@@ -163,6 +164,32 @@ class App extends Component {
         // });
       });
   };
+
+  handleSubmitSettings = (values) => {
+    console.log('hello submit settings')
+    const { username, email, password } = values;
+
+    let newUser = {
+      username,
+      email,
+      password,
+    };
+    axios.patch(`${config.API_URL}/api/settings`, newUser, {withCredentials: true})
+    .then((result) => {
+      this.setState({
+          user: result.data,
+      },() => {
+      this.props.history.push("/");
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+      // this.setState({
+      //   error: error.response.data,
+      // });
+    });
+  };
+
   handleLogout = () => {
     axios
       .post(`${config.API_URL}/api/logout`, {}, { withCredentials: true })
@@ -178,6 +205,7 @@ class App extends Component {
         });
       });
   };
+
   handleCreatePortfolio = async (e) => {
     e.preventDefault();
 
@@ -224,6 +252,7 @@ class App extends Component {
       }
     );
   };
+
   handleCreate = (e) => {
     e.preventDefault();
     let name = e.target.name.value;
@@ -310,6 +339,7 @@ class App extends Component {
         });
     }
   };
+
   handleSubmitPic = (e) => {
     e.preventDefault();
     let img = e.target.img.files[0];
@@ -340,13 +370,15 @@ class App extends Component {
             console.log(err);
           });
       });
-  }
+  };
+  
   render() {
     const { error, user, courses, userList, filteredCourses, filteredUserList } = this.state;
 
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
+        <Settings user={user} onSubmitSettings={this.handleSubmitSettings}/>
 
         <Switch>
           <Route exact path="/" component={LandingPage} />
