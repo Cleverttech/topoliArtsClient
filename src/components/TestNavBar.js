@@ -46,6 +46,7 @@ export default function PrimarySearchAppBar(props) {
   const { user, onLogout } = props;
   const classes = useStyles();
   const theme = useTheme()
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 

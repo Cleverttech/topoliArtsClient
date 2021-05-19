@@ -10,13 +10,15 @@ import TestRegister from "./components/TestRegister";
 import Courses from "./components/Courses";
 import Users from "./components/Users";
 import NotFound from "./components/NotFound";
-import Profile from "./components/Profile";
+
 import ChatPage from "./components/ChatPage";
 import Stripe from "./components/Stripe";
 import Artists from "./components/Artists";
 import PortfolioDetails from "./components/PortfolioDetails";
 import CoursePaymentForm from "./components/CoursePaymentForm";
 import Loader from './components/Loader'
+import './App.css'
+
 import ProfileTest from "./components/ProfileTest";
 import Settings from "./components/Settings";
 import CheckoutForm from "./components/CheckoutForm";
@@ -195,7 +197,7 @@ class App extends Component {
       .catch((error) => {
         // the real error json is always is the .response.data
         this.setState({
-          error: error.response.data,
+          error: error.data,
         });
       });
   };

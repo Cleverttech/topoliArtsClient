@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar, Grid, Paper, Typography, TextField, Button, FormControlLabel, Checkbox, FormHelperText } from "@material-ui/core";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import {  useTheme} from "@material-ui/core/styles";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import * as Yup from "yup";
 
@@ -13,8 +14,10 @@ function TestResgister(props) {
   const headerStyle = {
     margin: 0,
   };
+  
+  const theme = useTheme()
   const avatarStyle = {
-    backgroundColor: "#7f7f7f",
+    backgroundColor:theme.palette.primary.main,
   };
   //Validation starts here
   const initialValues = {
@@ -45,9 +48,8 @@ function TestResgister(props) {
           <Avatar style={avatarStyle}>
             <AddBoxIcon />
           </Avatar>
-          <h2 style={headerStyle}>Register</h2>
-          <Typography variant="caption" gutterBottom>
-            Please enter all fields to register
+          <Typography variant="h6" gutterBottom>
+          Please enter all fields to register
           </Typography>
         </Grid>
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>

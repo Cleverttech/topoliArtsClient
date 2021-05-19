@@ -31,31 +31,40 @@ const theme = createMuiTheme({
       'Arial',
       'sans-serif'
     ].join(','),
-    allVariants: {
-      // color: "#282624"
-    },
+    
+    // body1:{
+    //   color: "#282624"
+    // },
+
     h1: {
       fontWeight: 150,
-      fontSize: "3em"
+      fontSize: "3em",
+      color: "#282624"
     },
     h2: {
       fontWeight: 150,
       fontSize: "2em",
+      color: "#282624"
     },
     h3: {
       fontWeight: 300,
+      color: "#282624"
     },
     h4: {
-      fontWeight: 150
+      fontWeight: 150,
+      color: "#282624"
     },
     subtitle1:{
-      fontWeight: 150
+      fontWeight: 150,
+      color: "#282624"
     },
     subtitle2:{
-      fontWeight: 150
+      fontWeight: 150,
+      color: "#282624"
     },
     caption:{
-      fontWeight: 150
+      fontWeight: 150,
+      color: "#282624"
     }
 
   }
