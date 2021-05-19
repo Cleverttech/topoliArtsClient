@@ -52,17 +52,16 @@ function CoursePaymentForm(props){
 
 
 		const { courses } = props
-
+		
+		const [inputValues, updateinputValues] = useState(null);
 		const {courseId} = props.match.params
 	const handleOnSubmit =(values)=> {
 		// e.preventDefault()
 		const {courseId} = props.match.params
-		console.log(props)
-		console.log(values)
-		props.history.push(`/courses/${courseId}/payment`)
+		updateinputValues(values)
+		props.history.push({pathname: `/courses/${courseId}/payment`, state: {inputValues:values}})
     }
 
-	console.log(courseId)
 		return (
 			     <Grid>
 				<Paper elevation={20} style={paperStyle}>

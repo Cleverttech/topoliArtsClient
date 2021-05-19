@@ -8,11 +8,12 @@ import CheckoutForm from "./CheckoutForm";
 
 export default class Stripe extends Component {
     render() {
+        console.log(this.props)
         const promise = loadStripe("pk_test_51IpuIuH5gcnIJLr75WZLRMLyoP7d9Oe6boxI5XrBCL5MSjl9gtWL0M9cBJYWvujzTwhVrdyrSQ2PqZeOHHIpN5S500uwkbVzHl");
         return (
             <div>
                 <Elements stripe={promise}>
-                    <CheckoutForm />
+                    <CheckoutForm {...this.props}/>
                 </Elements>
             </div>
         )
