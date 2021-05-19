@@ -34,7 +34,7 @@ function CoursePaymentForm(props){
 		};
 
 		const avatarStyle = {
-			backgroundColor: "#7f7f7f",
+			backgroundColor: "primary",
 		};
 		const btnStyle = {
 			marginTop: "20px",

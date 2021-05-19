@@ -2,6 +2,7 @@ import React from "react";
 import { Avatar, Grid, Paper, Typography, TextField, Button, Link } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import {  useTheme} from "@material-ui/core/styles";
 import * as Yup from "yup";
 
 function TestLogin(props) {
@@ -18,6 +19,12 @@ function TestLogin(props) {
   email: "",
  };
 
+ const theme = useTheme()
+
+ const avatarStyle = {
+   backgroundColor:theme.palette.primary.main,
+ };
+
  const validationSchema = Yup.object().shape({
   email: Yup.string().email("Enter valid email").required("Email is required!"),
   password: Yup.string()
@@ -29,10 +36,12 @@ function TestLogin(props) {
   <Grid>
    <Paper elevation={20} style={paperStyle}>
     <Grid align="center">
-     <Avatar >
+     <Avatar style={avatarStyle}>
       <LockIcon />
      </Avatar>
-     <h2>Login</h2>
+     <Typography variant="h6" gutterBottom>
+            Login
+          </Typography>
     </Grid>
 
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onLogin}>
