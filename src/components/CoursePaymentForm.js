@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-import { Avatar, Grid, Paper, Typography, TextField, Button, Input } from "@material-ui/core";
+import { Avatar, Grid, Paper, Typography, TextField, Input, Button } from "@material-ui/core";
+import { FormControlLabel, Checkbox, FormHelperText } from "@material-ui/core";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
 import { Formik, Field, Form, ErrorMessage} from "formik";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { FormControlLabel, Checkbox, FormHelperText } from "@material-ui/core";
+
 import * as Yup from "yup";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,8 +25,6 @@ function CoursePaymentForm(props){
 	};
     // [state, updateState] = useState("test")
     const classes = useStyles()
-
-
 		const paperStyle = {
 			padding: "30px 20px",
 			width: 375,
@@ -35,14 +34,14 @@ function CoursePaymentForm(props){
 		const btnStyle = {
 			marginTop: "20px",
 		};
-
 		// Validation starts here
 		const initialValues = {
 			fullname: "",
 			telephone: "",
+			message: "",
 			termsAndConditions: false,
 		};
-		console.log(initialValues)
+		
 
 		const validationSchema = Yup.object().shape({
 			fullname: Yup.string().min(3, "username too short").required("Full name is required!"),
@@ -56,7 +55,7 @@ function CoursePaymentForm(props){
 		const [inputValues, updateinputValues] = useState(null);
 		const {courseId} = props.match.params
 	const handleOnSubmit =(values)=> {
-		// e.preventDefault()
+		
 		const {courseId} = props.match.params
 		updateinputValues(values)
 		props.history.push({pathname: `/courses/${courseId}/payment`, state: {inputValues:values}})
@@ -69,7 +68,7 @@ function CoursePaymentForm(props){
 						<Avatar style={avatarStyle}>
 							<CreditCardIcon />
 						</Avatar>
-                      
+
                       {
                         courses.map((el) => {
                          if( el._id === courseId ){
@@ -87,7 +86,6 @@ function CoursePaymentForm(props){
                          })
                 
                       }
-
 					</Grid>
 					<Formik
 						initialValues={initialValues}
@@ -128,12 +126,11 @@ function CoursePaymentForm(props){
 							<FormControlLabel control={<Field as={Checkbox} name="termsAndConditions" />} label="I accept the terms and conditions" />
 							<FormHelperText>
 								<ErrorMessage name="termsAndConditions">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>
-							</FormHelperText>
+							</FormHelperText> 
 							<Button style={btnStyle} type="submit" variant="contained" color="secondary">
                                continue	
 							</Button>
 						</Form>
-				
 					</Formik>
 				</Paper>
 			</Grid>

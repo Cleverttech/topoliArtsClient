@@ -1,5 +1,5 @@
 import { React, Component } from "react";
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Switch, Route, withRouter, Redirect } from "react-router-dom";
 import TestNavBar from "./components/TestNavBar";
 import axios from "axios";
 import config from "./config";
@@ -21,7 +21,7 @@ import './App.css'
 
 import ProfileTest from "./components/ProfileTest";
 import Settings from "./components/Settings";
-import CheckoutForm from "./components/CheckoutForm";
+
 
 // import './stripe.css'
 
@@ -38,6 +38,7 @@ class App extends Component {
     userList: [],
     filteredUserList: [],
     loading: true,
+    disableSubmit: false,
   };
 
   fetchFromDB=()=>{
@@ -204,7 +205,7 @@ class App extends Component {
 
   handleCreatePortfolio = async (e) => {
     e.preventDefault();
-
+  
     let title = e.target.title.value;
     let description = e.target.description.value;
     let cover = e.target.cover.files[0];
@@ -242,6 +243,7 @@ class App extends Component {
       {
         user: patchPortfolio,
         portfolio: [createFormData.data, ...this.state.portfolio],
+        
       },
       () => {
         this.props.history.push("/artists");
@@ -269,6 +271,7 @@ class App extends Component {
           this.setState(
             {
               courses: [response.data, ...this.state.courses],
+              disableSubmit: false,
             },
             () => {
               console.log("hello");
@@ -365,8 +368,19 @@ class App extends Component {
       });
   };
   
+  handleSubmitPayment=(e)=>{
+
+		e.preventDefault()
+    const fullname = e.target.fullname.value
+		const { courseId } = this.props.match.params
+    console.log(courseId)
+		const { user } = this.state
+		let msgForm = `Hello man, ${fullname} just bought your course. His E-mail is ${user.email}.`
+    return <Redirect to={`/courses/${courseId}/payment`} msgForm={msgForm}/>
+	}
+
   render() {
-    const {loading, error, user, courses, userList, filteredCourses, filteredUserList } = this.state;
+    const {disableSubmit, loading, error, user, courses, userList, filteredCourses, filteredUserList } = this.state;
     if(loading){
       return (<Loader/>)
     }else{
@@ -389,7 +403,7 @@ class App extends Component {
             return (<Courses error={error} courses={filteredCourses} {...routeProps} onSearchCourse={this.handleSearchCourse} userList={userList}/>);}}/>
           
           <Route exact path="/courses/:courseId" render={(routeProps) => {
-            return (<CoursePaymentForm error={error} courses={courses} userList={userList} {...routeProps}/>);}}/>
+            return (<CoursePaymentForm onSubmitPayment={this.handleSubmitPayment} disableSubmit={disableSubmit} error={error} courses={courses} userList={userList} {...routeProps}/>);}}/>
             
           <Route exact path="/courses/:courseId/payment" render={(routeProps) => {
             return (<Stripe error={error} user={user} userList={filteredUserList} courses={courses} {...routeProps}/>);}}/>
