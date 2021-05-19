@@ -16,11 +16,11 @@ export default function CheckoutForm() {
   const elements = useElements();
   
   useEffect(() => {
-    // const { courseId } = this.props.match.params
+    const courseId  = '60a22a625613b425d0fd0879'//just for testing
     
-    // const {msgForm} = props
+    
     // Create PaymentIntent as soon as the page loads
-    window.fetch(`${config.API_URL}/api/create-payment-intent`, {method: "POST",headers: {"Content-Type": "application/json"}, body: JSON.stringify({items: [{ id: "xl-tshirt" }]})}, {withCredentials: true})
+    window.fetch(`${config.API_URL}/api/create-payment-intent`, {method: "POST",headers: {"Content-Type": "application/json"}, body: JSON.stringify({items: [{ id: "xl-tshirt" }]},{courseId: courseId})}, {withCredentials: true})
       .then(res => {
         return res.json();
       })
@@ -74,27 +74,27 @@ export default function CheckoutForm() {
 
       // message part
       //do the socket connection
-      // socket = io(`${config.API_URL}`);
+      socket = io(`${config.API_URL}`);
 
-      
-      // const {user, courses, msgForm } = this.props
-      // let data = {
-      //   participants: [user._id, courses.mentor._id]
-      // }
-      // axios.post(`${config.API_URL}/api/conversation`, data, {withCredentials: true})
-      //   .then((response) => {
-      //         socket.emit("join_chat", response.data._id);
-      //         let messageContent = {
-      //             chatId: response.data._id,
-      //             content: {
-      //                   sender: this.props.user,
-      //                   message: this.props.msgForm,
-      //             },
-      //         };
+      let msgForm = `BLABLABLA`
+      const {user, courses} = this.props
+      let data = {
+        participants: [user._id, courses.mentor._id]
+      }
+      axios.post(`${config.API_URL}/api/conversation`, data, {withCredentials: true})
+        .then((response) => {
+              socket.emit("join_chat", response.data._id);
+              let messageContent = {
+                  chatId: response.data._id,
+                  content: {
+                        sender: this.props.user,
+                        message: msgForm,
+                  },
+              };
               
-      //     // emit it so that everyone connected to the same chat receives the message
-      //       socket.emit("send_message", messageContent);
-      //   })
+          // emit it so that everyone connected to the same chat receives the message
+            socket.emit("send_message", messageContent);
+        })
 
 
     }

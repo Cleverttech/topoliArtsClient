@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Avatar, Grid, Paper, Typography, TextField, Button } from "@material-ui/core";
+import { Avatar, Grid, Paper, Typography, TextField, Input, Button } from "@material-ui/core";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
@@ -35,28 +35,28 @@ function CoursePaymentForm(props){
 		const btnStyle = {
 			marginTop: "20px",
 		};
-		//Validation starts here
-		// const initialValues = {
-		// 	fullname: "",
-		// 	telephone: "",
-		// 	message: "",
-		// 	termsAndConditions: false,
-		// };
-		// const validationSchema = Yup.object().shape({
-		// 	fullname: Yup.string().min(3, "username too short").required("Full name is required!"),
-		// 	telephone: Yup.number().typeError("That doesn't look like a phone number").required("Telephone number is required!").positive().min(7),
-		// 	termsAndConditions: Yup.string().oneOf(["true"], "Please accept terms & conditions!"),
-		// });
+		// Validation starts here
+		const initialValues = {
+			fullname: "",
+			telephone: "",
+			message: "",
+			termsAndConditions: false,
+		};
+		const validationSchema = Yup.object().shape({
+			fullname: Yup.string().min(3, "username too short").required("Full name is required!"),
+			telephone: Yup.number().typeError("That doesn't look like a phone number").required("Telephone number is required!").positive().min(7),
+			termsAndConditions: Yup.string().oneOf(["true"], "Please accept terms & conditions!"),
+		});
 
 		const { courses, disableSubmit } = props
 
         const {courseId} = props.match.params
 		
-		const handleOnSubmit =(e)=> {
-			// e.preventDefault()
+		const handleOnSubmit =(values)=> {
+			
 			// const { user } = props
 			const {courseId} = props.match.params
-			// const {fullname, telephone, message} = values
+			const {fullname, telephone, message} = values
 			
 			// let msgForm = `${user.username} also know as ${fullname} just bought ${courseId.name} course. In case he doesn't reach out, you can call him at ${telephone}. He also left this as a message: ${message}`
 			props.history.push(`/courses/${courseId}/payment`)
@@ -90,15 +90,15 @@ function CoursePaymentForm(props){
      	
 					</Grid>
 					<Formik
-						// initialValues={initialValues}
-						// validationSchema={validationSchema}
+						initialValues={initialValues}
+						validationSchema={validationSchema}
 						//add onclick event
                         onSubmit={handleOnSubmit}
 					>
 						{/* {(props) => ( */}
 						<Form>
-							<TextField
-								as={TextField}
+							<Field
+								as={Input}
 								name="fullname"
 								fullWidth
 								label="Fullname"
@@ -106,8 +106,8 @@ function CoursePaymentForm(props){
 								helperText={<ErrorMessage name="fullname">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
 							/>
 							
-							<TextField
-								as={TextField}
+							<Field
+								as={Input}
 								name="telephone"
 								fullWidth
 								label="Telephone"
@@ -115,7 +115,7 @@ function CoursePaymentForm(props){
 								helperText={<ErrorMessage name="telephone">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
 							/>
 
-							<TextField as={TextField} name="message" fullWidth label="Message" type="text" />
+							<Field as={Input} name="message" fullWidth label="Message" type="text" />
 							{/* <FormControlLabel control={<Field as={Checkbox} name="termsAndConditions" />} label="I accept the terms and conditions" />
 							<FormHelperText>
 								<ErrorMessage name="termsAndConditions">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>
