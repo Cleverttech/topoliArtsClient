@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Avatar, Grid, Paper, Typography, TextField, Button } from "@material-ui/core";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { FormControlLabel, Checkbox, FormHelperText } from "@material-ui/core";
 import * as Yup from "yup";
 
@@ -18,39 +18,30 @@ const useStyles = makeStyles((theme) => ({
 
 function CoursePaymentForm(props){
 
-    const classes = useStyles()
-
-   const handleOnSubmit =(e)=> {
-       e.preventDefault()
-       const {courseId} = props.match.params
-      props.history.push(`/courses/${courseId}/payment`)
-    }
-
-
+	const theme = useTheme()
+	const avatarStyle = {
+	  backgroundColor:theme.palette.primary.main,
+	};
+  
 		const paperStyle = {
 			padding: "30px 20px",
 			width: 375,
 			margin: "30px auto",
 		};
 
-		const avatarStyle = {
-			backgroundColor: "primary",
-		};
 		const btnStyle = {
 			marginTop: "20px",
 		};
+
 		//Validation starts here
 		const initialValues = {
-			fullname: "",
-			countrycode: "",
-			email: "",
-			telephone: "",
+			fullname: "asdasd",
+			email: "asda@gmailc,om",
+			telephone: "234234234",
 			termsAndConditions: false,
 		};
 		const validationSchema = Yup.object().shape({
-			fullname: Yup.string().min(3, "username too short").required("Full name is required!"),
-			email: Yup.string().email("Enter valid email").required("Email is required!"),
-			countrycode: Yup.number().max(4, "Enter a minimum phone number").required("Country code is required!"),
+			fullname: Yup.string().required("Full name is required!"),
 			telephone: Yup.number().typeError("That doesn't look like a phone number").required("Telephone number is required!").positive().min(7),
 			termsAndConditions: Yup.string().oneOf(["true"], "Please accept terms & conditions!"),
 		});
@@ -58,9 +49,16 @@ function CoursePaymentForm(props){
 		const { courses } = props
 
         const {courseId} = props.match.params
-
-
-
+		console.log(validationSchema)
+		const handleOnSubmit =(e)=> {
+	
+			const {courseId} = props.match.params
+			// const { fullname, email,telephone , message} = values;
+			// console.log(values)
+            // console.log(fullname, email,telephone , message)
+		   props.history.push(`/courses/${courseId}/payment`)
+		 }
+          console.log(initialValues )
 		return (
 			     <Grid>
 				<Paper elevation={20} style={paperStyle}>
@@ -73,7 +71,9 @@ function CoursePaymentForm(props){
                         courses.map((el) => {
                          if( el._id === courseId ){
                           return ( <div>
-                                   <h3>{el.name}</h3>
+						    <Typography variant="h6" gutterBottom>
+							{el.name}
+                             </Typography>
                                    <p>Offered by {el.mentor.username}</p>
                                  <Typography variant="subTitle" gutterBottom>
                                 Price : €  {el.price}
@@ -91,9 +91,10 @@ function CoursePaymentForm(props){
 						initialValues={initialValues}
 						validationSchema={validationSchema}
 						//add onclick event
-                        onSubmit={handleOnSubmit}
+						onSubmit={handleOnSubmit}
 					>
-						<Form>
+					  {(props) => (
+						<Form  >
 							<TextField
 								as={TextField}
 								name="fullname"
@@ -102,7 +103,7 @@ function CoursePaymentForm(props){
 								placeholder="Enter fullname"
 								helperText={<ErrorMessage name="fullname">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
 							/>
-							<TextField
+							<TextFieldnpm start
 								as={TextField}
 								name="email"
 								fullWidth
@@ -110,7 +111,7 @@ function CoursePaymentForm(props){
 								placeholder="Enter Email"
 								helperText={<ErrorMessage name="email">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
 							/>
-							<TextField as={TextField} name="countrycode" fullWidth label="Country Code" placeholder="Country Code" />
+							
 							<TextField
 								as={TextField}
 								name="telephone"
@@ -129,6 +130,7 @@ function CoursePaymentForm(props){
                                continue	
 							</Button>
 						</Form>
+						)}
 					</Formik>
 				</Paper>
 			</Grid>
