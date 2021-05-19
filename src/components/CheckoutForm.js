@@ -6,7 +6,7 @@ import axios from 'axios'
 
 let socket = ''
 
-export default function CheckoutForm() {
+export default function CheckoutForm(props) {
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState('');
@@ -15,16 +15,20 @@ export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
 
-  useEffect((props) => {
-    const { courseId } = props.match.params
+  console.log(props)
+  useEffect(() => {
+    // const { courseId } = props.match.params
     // Create PaymentIntent as soon as the page loads
-    window.fetch(`${config.API_URL}/api/create-payment-intent`, {method: "POST",headers: {"Content-Type": "application/json"}, body: JSON.stringify({items: [{ id: "xl-tshirt" }]}, {courseId: `${courseId}`} )}, {withCredentials: true})
+    window.fetch(`${config.API_URL}/api/create-payment-intent`, {method: "POST",headers: {"Content-Type": "application/json"}, body: JSON.stringify({items: [{ id: "xl-tshirt" }]},
+    //  {courseId: `${courseId}`} 
+    )},
+      {withCredentials: true})
       .then(res => {
         return res.json();
       })
       .then(data => {
         setClientSecret(data.clientSecret);
-      });
+      })
   }, []);
 
   const cardStyle = {
@@ -123,7 +127,6 @@ export default function CheckoutForm() {
         <a
           href={`https://dashboard.stripe.com/test/payments`}
         >
-          {" "}
           Stripe dashboard.
         </a> Refresh the page to pay again.
       </p>

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-import { Avatar, Grid, Paper, Typography, TextField, Button } from "@material-ui/core";
+import { Avatar, Grid, Paper, Typography, TextField, Button, Input } from "@material-ui/core";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Field, Form, ErrorMessage} from "formik";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { FormControlLabel, Checkbox, FormHelperText } from "@material-ui/core";
 import * as Yup from "yup";
@@ -22,15 +22,9 @@ function CoursePaymentForm(props){
 	const avatarStyle = {
 	  backgroundColor:theme.palette.primary.main,
 	};
-  
+    // [state, updateState] = useState("test")
     const classes = useStyles()
 
-
-	const handleOnSubmit =(e)=> {
-		e.preventDefault()
-		const {courseId} = props.match.params
-		props.history.push(`/courses/${courseId}/payment`)
-    }
 
 		const paperStyle = {
 			padding: "30px 20px",
@@ -42,23 +36,33 @@ function CoursePaymentForm(props){
 			marginTop: "20px",
 		};
 
-		//Validation starts here
+		// Validation starts here
 		const initialValues = {
-			fullname: "asdasd",
-			email: "asda@gmailc,om",
-			telephone: "234234234",
+			fullname: "",
+			telephone: "",
 			termsAndConditions: false,
 		};
+		console.log(initialValues)
+
 		const validationSchema = Yup.object().shape({
-			fullname: Yup.string().required("Full name is required!"),
+			fullname: Yup.string().min(3, "username too short").required("Full name is required!"),
 			telephone: Yup.number().typeError("That doesn't look like a phone number").required("Telephone number is required!").positive().min(7),
 			termsAndConditions: Yup.string().oneOf(["true"], "Please accept terms & conditions!"),
 		});
 
+
 		const { courses } = props
 
-        const {courseId} = props.match.params
-	
+		const {courseId} = props.match.params
+	const handleOnSubmit =(values)=> {
+		// e.preventDefault()
+		const {courseId} = props.match.params
+		console.log(props)
+		console.log(values)
+		props.history.push(`/courses/${courseId}/payment`)
+    }
+
+	console.log(courseId)
 		return (
 			     <Grid>
 				<Paper elevation={20} style={paperStyle}>
@@ -91,37 +95,40 @@ function CoursePaymentForm(props){
 						initialValues={initialValues}
 						validationSchema={validationSchema}
 						//add onclick event
-						onSubmit={handleOnSubmit}
+						onSubmit={(values)=>{handleOnSubmit(values)}}
 					>
-					  {(props) => (
-						<Form  >
-							<TextField
-								as={TextField}
+				
+					
+						
+						<Form >
+							<Field
+								as={Input}
 								name="fullname"
 								fullWidth
 								label="Fullname"
 								placeholder="Enter fullname"
 								helperText={<ErrorMessage name="fullname">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
 							/>
-							<TextField
-								as={TextField}
-								name="email"
-								fullWidth
-								label="Email"
-								placeholder="Enter Email"
-								helperText={<ErrorMessage name="email">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
-							/>
 							
-							<TextField
-								as={TextField}
+							<Field
+								as={Input}
 								name="telephone"
 								fullWidth
 								label="Telephone"
 								placeholder="telephone"
 								helperText={<ErrorMessage name="telephone">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>}
 							/>
+								<Field
+								multiline
+								as={Input}
+								name="message"
+								fullWidth
+								placeholder="Send a message"
+								id="outlined-multiline-static"
+								rows={4}
+								type="text"
+							/>
 
-							<TextField as={TextField} name="message" fullWidth label="Message" type="text" />
 							<FormControlLabel control={<Field as={Checkbox} name="termsAndConditions" />} label="I accept the terms and conditions" />
 							<FormHelperText>
 								<ErrorMessage name="termsAndConditions">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>
@@ -130,7 +137,7 @@ function CoursePaymentForm(props){
                                continue	
 							</Button>
 						</Form>
-						)}
+				
 					</Formik>
 				</Paper>
 			</Grid>
