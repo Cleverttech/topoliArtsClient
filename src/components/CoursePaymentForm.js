@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Avatar, Grid, Paper, Typography, TextField, Input, Button } from "@material-ui/core";
-
+import { FormControlLabel, Checkbox, FormHelperText } from "@material-ui/core";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
 import { Formik, Field, Form, ErrorMessage} from "formik";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -127,7 +127,7 @@ function CoursePaymentForm(props){
 							<FormControlLabel control={<Field as={Checkbox} name="termsAndConditions" />} label="I accept the terms and conditions" />
 							<FormHelperText>
 								<ErrorMessage name="termsAndConditions">{(msg) => <div style={{ color: "red" }}>{msg}</div>}</ErrorMessage>
-							</FormHelperText>
+							</FormHelperText> 
 							<Button style={btnStyle} type="submit" variant="contained" color="secondary">
                                continue	
 							</Button>
