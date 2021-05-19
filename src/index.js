@@ -32,9 +32,9 @@ const theme = createMuiTheme({
       'sans-serif'
     ].join(','),
     
-    body1:{
-      color: "#282624"
-    },
+    // body1:{
+    //   color: "#282624"
+    // },
 
     h1: {
       fontWeight: 150,
