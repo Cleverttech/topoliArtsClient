@@ -1,9 +1,10 @@
-import { IconButton } from "@material-ui/core";
+
 import React, { Component } from "react";
 import SettingsIcon from '@material-ui/icons/Settings';
 import TabBar from './TabBar'
 import TabBarStud from './TabBarStud'
 import MessageIcon from '@material-ui/icons/Message';
+import {Link} from 'react-router-dom';
 
 
 class ProfileTest extends Component {
@@ -52,8 +53,8 @@ class ProfileTest extends Component {
                 }
             </form>
 
-            <a style={{textDecoration:'none', color:'inherit'}} href="/users"><MessageIcon style={{cursor:'pointer'}}/></a>
-            <a style={{textDecoration:'none', color:'inherit'}} href="/settings"><SettingsIcon style={{cursor:'pointer'}}/></a>
+            <Link style={{textDecoration:'none', color:'inherit'}} to="/users"><MessageIcon style={{cursor:'pointer'}}/></Link>
+            <Link style={{textDecoration:'none', color:'inherit'}} to="/settings"><SettingsIcon style={{cursor:'pointer'}}/></Link>
           </div>
           {            
             user.role != 'student' 

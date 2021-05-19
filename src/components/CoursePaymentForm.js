@@ -20,10 +20,10 @@ function CoursePaymentForm(props){
 
     const classes = useStyles()
 
-   const handleOnSubmit =(e)=> {
-       e.preventDefault()
-       const {courseId} = props.match.params
-      props.history.push(`/courses/${courseId}/payment`)
+	const handleOnSubmit =(e)=> {
+		e.preventDefault()
+		const {courseId} = props.match.params
+		props.history.push(`/courses/${courseId}/payment`)
     }
 
 

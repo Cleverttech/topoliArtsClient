@@ -4,6 +4,7 @@ import LottieControlLoader from "./LottieControlNotFound";
 
 export default class NotFound extends Component {
   render() {
+    
     return (
       <div>
         <br></br>

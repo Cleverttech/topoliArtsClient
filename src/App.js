@@ -16,9 +16,10 @@ import Stripe from "./components/Stripe";
 import Artists from "./components/Artists";
 import PortfolioDetails from "./components/PortfolioDetails";
 import CoursePaymentForm from "./components/CoursePaymentForm";
-
+import Loader from './components/Loader'
 import ProfileTest from "./components/ProfileTest";
 import Settings from "./components/Settings";
+import CheckoutForm from "./components/CheckoutForm";
 
 // import './stripe.css'
 
@@ -34,52 +35,52 @@ class App extends Component {
     artists: [],
     userList: [],
     filteredUserList: [],
+    loading: true,
   };
-  componentDidMount = () => {
-    axios
-      .get(`${config.API_URL}/api/user`, { withCredentials: true })
-      .then((response) => {
-        this.setState({
-          user: response.data,
-          fetchingUser: false,
-        });
-      })
-      .catch((error) => {
-        
-        // this.setState({
-        //   error: error.response.data,
-        //   fetchingUser: false,
-        // });
-      });
 
-    axios
-      .get(`${config.API_URL}/api/courses`, { withCredentials: true })
-      .then((response) => {
-        this.setState({
-          courses: response.data,
-          filteredCourses: response.data,
-        });
-      })
-      .catch((err) => {
-        this.setState({
-          error: err.data,
-        });
+  fetchFromDB=()=>{
+    axios.get(`${config.API_URL}/api/user`, { withCredentials: true })
+    .then((response) => {
+      this.setState({
+        user: response.data,
+        fetchingUser: false,
       });
+    })
+    .catch((error) => {
+      this.setState({
+        error: error.data,
+        fetchingUser: false,
+      });
+    });
 
-    axios
-      .get(`${config.API_URL}/api/users`, { withCredentials: true })
-      .then((response) => {
-        this.setState({
+  axios.get(`${config.API_URL}/api/courses`, { withCredentials: true })
+  .then((response) => {
+    this.setState({
+      courses: response.data,
+      filteredCourses: response.data,
+    });
+      return axios.get(`${config.API_URL}/api/users`, { withCredentials: true })
+    })
+    .then((response) => {
+      this.setState({
           userList: response.data,
-          filteredUserList: response.data
+          filteredUserList: response.data,
+          loading: false,
         });
-      })
-      .catch((err) => {
-        // this.setState({
-        //   error: err.data,
-        // });
+    })
+    .catch((error) => {
+      this.setState({
+        loading:false,
+        error: error.data,
       });
+    });
+  }
+
+
+  componentDidMount = () => {
+    this.fetchFromDB()
   };
+
   handleSearchUser =(e) => {
     let input = e.target.value
     const {userList} = this.state
@@ -114,15 +115,14 @@ class App extends Component {
       email,
       password,
     };
-    axios
-      .post(`${config.API_URL}/api/register`, newUser, {
+    axios.post(`${config.API_URL}/api/register`, newUser, {
         withCredentials: true,
       })
       .then((result) => {
-        this.setState(
-          {
-            user: result.data,
-          },
+        this.fetchFromDB()
+        this.setState({
+          user: result.data,
+        },
           () => {
             this.props.history.push("/");
           }
@@ -131,7 +131,7 @@ class App extends Component {
       .catch((error) => {
         console.log(error.data);
         this.setState({
-          error: error.response.data,
+          error: error.data,
         });
       });
   };
@@ -143,25 +143,20 @@ class App extends Component {
       password,
     };
 
-    axios
-      .post(`${config.API_URL}/api/login`, newUser, { withCredentials: true })
-      .then((response) => {
-
-        this.setState(
-          {
+    axios.post(`${config.API_URL}/api/login`, newUser, { withCredentials: true })
+    .then((response) => {
+      this.fetchFromDB()
+        this.setState({
             user: response.data,
             error: null,
-          },
-          () => {
+        },() => {
             this.props.history.push("/");
-          }
-        );
+        });
       })
       .catch((error) => {
-        console.log(error);
-        // this.setState({
-        //   error: error.response.data.error,
-        // });
+         this.setState({
+          error: error.data,
+        });
       });
   };
 
@@ -183,10 +178,9 @@ class App extends Component {
         });
     })
     .catch((error) => {
-      console.log(error);
-      // this.setState({
-      //   error: error.response.data,
-      // });
+      this.setState({
+        error: error.data,
+      });
     });
   };
 
@@ -319,9 +313,7 @@ class App extends Component {
     if (role) {
       newRole.role = "mentor";
       axios
-        .patch(`${config.API_URL}/api/users/${id}`, newRole, {
-          withCredentials: true,
-        })
+        .patch(`${config.API_URL}/api/users/${id}`, newRole, {withCredentials: true})
         .then((result) => {
           let updatedUserList = this.state.userList.map((e) => {
             if (e._id == result.data._id) {
@@ -332,6 +324,7 @@ class App extends Component {
           });
           this.setState({
             userList: updatedUserList,
+            filteredUserList: updatedUserList,
           });
         })
         .catch((err) => {
@@ -346,11 +339,9 @@ class App extends Component {
     let formData = new FormData();
     formData.append("imageUrl", img);
 
-    axios
-      .post(`${config.API_URL}/api/upload`, formData, { withCredentials: true })
-      .then((result) => {
-        axios
-          .patch(
+    axios.post(`${config.API_URL}/api/upload`, formData, { withCredentials: true })
+    .then((result) => {
+        axios.patch(
             `${config.API_URL}/api/user`,
             { img: result.data },
             { withCredentials: true }
@@ -373,15 +364,20 @@ class App extends Component {
   };
   
   render() {
-    const { error, user, courses, userList, filteredCourses, filteredUserList } = this.state;
+    const {loading, error, user, courses, userList, filteredCourses, filteredUserList } = this.state;
+    if(loading){
+      return (<Loader/>)
+    }else{
 
+    
     return (
       <div className="App">
         <TestNavBar onLogout={this.handleLogout} user={user} />
+        {/* <Stripe/> */}
 
         <Switch>
           <Route exact path="/" component={LandingPage} />
-          
+
           <Route path="/forchildren" component={ForChildren} />
     
           <Route path="/users" render={(routeProps) => {
@@ -394,7 +390,7 @@ class App extends Component {
             return (<CoursePaymentForm error={error} courses={courses} userList={userList} {...routeProps}/>);}}/>
             
           <Route exact path="/courses/:courseId/payment" render={(routeProps) => {
-            return (<Stripe error={error} user={user} userList={userList} courses={courses} {...routeProps}/>);}}/>
+            return (<Stripe error={error} user={user} userList={filteredUserList} courses={courses} {...routeProps}/>);}}/>
           
           <Route exact path='/artists' render={(routeProps)=>{
             return (<Artists error={error} user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
@@ -422,6 +418,7 @@ class App extends Component {
       </div>
     );
   }
+}
 }
 
 export default withRouter(App);
