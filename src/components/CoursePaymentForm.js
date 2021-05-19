@@ -87,8 +87,7 @@ function CoursePaymentForm(props){
                          })
                 
                       }
-                  
-     	
+
 					</Grid>
 					<Formik
 						initialValues={initialValues}
@@ -97,11 +96,9 @@ function CoursePaymentForm(props){
 						onSubmit={(values)=>{handleOnSubmit(values)}}
 					>
 				
-					
-						
 						<Form >
 							<Field
-								as={Input}
+								as={TextField}
 								name="fullname"
 								fullWidth
 								label="Fullname"

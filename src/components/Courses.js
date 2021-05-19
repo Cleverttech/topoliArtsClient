@@ -1,13 +1,32 @@
-import { Button, Grid, Typography } from "@material-ui/core";
+
+import { Button,Paper, Grid, Typography } from "@material-ui/core";
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import SearchCourses from './SearchCourses'
 
-export default class Courses extends Component {
-  render() {
-    const { courses, userList, onSearchCourse  } = this.props;
-    
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+  media: {
+    height: 200,
+  },
+}));
+function Courses(props){
+  const classes = useStyles();
+
+    const { courses, userList, onSearchCourse  } = props;
     const linkStyle = {
       color: "white",
       textDecoration:"none"
@@ -32,31 +51,49 @@ export default class Courses extends Component {
           }
           <Typography variant="h2">Courses Available</Typography>
           {
-          courses.map((e) => {
-            return (
-              <div key={e._id}>
-                <div>
-                  <br></br>
-                  <img
-                    style={{ width: "40ch" }}
-                    src={e.image}
-                    alt="CourseImage"
-                  />
-                  <div>
-                    <h3>{e.name}</h3>
-
-                    <Button variant="contained" color="secondary">
-                      <Link to={`/courses/${e._id}`} style={linkStyle}>
-                        Enroll
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+              <Grid container spacing={3}  s>
+              <Grid item xs={12} sm={6} lg={4}>
+                  { courses.map((e) => {
+                      return (
+                        
+                        <Card className={classes.root}>
+                          <CardActionArea>
+                            <CardMedia
+                              className={classes.media}
+                              image={e.image}
+                              title={e.name}
+                            />
+                            <CardContent>
+                              <Typography gutterBottom variant="h5" component="h2">
+                                {e.name}
+                              </Typography>
+                              <Typography gutterBottom variant="caption" component="h2">
+                                Created by : {e.mentor.username}
+                              </Typography>
+                              <Typography variant="body2" color="textSecondary" component="p">
+                              {e.description}
+                               
+                              </Typography>
+                        
+                            </CardContent>
+                          </CardActionArea>
+                          <CardActions>
+                            <Button fullWidth variant="contained" color="secondary">
+                              <Link to={`/courses/${e._id}`} style={linkStyle}>
+                                Enroll
+                              </Link>
+                          </Button>
+                          </CardActions>
+                        </Card> 
+                      )
+                    })
+                    }
+                </Grid>
+            </Grid> 
+          }
         </div>
       );
     }
   }
-}
+
+export default Courses
