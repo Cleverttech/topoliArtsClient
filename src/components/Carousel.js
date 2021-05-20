@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   button: {
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     color: "white",
     margin: "0 8px",
   },
