@@ -6,6 +6,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import BookReadingForm from "./BookReadingForm";
 import CancelIcon from "@material-ui/icons/Cancel";
+import Carousel from './Carousel'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -161,7 +162,6 @@ function ForChildren() {
               <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                onClick={handleCloseVol1}
                 open={openVol1}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
@@ -170,10 +170,12 @@ function ForChildren() {
                 }}
               >
                 <Fade in={openVol1}>
-                  <img
-                    src="../assets/AllBooks/Frieda/MDerenbach_Frieda_3.jpg"
-                    alt="KidsImage"
-                  ></img>
+                  <Grid>
+                    <Carousel />
+                    <IconButton onClick={handleCloseVol1}>
+                      <CancelIcon fontSize="large" style={closeStyle} />
+                    </IconButton>
+                  </Grid>
                 </Fade>
               </Modal>
             </Box>
@@ -201,7 +203,6 @@ function ForChildren() {
           <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
-            onClick={handleCloseVol2}
             open={openVol2}
             closeAfterTransition
             BackdropComponent={Backdrop}
@@ -210,12 +211,13 @@ function ForChildren() {
             }}
           >
             <Fade in={openVol2}>
-              <img
-                src="../assets/AllBooks/Frieda/MDerenbach_Frieda_1.jpg"
-                alt="KidsImage"
-                loading="lazy"
-              ></img>
-            </Fade>
+                  <Grid>
+                    <Carousel />
+                    <IconButton onClick={handleCloseVol2}>
+                      <CancelIcon fontSize="large" style={closeStyle} />
+                    </IconButton>
+                  </Grid>
+                </Fade>
           </Modal>
         </Grid>
         <Typography fontWeight="fontWeightLight" style={friedaIntText}>
@@ -233,7 +235,6 @@ function ForChildren() {
           <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
-            onClick={handleCloseFriedaInt}
             open={openFriedaInt}
             closeAfterTransition
             BackdropComponent={Backdrop}
@@ -242,11 +243,13 @@ function ForChildren() {
             }}
           >
             <Fade in={openFriedaInt}>
-              <img
-                src="../assets/AllBooks/Frieda/MDerenbach_Frieda_8.jpg"
-                alt="KidsImage"
-              ></img>
-            </Fade>
+              <Grid>
+                <Carousel />
+                <IconButton onClick={handleCloseFriedaInt}>
+                  <CancelIcon fontSize="large" style={closeStyle} />
+                </IconButton>
+              </Grid>
+            </Fade>              
           </Modal>
         </Typography>
       </Grid>

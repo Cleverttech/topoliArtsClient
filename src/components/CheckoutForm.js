@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {Redirect}  from 'react-router-dom'
 import Loader from './Loader'
 import {  CardElement,  useStripe,  useElements} from "@stripe/react-stripe-js";
 import config from '../config'
 import io from "socket.io-client";
 import axios from 'axios'
+
+import '../stripe.css'
 
 
 let socket = ''
@@ -97,7 +98,6 @@ export default function CheckoutForm(props) {
         }
         axios.post(`${config.API_URL}/api/conversation`, data, {withCredentials: true})
         .then((response) => {
-          console.log(response)
           socket.emit("join_chat", response.data._id);
           let messageContent = {
             chatId: response.data._id,
@@ -106,8 +106,6 @@ export default function CheckoutForm(props) {
               message: msgForm,
             },
           };
-          
-          console.log(messageContent)
           // emit it so that everyone connected to the same chat receives the message
            socket.emit("send_message", messageContent);
           })
@@ -116,9 +114,9 @@ export default function CheckoutForm(props) {
       };
       
       return (
-      <form id="payment-form" onSubmit={handleSubmit}>
+      <form className='form-submit' id="payment-form" onSubmit={handleSubmit}>
         <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
-        <button className='myButton' disabled={processing || disabled || succeeded} id="submit"
+        <button className='button-stripe' disabled={processing || disabled || succeeded} id="submit"
         >
           <span id="button-text">
             {processing ? (
