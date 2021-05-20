@@ -17,6 +17,11 @@ const useStyles = makeStyles((theme) => ({
     height: 200,
   },
 }));
+const sectionStyle = { width: "80%", margin: "20px auto" };
+const friedaIntText = {
+
+  fontWeight: "bolder",
+};
 function Courses(props){
    const classes = useStyles();
 
@@ -29,18 +34,20 @@ function Courses(props){
     const boxStyle = {
       height : "auto",
       display: "flex",
-      margin: "25px auto"
+      margin: "100px auto",
+
    }
     const gridStyle = {
-      margin: "40px 0px",
+      margin: "0px",
       display: "flex",
       flexWrap : "wrap",
       flexDirection : "row"
     }
     const arrangeCards =(card, index)=>{
       return (  
-      <div style={boxStyle}>
-      <Card style={{width:"18rem"}} key={index}>
+
+        <div style={boxStyle}>
+      <Card style={{width:"20rem"}} key={index}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
@@ -71,20 +78,21 @@ function Courses(props){
       </Card> 
        </div>
 
+
       )
     }
     if (!userList) {
       return <p>Loading...</p>;
     } else {
       return (
-        <div className={classes.root}>
+        <div className={classes.root} style={sectionStyle}>
            <SearchCourses  onSearchCourse={onSearchCourse} />
           {
             !courses.length ?
             <h3 style={{color: theme.palette.secondary.main}}>No courses found?...Did you paste Manish's code right?</h3>
             : true
           }
-          <Typography variant="h3">Courses Available</Typography>
+          <Typography style={friedaIntText} variant="h3">Courses Available</Typography>
           {
               <Grid style={gridStyle}>
 
