@@ -44,10 +44,10 @@ export default class PortfolioDetails extends Component {
     return (
       <div>
         <h1>Portfolio</h1>
-        <img style={{width:'70%'}} src={portfolio.cover} alt={portfolio.cover} />
+        <img src={portfolio.cover} alt={portfolio.cover} />
         <h3>{portfolio.title}</h3>
         <p>{portfolio.description}</p>
-        <Carousel style={{marginTop: 'auto'}}images={extraImg}/>
+        <Carousel images={extraImg}/>
         <div style={{ margin: "auto" , display: 'flex', justifyContent: 'space-around'}}>
         <Button variant='contained' color='secondary' component={Link} to={'/artists'}> Go Back </Button>
         </div>
