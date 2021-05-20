@@ -1,11 +1,12 @@
 import React from "react";
-import { Typography , Card, CardActionArea, CardContent, CardMedia} from "@material-ui/core";
+import { Typography , Card, CardActionArea, CardContent, CardMedia, Grid} from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
+import Loader from './Loader'
 
 
 const useStyles = makeStyles((theme) => ({
   root:{
-   margin: "0px 70px",
+   margin: "0px",
   },
    paper: {
      padding: theme.spacing(2),
@@ -17,21 +18,11 @@ const useStyles = makeStyles((theme) => ({
    },
  }));
 function MyCoursesByBuyer(props) {
- const classes = useStyles();
+  const classes = useStyles();
+  const { courses, user, userList  } = props;
 
-    const { courses, user  } = props;
-
-    const boxStyle = {
-      height : "auto",
-      display: "flex",
-      margin: "25px auto"
-   }
-    const gridStyle = {
-      margin: "40px 0px",
-      display: "flex",
-      flexWrap : "wrap",
-      flexDirection : "row"
-    }
+  const boxStyle = {height : "auto",display: "flex", margin: "25px auto"}
+  const gridStyle = { margin: "40px 0px", display: "flex", flexWrap : "wrap", flexDirection : "row" }
   const arrangeCards = (card, index) => {
     return (  
       <div style={boxStyle}>
@@ -43,7 +34,6 @@ function MyCoursesByBuyer(props) {
             title={card.name}
           />
           <CardContent>
-
             <Typography gutterBottom variant="h5" component="h2">
               {card.name}
             </Typography>
@@ -52,33 +42,38 @@ function MyCoursesByBuyer(props) {
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
             {card.description}
-             
+            
             </Typography>
           </CardContent>
 
         </CardActionArea>
 
       </Card> 
-       </div>
+      </div>
       )
   }
-
-  if (!courses) {
-    return <p>Loading ...</p>
-  } else {
-    let filteredCoursesStudent = courses.filter((course) => {
-      if (course.buyers.userId !== user._id) {
-        return course
-      }
-      return (
-        <div style={gridStyle}>
-          {
-            filteredCoursesStudent.map(arrangeCards)
-          }
-        </div>
-      );
-    })
-  }
+    if(!courses || !user){
+      return <p>Loading ...</p>
+    }else{
+      let filteredCourses = courses.filter((course)=>{
+        
+        if(course.buyers.length > 0){
+          
+              course.buyers.filter((e)=>{
+            // console.log(e)
+            if(e.userId._id == user._id){
+              return e
+            }
+          })
+          return course
+        }  
+      })
+        return ( 
+            <Grid style={gridStyle}>
+              { filteredCourses.map(arrangeCards) }
+            </Grid>
+            )
+    }
 }
 
 export default MyCoursesByBuyer;

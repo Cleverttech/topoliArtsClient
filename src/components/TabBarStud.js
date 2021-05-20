@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
    },
 }));
 
-export default function FullWidthTabs(props) {  
+export default function FullWidthTabs (props) {  
   const { courses, userList, user  , onCreatePortfolio, onCreate, onDeleteCourse, error} = props
   const classes = useStyles();
   const theme = useTheme();
@@ -80,7 +80,6 @@ export default function FullWidthTabs(props) {
           aria-label="full width tabs example"
           >
           <Tab label="My Courses" {...a11yProps(0)} />
-          <Tab label="Settings" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -88,11 +87,8 @@ export default function FullWidthTabs(props) {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-        {/* <TabPanel value={value} index={0} dir={theme.direction}>
-          <MyCoursesByBuyer error={error} courses={courses} user={user} />  
-        </TabPanel> */}
-        <TabPanel value={value} index={3} dir={theme.direction}>
-          <TestRegister courses={courses}  userList={userList} user={user}/>
+        <TabPanel value={value} index={0} dir={theme.direction}>
+          <MyCoursesByBuyer error={error} courses={courses} user={user} userList={userList}/>  
         </TabPanel>
       </SwipeableViews>
     </div>

@@ -59,7 +59,7 @@ class ProfileTest extends Component {
           {            
             user.role != 'student' 
             ? <TabBar disableSubmit={disableSubmit} user={user} courses={courses} userList={userList} onCreatePortfolio={onCreatePortfolio} onCreate={onCreate} onDeleteCourse={onDeleteCourse} />
-            : <TabBarStud user={user} courses={courses} userList={userList}/>
+            : <TabBarStud user={user} courses={courses} userList={userList} />
           }
         </div>
       );
