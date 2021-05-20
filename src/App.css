@@ -3,13 +3,14 @@
 }
 
 .footer{
-  background-color: #ff524e;
-  position: fixed;
+  background-color: #282624;
+  position: static;
   bottom: 0;
   left: 0;
   width: 100%;
 }
 .footer h2{
+  padding-top: 25px;
   color: white;
   font-family: 'Nunito';
   font-style: normal;
