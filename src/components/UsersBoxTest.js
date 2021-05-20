@@ -8,8 +8,9 @@ import {Redirect} from 'react-router-dom'
 
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import {Card, Button, Grid, CardHeader, CardMedia, CardContent,Avatar, Typography} from '@material-ui/core';
+import {Card, Button, Grid, CardHeader, CardMedia, CardContent,Avatar, Typography, Input} from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
+import { CheckBox } from "@material-ui/icons";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -94,20 +95,35 @@ function UsersBoxTest(props){
           <div style={boxStyle}>
               <Card style={{width:"10rem"}} key={index} className={classes.root}>
                 <CardHeader
-                  avatar={
-                    <Avatar src={card.image} width= '1rem' aria-label="recipe"/>
-                    
-                  } 
+                  avatar={<Avatar src={card.image} width= '1rem' aria-label="recipe"/>} 
                   title={card.username}
                 />
-                <CardMedia
-     
-                  title={card.username}
-                />               
-                  <Button fullWidth variant="contained" color="secondary">
-                    <Link style={{color:"white", textDecoration:"none"}} to={`/artists/${card._id}`}>Message</Link>
+                <CardMedia title={card.username}/>               
+                  <Button fullWidth variant="contained" color="secondary" onClick={()=>{handleChatClick(card._id)}}>
+                    Message
                   </Button>
               </Card>
+               {
+                user.role !== 'owner'
+                                    ? null
+                                    :[<form onSubmit={(event)=>{onPatchRole(card._id, event)}} >
+                                    
+                                    {
+                                        card.role === 'student'
+                                        ?
+                                        <>
+                                        <label for='student'/>
+                                        <CheckBox  variant='contained' color='secondary'type='checkbox' id='student' name='student' value='student'/>
+                                        <Button variant='contained' color='secondary'>Ok</Button>
+                                        </>  
+                                        :
+                                        <CheckBox variant='contained' color='secondary' type='checkbox' name='admin' checked/>
+                                    }</form>
+                                     
+                                    
+                                    ]
+                                    
+                                }
           </div>
           )
       }
@@ -128,54 +144,12 @@ function UsersBoxTest(props){
                             ? <h4 style={{color: 'red'}}>No user found?...Did you paste Manish's code?</h4>
                             : true
                         }
-                        <div >
-                        <Grid style={gridStyle}>
-                            
-
-                            
-                                {allUsers.map(arrangeCards)}
-                                {
-                                    user.role !== 'owner'
-                                    ? null
-                                    :[
-                                    
-                                allUsers.map((e)=>{
-                                    return (
-                                        
-                                        <form onSubmit={(event)=>{onPatchRole(e._id, event)}} >
-                                    
-                                    {
-                                        e.role === 'student'
-                                        ?
-                                    <>
-                                    <label for='student'/>
-                                    <input type='checkbox' id='student' name='student' value='student'/>
-                                    <button>Ok</button>
-                                    </>  
-                                    :
-                                    <input type='checkbox' name='admin' checked/>
-                                }
-                                            
-                                            </form>
-                                            )
-                                        })
-                                    ]
-                                    
-                                }
-                            
-        
-                            
-                                
-                            
-                                              
-                        </Grid>
-                        </div>
-
-                    </div>)
                         
-                            
-                        }                        
-
+                        <Grid style={gridStyle}>
+                                {allUsers.map(arrangeCards)}     
+                        </Grid>
+                    </div>)
+        }                        
 }
 
 export default UsersBoxTest;
