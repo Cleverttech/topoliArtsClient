@@ -259,7 +259,10 @@ class App extends Component {
     let image = e.target.courseImage.files[0];
     let formData = new FormData();
     formData.append("imageUrl", image);
-
+    
+    this.setState({
+      disableSubmit : true,
+    })
     axios.post(`${config.API_URL}/api/upload`, formData).then((result) => {
       axios
         .post(
@@ -415,7 +418,7 @@ class App extends Component {
             return (<PortfolioDetails user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
           
           <Route exact path="/profile" render={(routeProps) => {
-            return (<ProfileTest user={user} userList={filteredUserList} onSubmitSettings={this.handleSubmitSettings} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={filteredCourses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
+            return (<ProfileTest disableSubmit={disableSubmit} user={user} userList={filteredUserList} onSubmitSettings={this.handleSubmitSettings} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={filteredCourses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
             
           <Route path='/chat/:conversationId' render={(routeProps)=>{
             return (<ChatPage user={user} {...routeProps}/>)

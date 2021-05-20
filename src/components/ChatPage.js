@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import config from '../config'
+import Loader from './Loader'
 // import './ChatPage.css'
 import io from "socket.io-client";
 
@@ -77,10 +78,12 @@ class ChatPage extends Component {
     render() {
         const { loading , messageList} = this.state
         const { user } = this.props
+        console.log(user)
 
         if (loading) {
-            <p>Loading all messages . . .</p>
-        }
+            return <Loader />,
+            <h1>Loading all messages . . .</h1>
+        }   
 
         return (
             <div>

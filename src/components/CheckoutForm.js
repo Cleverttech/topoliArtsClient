@@ -6,6 +6,7 @@ import config from '../config'
 import io from "socket.io-client";
 import axios from 'axios'
 
+
 let socket = ''
 
 export default function CheckoutForm(props) {
@@ -83,26 +84,25 @@ export default function CheckoutForm(props) {
         
         
         const {user, courses} = thisProps
+        
         let mentorId = '';
         courses.map((e)=>{
           if(e._id == thisProps.match.params.courseId){
-            console.log(e.mentor._id)
+            
             return mentorId = e.mentor._id
           }
         })
-
-        
-        console.log(user, courses)
         let data = {
           participants: [user._id, mentorId]
         }
         axios.post(`${config.API_URL}/api/conversation`, data, {withCredentials: true})
         .then((response) => {
+          console.log(response)
           socket.emit("join_chat", response.data._id);
           let messageContent = {
             chatId: response.data._id,
             content: {
-              sender: user._id,
+              sender: user,
               message: msgForm,
             },
           };
@@ -111,7 +111,6 @@ export default function CheckoutForm(props) {
           // emit it so that everyone connected to the same chat receives the message
            socket.emit("send_message", messageContent);
           })
-          
           
         }
       };

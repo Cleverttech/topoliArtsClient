@@ -47,17 +47,23 @@ export default class Users extends Component {
             return (<Loader style={{width:"200px"}}/>)
         }else{
 
+            let allUsers = userList
+            if (user) {
+                allUsers = userList.filter(u => u._id !== user._id)
+            }
+
             return (
             <div>
                 <SearchUser onSearchUser={onSearchUser}/>
                 <h3 onClick={()=>{this.handleGralChatClick()}}>Global Chat</h3>
                 {
-                    !userList.length ?
+                    !allUsers.length ?
                     <h3 style={{color: 'red'}}>No user found?...Did you paste Manish's code?</h3>
                     : true
                 }
                 {
-                    userList.map((e)=>{
+                    allUsers.map((e)=>{
+                        
                         return <div key={e._id}>
                                 <h3 onClick={()=>{this.handleChatClick(e._id)}}>{e.username}</h3>
                                 <h4>{e.role}</h4>
