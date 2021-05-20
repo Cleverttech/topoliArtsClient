@@ -31,6 +31,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const sectionStyle = { width: "80%", margin: "100px auto" };
+const friedaIntText = {
+  fontWeight: "bolder",
+  marginTop:"100px"
+};
 function Artists(props){
 
   const classes = useStyles();
@@ -92,8 +96,8 @@ function Artists(props){
         return (
           <div style={sectionStyle}>
           
-             <Typography variant="h3" color="primary" style={{marginTop:"100px"}}>
-                   Meet the Mentors
+             <Typography variant="h3" color="primary" style={friedaIntText}>
+                   Meet the Artists
               </Typography>
 
              <Typography style={{textAlign:"center", margin:"40px"}} variant="p" color="primary" component="p" >
