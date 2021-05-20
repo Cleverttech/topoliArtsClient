@@ -31,10 +31,6 @@ const theme = createMuiTheme({
       'Arial',
       'sans-serif'
     ].join(','),
-    
-    // body1:{
-    //   color: "#282624"
-    // },
 
     h1: {
       fontWeight: 150,
@@ -48,7 +44,8 @@ const theme = createMuiTheme({
     },
     h3: {
       fontWeight: 300,
-      color: "#282624"
+      color: "#282624",
+      fontSize: "1.8em",
     },
     h4: {
       fontWeight: 150,

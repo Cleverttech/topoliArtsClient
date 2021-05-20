@@ -1,7 +1,7 @@
 
-import { Button,Paper, Grid, Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -11,9 +11,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import SearchCourses from './SearchCourses'
 
 const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   flexGrow: 1,
-  // },
+
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
@@ -24,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function Courses(props){
-  const classes = useStyles();
+   const classes = useStyles();
 
     const { courses, userList, onSearchCourse  } = props;
     const linkStyle = {
@@ -32,23 +30,19 @@ function Courses(props){
       textDecoration:"none"
     };
     const boxStyle = {
-      maxHeight : "80vh",
-      height : "60vh",
+      height : "auto",
       display: "flex",
       margin: "25px auto "
    }
-  const gridStyle = {
-     minHeight : "100%",
-     display: "flex",
-     flexWrap : "wrap",
-     flexDirection : "row"
-   }
+    const gridStyle = {
+      display: "flex",
+      flexWrap : "wrap",
+      flexDirection : "row"
+    }
     const arrangeCards =(card, index)=>{
-
-
       return (  
        <div style={boxStyle}>
-          <Card style={{width:"18rem" }} key={card.index}>
+          <Card style={{width:"18rem" }} key={index}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
@@ -85,20 +79,14 @@ function Courses(props){
       return <p>Loading...</p>;
     } else {
       return (
-        <div
-          // style={{
-          //   display: "flex",
-          //   flexDirection: "column",
-          //   alignItems: "center",
-          // }}
-        >
+        <div>
           <SearchCourses  onSearchCourse={onSearchCourse} />
           {
             !courses.length ?
             <h3 style={{color: 'red'}}>No courses found?...Did you paste Manish's code?</h3>
             : true
           }
-          <Typography variant="h2">Courses Available</Typography>
+          <Typography variant="h3">Courses Available</Typography>
           {
               <Grid style={gridStyle} spacing={4}>
 
