@@ -18,7 +18,7 @@ function LandingPage(){
      
       ]
       const gridStyle = {
-        marginTop: "-200px",
+        marginTop: "-180px",
       }; 
 
         return (
