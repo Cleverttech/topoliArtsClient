@@ -4,8 +4,9 @@ body {
 }  
   
   .chatContainer {
+    color:rgba(255, 255, 255, 0);
     width: 600px;
-    height: 350px;
+    height: 450px;
     border: 5px solid #282624;
     border-radius: 10px;
     display: flex;
