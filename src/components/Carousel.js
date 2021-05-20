@@ -9,6 +9,7 @@ import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import { Grid } from "@material-ui/core";
 
+
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +47,9 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     margin: "0 8px",
   },
+
 }));
+
 
 function SwipeableTextMobileStepper(props) {
   const classes = useStyles();
