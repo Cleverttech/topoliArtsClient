@@ -40,7 +40,7 @@ class Profile extends Component {
     } else {
       return (
           <div style={sectionStyle}>
-            <div style={{display: 'flex' , flexDirection: 'column', alignItems:'center', justifyContent:'flex-end', marginBottom:"40px"}}>
+            <div style={{display: 'flex' , flexDirection: 'column', alignItems:'center', justifyContent:'flex-end'}}>
        
             <Avatar style={{width:'200px', height:'200px'}} aria-label="recipe">
               <img src={user.image} width='200px' alt="profpic" />
@@ -64,9 +64,9 @@ class Profile extends Component {
                 
                
               </form>
-                <div style={{position: 'absolute' }}>
-                  <Link style={{textDecoration:'none', color:'inherit'}} to="/users"><MessageIcon style={{width:'150px', height: '50px' ,cursor:'pointer'}}/></Link>
-                  <Link style={{textDecoration:'none', color:'inherit'}} to="/settings"><SettingsIcon style={{width:'150px' , height: '50px', cursor:'pointer'}}/></Link>
+                <div style={{position: 'relative', left:"40%", bottom:"43px"}}>
+                  <Link style={{textDecoration:'none', color:'inherit'}} to="/users"><MessageIcon style={{width:'45px', height:'45px', cursor:'pointer', marginRight:"30px"}}/></Link>
+                  <Link style={{textDecoration:'none', color:'inherit'}} to="/settings"><SettingsIcon style={{ width:'45px', height:'45px',cursor:'pointer'}}/></Link>
                 </div> 
             
           </div>
