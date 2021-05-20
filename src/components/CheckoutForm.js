@@ -114,7 +114,12 @@ export default function CheckoutForm(props) {
       };
       
       return (
-      <form className='form-submit' id="payment-form" onSubmit={handleSubmit}>
+        <div className='body-stripe'>
+         
+
+          
+
+      <form className='form-stripe' id="payment-form" onSubmit={handleSubmit}>
         <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
         <button className='button-stripe' disabled={processing || disabled || succeeded} id="submit"
         >
@@ -122,8 +127,8 @@ export default function CheckoutForm(props) {
             {processing ? (
               <div className="spinner" id="spinner"></div>
               ) : (
-              "Pay now"
-              )}
+                "Pay now"
+                )}
           </span>
         </button>
         {/* Show any error that happens when processing the payment */}
@@ -137,11 +142,12 @@ export default function CheckoutForm(props) {
           Payment succeeded, see the result in your
           <a
             href={`https://dashboard.stripe.com/test/payments`}
-          >
+            >
             Stripe dashboard.
           </a> Refresh the page to pay again.
         </p>
       </form>
+    </div>
     );
   }
 

@@ -76,6 +76,7 @@ class ChatPage extends Component {
 
 
     render() {
+        const Image = '../assets/Background_test.jpg'
         const { loading , messageList} = this.state
         const { user } = this.props
         console.log(user)
@@ -86,7 +87,7 @@ class ChatPage extends Component {
         }   
 
         return (
-            <div style={{display:'flex', flexDirection: 'column' , alignItems: 'center'}}>
+            <div style={{height: '100%', backgroundImage:`url(${Image})`, backgroundSize:'cover', display:'flex', flexDirection: 'column' , alignItems: 'center'}}>
                 <h3>You're in the Chat Page</h3>
                 <div className="chatContainer">
                     <div className="messages">
@@ -108,11 +109,12 @@ class ChatPage extends Component {
                     <div className="messageInputs">
                         <input value={this.state.currentMessage} type="text" placeholder="Message..."
                             onChange={this.handleMessageInput}
-                        />
+                            />
                         <button onClick={this.sendMessage}>Send</button>
                     </div>
                 </div>
             </div>
+                            
         )
     }
 }
