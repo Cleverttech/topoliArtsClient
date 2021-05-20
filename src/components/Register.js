@@ -5,7 +5,7 @@ import {  useTheme} from "@material-ui/core/styles";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import * as Yup from "yup";
 
-function TestResgister(props) {
+function Register(props) {
   const paperStyle = {
     padding: "30px 20px",
     width: 375,
@@ -102,4 +102,4 @@ function TestResgister(props) {
   );
 }
 
-export default TestResgister;
+export default Register;

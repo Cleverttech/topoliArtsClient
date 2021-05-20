@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import { Link , withRouter} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
 
@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
@@ -45,17 +44,12 @@ const useStyles = makeStyles((theme) => ({
 export default function PrimarySearchAppBar(props) {
   const { user, onLogout } = props;
   const classes = useStyles();
-  const theme = useTheme()
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -154,12 +148,11 @@ export default function PrimarySearchAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6">
-            <Button component={Link} to="/" color="inherit">
-              <img width= '35px' src='../assets/logos/Logo_Master_white.png'/> TopoliArts
-             </Button>
-           </Typography> 
-        
-    
+            <Button component={Link} to="/" color="inherit">   
+              <img width= '35px' src='../assets//logos/Logo_Master_white.png' alt="logo"/> TopoliArts
+            </Button>
+          </Typography>
+
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <MenuItem>

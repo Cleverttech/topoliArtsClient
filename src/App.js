@@ -1,16 +1,15 @@
 import { React, Component } from "react";
 import { Switch, Route, withRouter, Redirect } from "react-router-dom";
-import TestNavBar from "./components/TestNavBar";
+import NavBar from "./components/NavBar";
 import axios from "axios";
 import config from "./config";
 import ForChildren from "./components/ForChildren";
 import LandingPage from "./components/LandingPage";
-import TestLogin from "./components/TestLogin";
-import TestRegister from "./components/TestRegister";
+import Login from "./components/Login";
+import Register from "./components/Register";
 import Courses from "./components/Courses";
 import Users from "./components/Users";
 import NotFound from "./components/NotFound";
-
 import ChatPage from "./components/ChatPage";
 import Stripe from "./components/Stripe";
 import Artists from "./components/Artists";
@@ -391,7 +390,7 @@ class App extends Component {
     
     return (
       <div className="App">
-        <TestNavBar onLogout={this.handleLogout} user={user} />
+        <NavBar onLogout={this.handleLogout} user={user} />
         {/* <Stripe/> */}
 
         <Switch>
@@ -425,10 +424,10 @@ class App extends Component {
           }}/>
           
           <Route exact path="/login" render={(routeProps) => {
-            return (<TestLogin error={error} onLogin={this.handleLogin} {...routeProps} />);}}/>
+            return (<Login error={error} onLogin={this.handleLogin} {...routeProps} />);}}/>
           
           <Route exact path="/register" render={(routeProps) => {
-            return (<TestRegister error={error} onSubmit={this.handleRegister} {...routeProps}/>);}}/>
+            return (<Register error={error} onSubmit={this.handleRegister} {...routeProps}/>);}}/>
 
           <Route path='/settings' render={(routeProps)=>{
             return (<Settings error={error} user={user} onSubmitSettings={this.handleSubmitSettings} {...routeProps}/>);}}/>

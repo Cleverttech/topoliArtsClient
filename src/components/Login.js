@@ -5,7 +5,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import {  useTheme} from "@material-ui/core/styles";
 import * as Yup from "yup";
 
-function TestLogin(props) {
+function Login(props) {
  const { error, onLogin } = props;
  const paperStyle = {
   padding: "30px 20px",
@@ -80,4 +80,4 @@ function TestLogin(props) {
  );
 }
 
-export default TestLogin;
+export default Login;

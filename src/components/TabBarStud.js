@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import MyCoursesByBuyer from './MyCoursesByBuyer'
-import TestRegister from './TestRegister'
+
 
 
 function TabPanel(props) {
