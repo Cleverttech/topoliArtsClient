@@ -8,7 +8,7 @@ import LandingPage from "./components/LandingPage";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Courses from "./components/Courses";
-import Users from "./components/Users";
+import UsersBoxTest from "./components/UsersBoxTest";
 import NotFound from "./components/NotFound";
 import ChatPage from "./components/ChatPage";
 import Stripe from "./components/Stripe";
@@ -405,7 +405,7 @@ class App extends Component {
           <Route path="/forchildren" component={ForChildren} />
     
           <Route path="/users" render={(routeProps) => {
-            return (<Users onSearchUser={this.handleSearchUser} onPatchRole={this.handleSubmitAdmin} error={error} user={user} userList={filteredUserList} {...routeProps}/>);}}/>
+            return (<UsersBoxTest onSearchUser={this.handleSearchUser} onPatchRole={this.handleSubmitAdmin} error={error} user={user} userList={filteredUserList} {...routeProps}/>);}}/>
           
           <Route exact path="/courses" render={(routeProps) => {
             return (<Courses error={error} courses={filteredCourses} {...routeProps} onSearchCourse={this.handleSearchCourse} userList={userList}/>);}}/>

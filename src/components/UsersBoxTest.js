@@ -1,0 +1,181 @@
+import React from "react";
+
+import config from '../config'
+import SearchUser from './SearchUser'
+import axios from 'axios'
+import Loader from './Loader'
+import {Redirect} from 'react-router-dom'
+
+import { Link } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import {Card, Button, Grid, CardHeader, CardMedia, CardContent,Avatar, Typography} from '@material-ui/core';
+import { red } from '@material-ui/core/colors';
+
+
+const useStyles = makeStyles((theme) => ({
+  
+    root: {
+      maxWidth: 345,
+    },
+    media: {
+      height: 0,
+      paddingTop: '70.25%',
+    },
+    expand: {
+      transform: 'rotate(0deg)',
+      marginLeft: 'auto',
+      transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest,
+      }),
+    },
+    expandOpen: {
+      transform: 'rotate(180deg)',
+    },
+
+  }));
+
+function UsersBoxTest(props){
+
+    const classes = useStyles();
+
+      const boxStyle = {
+        height : "auto",
+        display: "flex",
+        margin: "10px auto"
+    }
+      const gridStyle = {
+        margin: "10px 0px",
+        display: "flex",
+        flexWrap : "wrap",
+        flexDirection : "row"
+      }
+    
+
+      
+    const {onPatchRole , user, userList, onSearchUser} = props
+
+    const handleChatClick=(chatUserId)=>{
+        const { user } = props
+        if(!user){
+            props.history.push('/signin')
+        }
+        else {
+           let data = {
+               participants: [chatUserId, user._id]
+           }
+           axios.post(`${config.API_URL}/api/conversation`, data, {withCredentials: true})
+                .then((response) => {
+                    props.history.push(`/chat/${response.data._id}`)
+                })
+            
+        }
+    }
+    const handleGralChatClick=()=>{
+        const { user } = props
+        if(!user){
+            props.history.push('/signin')
+        }
+        else {
+           let data = {
+               generalChat: true
+           }
+           axios.post(`${config.API_URL}/api/conversation`, data, {withCredentials: true})
+                .then((response) => {
+                    props.history.push(`/chat/${response.data._id}`)
+                })
+            
+        }
+    }
+
+    const arrangeCards = (card, index) => {
+      
+        return (  
+
+          <div style={boxStyle}>
+              <Card style={{width:"10rem"}} key={index} className={classes.root}>
+                <CardHeader
+                  avatar={
+                    <Avatar src={card.image} width= '1rem' aria-label="recipe"/>
+                    
+                  } 
+                  title={card.username}
+                />
+                <CardMedia
+     
+                  title={card.username}
+                />               
+                  <Button fullWidth variant="contained" color="secondary">
+                    <Link style={{color:"white", textDecoration:"none"}} to={`/artists/${card._id}`}>Message</Link>
+                  </Button>
+              </Card>
+          </div>
+          )
+      }
+
+        if(!user){
+            return <Redirect to="/login" />
+        }else if(!userList){
+            return (<Loader/>)
+        }else{
+
+            let allUsers = userList.filter(u => u._id !== user._id)
+            return (
+                    <div>
+                        <SearchUser onSearchUser={onSearchUser}/>
+                        <Button onClick={()=>{handleGralChatClick()}}>Global Chat</Button>
+                        {
+                        !allUsers.length 
+                            ? <h4 style={{color: 'red'}}>No user found?...Did you paste Manish's code?</h4>
+                            : true
+                        }
+                        <div >
+                        <Grid style={gridStyle}>
+                            
+
+                            
+                                {allUsers.map(arrangeCards)}
+                                {
+                                    user.role !== 'owner'
+                                    ? null
+                                    :[
+                                    
+                                allUsers.map((e)=>{
+                                    return (
+                                        
+                                        <form onSubmit={(event)=>{onPatchRole(e._id, event)}} >
+                                    
+                                    {
+                                        e.role === 'student'
+                                        ?
+                                    <>
+                                    <label for='student'/>
+                                    <input type='checkbox' id='student' name='student' value='student'/>
+                                    <button>Ok</button>
+                                    </>  
+                                    :
+                                    <input type='checkbox' name='admin' checked/>
+                                }
+                                            
+                                            </form>
+                                            )
+                                        })
+                                    ]
+                                    
+                                }
+                            
+        
+                            
+                                
+                            
+                                              
+                        </Grid>
+                        </div>
+
+                    </div>)
+                        
+                            
+                        }                        
+
+}
+
+export default UsersBoxTest;

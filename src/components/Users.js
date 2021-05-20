@@ -40,6 +40,7 @@ export default class Users extends Component {
     }
        
     render() {
+        
         const {onPatchRole , user, userList, onSearchUser} = this.props
         if(!user){
             return <Redirect to="/login" />

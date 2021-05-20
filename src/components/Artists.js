@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import {Card, Button, Grid, CardHeader, CardMedia, CardContent,Avatar, Typography} from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
+import Loader from './Loader'
 
 
 
@@ -80,7 +81,7 @@ function Artists(props){
           )
       }
       if (!userList) {
-        return <p>Loading...</p>;
+        return <Loader />;
       } else {
         let filteredUsers = userList.filter((singleUser) => {
     

@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
- function SearchUser(props){
+ function SearchCourses(props){
     const classes = useStyles();
    
         const {onSearchCourse} = props
@@ -41,4 +41,4 @@ const useStyles = makeStyles((theme) => ({
         )
 }
 
-export default SearchUser
+export default SearchCourses
