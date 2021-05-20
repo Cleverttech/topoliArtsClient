@@ -282,7 +282,9 @@ class App extends Component {
           );
         })
         .catch((error) => {
-          console.log(error);
+          this.setState({
+            error: error.data,
+          });
         });
     });
   };
@@ -305,12 +307,12 @@ class App extends Component {
             }
           );
         })
-        .catch((err) => {
-          console.log("Delete course failed", err);
+        .catch((error) => {
+          this.setState({
+            error: error.data,
+          });
         });
-    } else {
-      console.log("delete failed");
-    }
+      }
   };
   
   handleSubmitAdmin = (id, e) => {
@@ -334,8 +336,10 @@ class App extends Component {
             filteredUserList: updatedUserList,
           });
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((error) => {
+          this.setState({
+            error: error.data,
+          });
         });
     }
   };
@@ -364,8 +368,10 @@ class App extends Component {
               }
             );
           })
-          .catch((err) => {
-            console.log(err);
+          .catch((error) => {
+            this.setState({
+              error: error.data,
+            });
           });
       });
   };
