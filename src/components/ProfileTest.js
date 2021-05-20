@@ -30,7 +30,7 @@ class ProfileTest extends Component {
   e
   render() {
 
-    const {onCreate, onCreatePortfolio, user, courses, userList, onSubmitPic, onDeleteCourse} = this.props;
+    const {onCreate, onCreatePortfolio, user, courses, userList, onSubmitPic, onDeleteCourse, disableSubmit} = this.props;
     const { fileValue } = this.state
     
     if (!user) {
@@ -58,7 +58,7 @@ class ProfileTest extends Component {
           </div>
           {            
             user.role != 'student' 
-            ? <TabBar  user={user} courses={courses} userList={userList} onCreatePortfolio={onCreatePortfolio} onCreate={onCreate} onDeleteCourse={onDeleteCourse} />
+            ? <TabBar disableSubmit={disableSubmit} user={user} courses={courses} userList={userList} onCreatePortfolio={onCreatePortfolio} onCreate={onCreate} onDeleteCourse={onDeleteCourse} />
             : <TabBarStud user={user} courses={courses} userList={userList}/>
           }
         </div>
