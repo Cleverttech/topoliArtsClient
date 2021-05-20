@@ -18,7 +18,7 @@ import CoursePaymentForm from "./components/CoursePaymentForm";
 import Loader from './components/Loader'
 import './App.css'
 
-import ProfileTest from "./components/ProfileTest";
+import Profile from "./components/Profile";
 import Settings from "./components/Settings";
 
 
@@ -423,7 +423,7 @@ class App extends Component {
             return (<PortfolioDetails user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
           
           <Route exact path="/profile" render={(routeProps) => {
-            return (<ProfileTest disableSubmit={disableSubmit} user={user} userList={filteredUserList} onSubmitSettings={this.handleSubmitSettings} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={filteredCourses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
+            return (<Profile disableSubmit={disableSubmit} user={user} userList={filteredUserList} onSubmitSettings={this.handleSubmitSettings} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={filteredCourses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
             
           <Route path='/chat/:conversationId' render={(routeProps)=>{
             return (<ChatPage user={user} {...routeProps}/>)
