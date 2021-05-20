@@ -7,47 +7,19 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
+import { Grid } from "@material-ui/core";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-const tutorialSteps = [
-  {    
-    imgPath: "../assets/CharacterDesign/mädchen_intern.jpg",
-  },
-  {
-    imgPath:
-      "../assets/CharacterDesign/Matthias_Derenbach_Onno&Ontje_Charakterentwicklung1.jpg",
-  },
-  {
-    imgPath:
-      "../assets/CharacterDesign/Matthias_Derenbach_Onno&Ontje_Charakterentwicklung2.jpg",
-  },
-  {
-    imgPath: "../assets/AllBooks/Kasi_Kauz/Kasi_einzeln.jpg",
-  },
-];
-
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 500,
+    maxWidth: "80%",
     flexGrow: 1,
     display: "flex",
     flexDirection: "column",
     position: "relative",
-    margin: 10,
   },
-  // header: {
-  //   color: "white",
-  //   display: "flex",
-  //   alignItems: "center",
-  //   height: 50,
-  //   width: "100%",
-  //   paddingLeft: theme.spacing(4),
-  //   backgroundColor: "rgba(0, 0, 0, 0.1)",
-  //   position: "absolute",
-  //   top: 0,
-  //   left: 0
-  // },
+
   img: {
     display: "block",
     overflow: "hidden",
@@ -70,15 +42,16 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   button: {
-    backgroundColor: "rgba(0, 0, 0, 0.1)",
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
     color: "white",
     margin: "0 8px",
   },
 }));
 
-function SwipeableTextMobileStepper() {
+function SwipeableTextMobileStepper(props) {
   const classes = useStyles();
   const theme = useTheme();
+  const tutorialSteps = props.images
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = tutorialSteps.length;
 
@@ -94,8 +67,15 @@ function SwipeableTextMobileStepper() {
     setActiveStep(step);
   }
 
+  const gridStyle = {
+    height:"auto",
+    margin: "auto",
+    marginTop: "200px",
+    width:"100vw"
+  }; 
+
   return (
-    <div className={classes.root}>
+    <Grid className={classes.root} style={gridStyle}>
       <AutoPlaySwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
@@ -154,7 +134,7 @@ function SwipeableTextMobileStepper() {
         backButton={<div />}
         nextButton={<div />}
       />
-    </div>
+    </Grid>
   );
 }
 

@@ -65,8 +65,6 @@ function BookReadingForm() {
     setSelectedDate(date);
   };
 
-  console.log(selectedDate);
-
   return (
     <Grid>
       <Paper elevation={20} style={paperStyle}>

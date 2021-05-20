@@ -1,29 +1,29 @@
 import { Grid} from '@material-ui/core'
 import React from 'react'
 import RandomPhrases from './RandomPhases'
-
+import Carousel from './Carousel'
 
 
 function LandingPage(){
-    
-    let Image = './assets/AllBooks/Frieda/MDerenbach_Frieda_1.jpg'
-    const styles = {
-        paperContainer: {
-            backgroundImage: `url(${Image})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            backgroundPosition: "center",
-            height: '65vh',
+    const landingImages = [
+        {
+          imgPath: "../assets/Landingpage1.jpg",
+        },
+        {
+          imgPath: "../assets/Landingpage2.jpg",
+        },
+        {
+          imgPath: "../assets/Landingpage3.jpg",
+        },
+     
+      ]
+      const gridStyle = {
+        marginTop: "-200px",
+      }; 
 
-        }
-    };
-    
         return (
-            <div>
-                <Grid md={12} style={styles.paperContainer}>
-                    {/* <img style={{margin: '10px', objectFit: 'fill'}} src='./assets/AllBooks/Frieda/MDerenbach_Frieda_1.jpg'/> */}
-
-                </Grid>
+            <div style={gridStyle}>
+               <Carousel images={landingImages}/>
                 <Grid container direction="column" justify="center" alignItems="center">        
                     <RandomPhrases/>
                 </Grid>
