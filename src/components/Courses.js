@@ -6,7 +6,7 @@ import SearchCourses from './SearchCourses'
 
 const useStyles = makeStyles((theme) => ({
  root:{
-  margin: "0px 70px",
+  margin: "0px",
  },
   paper: {
     padding: theme.spacing(2),

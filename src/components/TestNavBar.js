@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    display: "none",
+    
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
@@ -150,14 +150,16 @@ export default function PrimarySearchAppBar(props) {
 
   return (
     <div className={classes.grow}>
+    
       <AppBar position="static">
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} variant="h6">
             <Button component={Link} to="/" color="inherit">
-              <img width= '35px' src='../assets//logos/Logo_Master_white.png'/> TopoliArts
-            </Button>
-          </Typography>
-
+              <img width= '35px' src='../assets/logos/Logo_Master_white.png'/> TopoliArts
+             </Button>
+           </Typography> 
+        
+    
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <MenuItem>
@@ -210,6 +212,7 @@ export default function PrimarySearchAppBar(props) {
             )}
           </div>
           <div className={classes.sectionMobile}>
+
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}

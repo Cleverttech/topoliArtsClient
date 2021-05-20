@@ -6,10 +6,8 @@ export default class NotFound extends Component {
   render() {
     
     return (
-      <div>
-        <br></br>
-        <br></br>
-        <LottieControlLoader animation={loader} width={600} height={600} />
+      <div style={{display: 'flex', justifyContent:'center'}}>
+        <LottieControlLoader animation={loader} width={400} height={400} />
       </div>
     );
   }
