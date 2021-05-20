@@ -1,17 +1,13 @@
-
-import { Button, Grid, Typography } from "@material-ui/core";
-import { makeStyles, useTheme } from '@material-ui/core/styles';
 import React from "react";
+import { Button, Grid, Typography , Card, CardActionArea, CardActions, CardContent, CardMedia} from "@material-ui/core";
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { Link } from "react-router-dom";
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import SearchCourses from './SearchCourses'
 
 const useStyles = makeStyles((theme) => ({
-
+ root:{
+  margin: "0px 70px",
+ },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
@@ -24,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 function Courses(props){
    const classes = useStyles();
 
+   const theme = useTheme()
     const { courses, userList, onSearchCourse  } = props;
     const linkStyle = {
       color: "white",
@@ -32,17 +29,18 @@ function Courses(props){
     const boxStyle = {
       height : "auto",
       display: "flex",
-      margin: "25px auto "
+      margin: "25px auto"
    }
     const gridStyle = {
+      margin: "40px 0px",
       display: "flex",
       flexWrap : "wrap",
       flexDirection : "row"
     }
     const arrangeCards =(card, index)=>{
       return (  
-       <div style={boxStyle}>
-          <Card style={{width:"18rem" }} key={index}>
+      <div style={boxStyle}>
+      <Card style={{width:"18rem"}} key={index}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
@@ -72,23 +70,23 @@ function Courses(props){
         </CardActions>
       </Card> 
        </div>
-      
+
       )
     }
     if (!userList) {
       return <p>Loading...</p>;
     } else {
       return (
-        <div>
-          <SearchCourses  onSearchCourse={onSearchCourse} />
+        <div className={classes.root}>
+           <SearchCourses  onSearchCourse={onSearchCourse} />
           {
             !courses.length ?
-            <h3 style={{color: 'red'}}>No courses found?...Did you paste Manish's code?</h3>
+            <h3 style={{color: theme.palette.secondary.main}}>No courses found?...Did you paste Manish's code right?</h3>
             : true
           }
           <Typography variant="h3">Courses Available</Typography>
           {
-              <Grid style={gridStyle} spacing={4}>
+              <Grid style={gridStyle}>
 
                  {
                   courses.map(arrangeCards)
