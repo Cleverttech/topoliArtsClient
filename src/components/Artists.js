@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {Card, Button, Grid, CardHeader, CardMedia, CardContent,Avatar, Typography} from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
 import Loader from './Loader'
 
 
 
+
 const useStyles = makeStyles((theme) => ({
-  
   root: {
     maxWidth: 345,
   },
@@ -27,10 +27,10 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: theme.palette.secondary.main,
   },
 }));
-
+const sectionStyle = { width: "80%", margin: "100px auto" };
 function Artists(props){
 
   const classes = useStyles();
@@ -48,7 +48,7 @@ function Artists(props){
       }
     const { userList } = props
       const arrangeCards = (card, index) => {
-      
+
         return (  
 
           <div style={boxStyle}>
@@ -90,12 +90,13 @@ function Artists(props){
           }
         })
         return (
-          <div>
-             <Typography variant="h3" color="primary" style={{marginTop:"70px"}}>
+          <div style={sectionStyle}>
+          
+             <Typography variant="h3" color="primary" style={{marginTop:"100px"}}>
                    Meet the Mentors
               </Typography>
 
-             <Typography style={{textAlign:"center", margin:"70px", lineHeight:"1.5"}} variant="p" color="primary" component="p" >
+             <Typography style={{textAlign:"center", margin:"40px"}} variant="p" color="primary" component="p" >
               Lorem ipsum stuff Lorem ipsum stuff Lorem ipsum stuff Lorem ipsum
               stuffLorem ipsum stuffLorem ipsum stuffLorem ipsum stuffLorem ipsum
               stuff
