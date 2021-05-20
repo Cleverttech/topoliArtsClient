@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 function PortfolioForm(props) {
   const classes = useStyles();
-  const { onCreatePortfolio } = props;
+  const { user, userList, onCreatePortfolio, disableSubmit} = props;
 
   const paperStyle = {
     padding: "30px 20px",
@@ -118,6 +118,7 @@ const theme = useTheme()
           <Button
             fullWidth
             style={btnStyle}
+            disabled={disableSubmit}
             type="submit"
             variant="contained"
             color="secondary"

@@ -98,7 +98,7 @@ export default function FullWidthTabs(props) {
             <CoursesCreateForm disableSubmit={disableSubmit} onCreate={onCreate} />
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
-            <PortfolioForm onCreatePortfolio={onCreatePortfolio} />
+            <PortfolioForm disableSubmit={disableSubmit} onCreatePortfolio={onCreatePortfolio} />
           </TabPanel>
       </SwipeableViews>
     </div>

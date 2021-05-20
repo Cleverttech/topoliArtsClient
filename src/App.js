@@ -205,11 +205,14 @@ class App extends Component {
   handleCreatePortfolio = async (e) => {
     e.preventDefault();
   
+    this.setState({
+      disableSubmit : true,
+    })
     let title = e.target.title.value;
     let description = e.target.description.value;
     let cover = e.target.cover.files[0];
     let images = e.target.images.files;
-
+    
     let formDataCover = new FormData();
     let formDataImages = new FormData();
     for (var i = 0; i < images.length; i++) {
@@ -242,6 +245,7 @@ class App extends Component {
       {
         user: patchPortfolio,
         portfolio: [createFormData.data, ...this.state.portfolio],
+        disableSubmit: false,
         
       },
       () => {
@@ -349,6 +353,9 @@ class App extends Component {
     let img = e.target.img.files[0];
     let formData = new FormData();
     formData.append("imageUrl", img);
+    this.setState({
+      disableSubmit : true,
+    })
 
     axios.post(`${config.API_URL}/api/upload`, formData, { withCredentials: true })
     .then((result) => {
@@ -359,11 +366,10 @@ class App extends Component {
           )
           .then((result1) => {
             let newUser = result1.data;
-            this.setState(
-              {
+            this.setState({
                 user: newUser,
-              },
-              () => {
+                disableSubmit : false,
+              },() => {
                 this.props.history.push("/profile");
               }
             );
