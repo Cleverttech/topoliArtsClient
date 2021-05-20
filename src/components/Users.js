@@ -6,10 +6,8 @@ import axios from 'axios'
 import Loader from './Loader'
 import {Redirect} from 'react-router-dom'
 
-import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import {Card, Button, Grid, CardHeader, CardMedia, CardContent,Avatar, Typography, Input} from '@material-ui/core';
-import { red } from '@material-ui/core/colors';
+import {Card, Button, Grid, CardHeader, CardMedia,Avatar} from '@material-ui/core';
 import { CheckBox } from "@material-ui/icons";
 
 
@@ -138,7 +136,7 @@ function UsersBoxTest(props){
             return (
                     <div>
                         <SearchUser onSearchUser={onSearchUser}/>
-                        <Button onClick={()=>{handleGralChatClick()}}>Global Chat</Button>
+                        <Button variant ='contained' color='secondary' onClick={()=>{handleGralChatClick()}}>Global Chat</Button>
                         {
                         !allUsers.length 
                             ? <h4 style={{color: 'red'}}>No user found?...Did you paste Manish's code?</h4>
