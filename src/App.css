@@ -2,6 +2,25 @@
   text-align: center;
 }
 
+.footer{
+  background-color: #ff524e;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.footer h2{
+  color: white;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+.footerinner{
+  width: 100;
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
