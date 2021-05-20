@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import config from '../config'
 import Loader from './Loader'
-// import './ChatPage.css'
+import './ChatPage.css'
 import io from "socket.io-client";
 
 let socket = ''
@@ -86,8 +86,8 @@ class ChatPage extends Component {
         }   
 
         return (
-            <div>
-                <h3>You're in the Chat Page </h3>
+            <div style={{display:'flex', flexDirection: 'column' , alignItems: 'center'}}>
+                <h3>You're in the Chat Page</h3>
                 <div className="chatContainer">
                     <div className="messages">
                         {

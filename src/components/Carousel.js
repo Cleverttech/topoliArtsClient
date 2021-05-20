@@ -11,22 +11,18 @@ import { autoPlay } from "react-swipeable-views-utils";
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const tutorialSteps = [
-  {
-    // label: "San Francisco – Oakland Bay Bridge, United States",
+  {    
     imgPath: "../assets/CharacterDesign/mädchen_intern.jpg",
   },
   {
-    // label: "Bluetit",
     imgPath:
       "../assets/CharacterDesign/Matthias_Derenbach_Onno&Ontje_Charakterentwicklung1.jpg",
   },
   {
-    // label: "Bali, Indonesia",
     imgPath:
       "../assets/CharacterDesign/Matthias_Derenbach_Onno&Ontje_Charakterentwicklung2.jpg",
   },
   {
-    // label: "NeONBRAND Digital Marketing, Las Vegas, United States",
     imgPath: "../assets/AllBooks/Kasi_Kauz/Kasi_einzeln.jpg",
   },
 ];

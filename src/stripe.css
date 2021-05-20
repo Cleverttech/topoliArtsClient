@@ -1,11 +1,6 @@
-#root {
-    display: flex;
-    align-items: center;
-  }
-  
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 16px;
+
+  .body-stripe {
+
     -webkit-font-smoothing: antialiased;
     display: flex;
     justify-content: center;
@@ -14,7 +9,7 @@
     width: 100vw;
   }
   
-  form {
+  .form-stripe {
     width: 30vw;
     align-self: center;
     box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
@@ -23,7 +18,7 @@
     padding: 40px;
   }
   
-  input {
+  .input-stripe {
     border-radius: 6px;
     margin-bottom: 6px;
     padding: 12px;
@@ -73,7 +68,7 @@
   }
   
   /* Buttons and links */
-  button {
+  .button-stripe{
     background: #5469d4;
     font-family: Arial, sans-serif;
     color: #ffffff;
@@ -89,11 +84,11 @@
     width: 100%;
   }
   
-  button:hover {
+  .button-stripe :hover {
     filter: contrast(115%);
   }
   
-  button:disabled {
+  .button-stripe :disabled {
     opacity: 0.5;
     cursor: default;
   }
