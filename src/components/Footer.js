@@ -4,7 +4,9 @@ export default class Footer extends Component {
     render() {
         const imgStyle = {
             width:'30px', 
-            margin:'-5px 15px 10px 15px',
+            margin:'0 20px',
+            marginBottom: '15px',
+            paddingBottom: '10px',
         }
         return (
             <div className='footer'>
@@ -14,7 +16,6 @@ export default class Footer extends Component {
                  <a href='https://www.facebook.com/friedadeinbuch' target="_blank"><img style={imgStyle} src='../assets/Link_Facebook.png' alt='Facebook'/></a>
                  <a href='https://matthias-derenbach.com/' target="_blank"><img style={imgStyle} src='../assets/Link_Topoli.png' alt='Topoli'/></a>
                  <a href='https://www.youtube.com/channel/UCsX-xoi4ObuuCXusqAbbGiw' target="_blank"><img style={imgStyle} src='../assets/Youtube-300x300.png' alt='Youtube'/></a>
-                 
              </div>
             </div>
         )
