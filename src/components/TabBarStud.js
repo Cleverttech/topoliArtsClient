@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import MyCoursesByBuyer from './MyCoursesByBuyer'
-import TestRegister from './TestRegister'
+import Register from './Register'
 
 
 function TabPanel(props) {
@@ -92,7 +92,7 @@ export default function FullWidthTabs(props) {
           <MyCoursesByBuyer error={error} courses={courses} user={user} />  
         </TabPanel> */}
         <TabPanel value={value} index={3} dir={theme.direction}>
-          <TestRegister courses={courses}  userList={userList} user={user}/>
+          <Register courses={courses}  userList={userList} user={user}/>
         </TabPanel>
       </SwipeableViews>
     </div>

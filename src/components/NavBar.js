@@ -45,17 +45,12 @@ const useStyles = makeStyles((theme) => ({
 export default function PrimarySearchAppBar(props) {
   const { user, onLogout } = props;
   const classes = useStyles();
-  const theme = useTheme()
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -154,7 +149,7 @@ export default function PrimarySearchAppBar(props) {
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             <Button component={Link} to="/" color="inherit">
-              <img width= '35px' src='../assets//logos/Logo_Master_white.png'/> TopoliArts
+              <img width= '35px' src='../assets//logos/Logo_Master_white.png' alt="logo"/> TopoliArts
             </Button>
           </Typography>
 

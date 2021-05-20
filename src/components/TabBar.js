@@ -7,17 +7,15 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Courses from './Courses';
 import CoursesCreateForm from './CoursesCreateForm';
 import PortfolioForm from './PortfolioForm';
 import MyCoursesByMentor from './MyCoursesByMentor'
-import TestRegister from './TestRegister'
+
 
 
 function TabPanel(props) {
   const {children, value, index, ...other } = props;
   
-  // const {courses, user, userList} =props
   return (
     <div
     role="tabpanel"
@@ -52,14 +50,12 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    // margin:'auto',
-    // width: 500,
 
   },
 }));
 
 export default function FullWidthTabs(props) {  
-  const { courses, userList, user  , onCreatePortfolio, onCreate, onDeleteCourse, error, disableSubmit} = props
+  const { courses, user  , onCreatePortfolio, onCreate, onDeleteCourse, error, disableSubmit} = props
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
