@@ -149,7 +149,8 @@ export default function PrimarySearchAppBar(props) {
         <Toolbar>
           <Typography className={classes.title} variant="h6">
             <Button component={Link} to="/" color="inherit">   
-              <img width= '35px' src='../assets//logos/Logo_Master_white.png' alt="logo"/> TopoliArts
+              <img style={{width: '35px' , marginRight: "8px"}} src='../assets//logos/Logo_Master_white.png' alt="logo"/> 
+              TopoliArts
             </Button>
           </Typography>
 
