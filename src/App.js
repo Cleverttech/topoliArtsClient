@@ -20,6 +20,7 @@ import './App.css'
 
 import Profile from "./components/Profile";
 import Settings from "./components/Settings";
+import Footer from "./components/Footer";
 
 
 // import './stripe.css'
@@ -403,7 +404,7 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar onLogout={this.handleLogout} user={user} />
-        {/* <Stripe/> */}
+
 
         <Switch>
           <Route exact path="/" component={LandingPage} />
@@ -445,6 +446,7 @@ class App extends Component {
             return (<Settings error={error} user={user} onSubmitSettings={this.handleSubmitSettings} {...routeProps}/>);}}/>
           <Route component={NotFound} />
         </Switch>
+        <Footer/>
       </div>
     );
   }
