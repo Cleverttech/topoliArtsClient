@@ -308,7 +308,7 @@ class App extends Component {
           this.setState({
             courses: filteredCourses,
             },() => {
-              this.props.history.push("/");
+              this.props.history.push("/profile");
             }
           );
         })
