@@ -7,7 +7,7 @@ import Fade from "@material-ui/core/Fade";
 import BookReadingForm from "./BookReadingForm";
 import CancelIcon from "@material-ui/icons/Cancel";
 import Carousel from './Carousel'
-import kidsPaintings from '../kidsImages'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -72,6 +72,82 @@ function ForChildren() {
       imgPath: "../assets/AllBooks/Frieda/MDerenbach_Frieda_8.jpg",
     },
 
+  ]
+  const kidsPaintings = [
+    {    
+      imgPath: "../assets/kidsImages/AlihanT.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Beria.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Berkan.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Daniel3.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/florian.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Helena.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/jakob.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Jan-Hendrik.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Jan2.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Jonas_lebende wellen.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Laurenz.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Lea.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Lena.jpg",
+    },
+   
+    {    
+      imgPath: "../assets/kidsImages/Lena2.jpg",
+    },
+   
+    {    
+      imgPath: "../assets/kidsImages/LisaD.jpg",
+    },
+   
+    {    
+      imgPath: "../assets/kidsImages/Luca.jpg",
+    },
+   
+    {    
+      imgPath: "../assets/kidsImages/Malte.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Max.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Merve.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Michelle.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Onur.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/stella.jpg",
+    },
+    {    
+      imgPath: "../assets/kidsImages/Yusuf.jpg",
+    },
+   
   ]
   const theme = useTheme()
   const dividerStyle = { borderTop: `4px solid ${theme.palette.primary.main}`, marginTop: "30%", marginBottom: "10%", width: "100%" }
@@ -302,17 +378,6 @@ function ForChildren() {
 
       </Grid>
 
-      {/* <div style={{ display: "flex", flexDirection: "column" }}>
-        <div style={dividerStyle}>
-        </div>
-
-        <Box textAlign="center" margin="45px" >
-          <Typography marginBottom="20px" variant="h3" style={friedaIntText}>
-            Kids drawing Frieda
-          </Typography>
-        </Box>
-
-      </div> */}
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div style={dividerStyle}>
         </div>
@@ -323,6 +388,7 @@ function ForChildren() {
                 </Typography>
         </Box>
       </div>
+
 
       <Grid style={{ margin: "auto"}}>
 
