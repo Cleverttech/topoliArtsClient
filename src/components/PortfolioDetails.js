@@ -1,4 +1,4 @@
-import { Button, Card, CardContent } from "@material-ui/core";
+import { Button, Card, CardMedia } from "@material-ui/core";
 import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
@@ -34,7 +34,7 @@ export default class PortfolioDetails extends Component {
 
   render() {
     const {portfolio, extraImg} = this.state
-    
+
     if (portfolio == null) {
       return (<div>
           <h1 alignText >No content yet, ask your mentor to post something here!</h1>
@@ -44,9 +44,13 @@ export default class PortfolioDetails extends Component {
     return (
       <div>
         <h1>Portfolio</h1>
-        <img src={portfolio.cover} alt={portfolio.cover} />
-        <h3>{portfolio.title}</h3>
-        <p>{portfolio.description}</p>
+        <Card>
+          <CardMedia>
+            <img src={portfolio.cover} alt={portfolio.cover} />
+          </CardMedia>
+          <h3>{portfolio.title}</h3>
+          <p>{portfolio.description}</p>
+        </Card>
         <Carousel images={extraImg}/>
         <div style={{ margin: "auto" , display: 'flex', justifyContent: 'space-around'}}>
         <Button variant='contained' color='secondary' component={Link} to={'/artists'}> Go Back </Button>

@@ -404,48 +404,48 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar onLogout={this.handleLogout} user={user} />
+        <div style={{minHeight: '76.3vh'}}>
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
 
-
-        <Switch>
-          <Route exact path="/" component={LandingPage} />
-
-          <Route path="/forchildren" component={ForChildren} />
-    
-          <Route path="/users" render={(routeProps) => {
-            return (<Users onSearchUser={this.handleSearchUser} onPatchRole={this.handleSubmitAdmin} error={error} user={user} userList={filteredUserList} {...routeProps}/>);}}/>
-          
-          <Route exact path="/courses" render={(routeProps) => {
-            return (<Courses error={error} courses={filteredCourses} {...routeProps} onSearchCourse={this.handleSearchCourse} userList={userList}/>);}}/>
-          
-          <Route exact path="/courses/:courseId" render={(routeProps) => {
-            return (<CoursePaymentForm onSubmitPayment={this.handleSubmitPayment} disableSubmit={disableSubmit} error={error} courses={courses} userList={userList} {...routeProps}/>);}}/>
+            <Route path="/forchildren" component={ForChildren} />
+      
+            <Route path="/users" render={(routeProps) => {
+              return (<Users onSearchUser={this.handleSearchUser} onPatchRole={this.handleSubmitAdmin} error={error} user={user} userList={filteredUserList} {...routeProps}/>);}}/>
             
-          <Route exact path="/courses/:courseId/payment" render={(routeProps) => {
-            return (<Stripe error={error} user={user} userList={filteredUserList} courses={courses} {...routeProps}/>);}}/>
-          
-          <Route exact path='/artists' render={(routeProps)=>{
-            return (<Artists error={error} user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
-          
-          <Route exact path='/artists/:artistId' render={(routeProps)=>{
-            return (<PortfolioDetails user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
-          
-          <Route exact path="/profile" render={(routeProps) => {
-            return (<Profile disableSubmit={disableSubmit} user={user} userList={filteredUserList} onSubmitSettings={this.handleSubmitSettings} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={filteredCourses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
+            <Route exact path="/courses" render={(routeProps) => {
+              return (<Courses error={error} courses={filteredCourses} {...routeProps} onSearchCourse={this.handleSearchCourse} userList={userList}/>);}}/>
             
-          <Route path='/chat/:conversationId' render={(routeProps)=>{
-            return (<ChatPage user={user} {...routeProps}/>)
-          }}/>
-          
-          <Route exact path="/login" render={(routeProps) => {
-            return (<Login error={error} onLogin={this.handleLogin} {...routeProps} />);}}/>
-          
-          <Route exact path="/register" render={(routeProps) => {
-            return (<Register error={error} onSubmit={this.handleRegister} {...routeProps}/>);}}/>
+            <Route exact path="/courses/:courseId" render={(routeProps) => {
+              return (<CoursePaymentForm onSubmitPayment={this.handleSubmitPayment} disableSubmit={disableSubmit} error={error} courses={courses} userList={userList} {...routeProps}/>);}}/>
+              
+            <Route exact path="/courses/:courseId/payment" render={(routeProps) => {
+              return (<Stripe error={error} user={user} userList={filteredUserList} courses={courses} {...routeProps}/>);}}/>
+            
+            <Route exact path='/artists' render={(routeProps)=>{
+              return (<Artists error={error} user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
+            
+            <Route exact path='/artists/:artistId' render={(routeProps)=>{
+              return (<PortfolioDetails error={error} user={user} courses={courses} userList={userList} {...routeProps}/>)}}/>
+            
+            <Route exact path="/profile" render={(routeProps) => {
+              return (<Profile disableSubmit={disableSubmit} user={user} userList={filteredUserList} onSubmitSettings={this.handleSubmitSettings} onCreate={this.handleCreate} onDeleteCourse={this.handleDeleteCourse} onCreatePortfolio={this.handleCreatePortfolio} courses={filteredCourses} onSubmitPic={this.handleSubmitPic} onDeleteCourse={this.handleDeleteCourse} {...routeProps}/>);}}/>
+              
+            <Route path='/chat/:conversationId' render={(routeProps)=>{
+              return (<ChatPage user={user} {...routeProps}/>)
+            }}/>
+            
+            <Route exact path="/login" render={(routeProps) => {
+              return (<Login error={error} onLogin={this.handleLogin} {...routeProps} />);}}/>
+            
+            <Route exact path="/register" render={(routeProps) => {
+              return (<Register error={error} onSubmit={this.handleRegister} {...routeProps}/>);}}/>
 
-          <Route path='/settings' render={(routeProps)=>{
-            return (<Settings error={error} user={user} onSubmitSettings={this.handleSubmitSettings} {...routeProps}/>);}}/>
-          <Route component={NotFound} />
-        </Switch>
+            <Route path='/settings' render={(routeProps)=>{
+              return (<Settings error={error} user={user} onSubmitSettings={this.handleSubmitSettings} {...routeProps}/>);}}/>
+            <Route component={NotFound} />
+          </Switch>
+        </div>
         <Footer/>
       </div>
     );
