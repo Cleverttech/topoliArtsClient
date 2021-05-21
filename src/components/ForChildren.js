@@ -93,7 +93,7 @@ function ForChildren() {
       imgPath: "../assets/KidsImages/Helena.jpg",
     },
     {    
-      imgPath: ".../assets/KidsImages/jakob.jpg",
+      imgPath: "../assets/KidsImages/jakob.jpg",
     },
     {    
       imgPath: "../assets/KidsImages/Jan-Hendrik.jpg",
@@ -111,10 +111,10 @@ function ForChildren() {
       imgPath: "../assets/KidsImages/Lea.jpg",
     },
     {    
-      imgPath: "../assets/KidsImages/Lena.jpg",
+      imgPath: "../assets/KidsImages/lena.jpg",
     },
     {    
-      imgPath: "../assets/KidsImages/Lena2.jpg",
+      imgPath: "../assets/KidsImages/lena2.jpg",
     },
    
     {    

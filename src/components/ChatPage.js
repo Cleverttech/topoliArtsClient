@@ -82,8 +82,8 @@ class ChatPage extends Component {
         console.log(user)
 
         if (loading) {
-            return <Loader />,
-            <h1>Loading all messages . . .</h1>
+            return (<Loader />,
+            <h1>Loading all messages . . .</h1>)
         }   
 
         return (

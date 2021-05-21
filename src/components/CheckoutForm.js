@@ -20,7 +20,7 @@ export default function CheckoutForm(props) {
   const elements = useElements();
   let thisProps = props  
   let {fullname, telephone, message} = thisProps.location.state.inputValues
-  let msgForm = `${fullname} just bought a course from you. Here's their number ${telephone} to contact them if ${thisProps.user.email} or IM is not an option. He also left this message: ${message}`
+  let msgForm = `${fullname} - ${telephone} - ${thisProps.user.email} bought a course.`
     useEffect(() => {
       if(!thisProps){
         return (<Loader style={{width:"200px"}}/>)
