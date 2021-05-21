@@ -197,33 +197,15 @@ function ForChildren() {
         <Grid item lg={7} md={7} xs={12}>
 
           <Typography variant="p" style={friedaText}>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet Lorem ipsum
-            dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-            tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-            voluptua.
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet Lorem ipsum
-            dolor sit amet, consetetur
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet Lorem ipsum
-            dolor sit amet, consetetur
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet Lorem ipsum
-            dolor sit amet, consetetur
-              </Typography>
+          Matthias Derenbach, born in 1979, is a passionate draftsman. He finished his studies at the Rhein-Sieg-Kunst Akademie in 2007 with a diploma grade of 1.0. The author has been working as a freelance illustrator and communication designer in Cologne since 2008. In 2009 he founded the "Topoli Verlag" to publish the Frieda series.
+          How the adventure began ...After I was born, I ate, drank and slept a lot. Eventually I got older and was able to hold my first pen. After kindergarten I went to school. Frieda started a few years ago and dates back to my time as a student at the Rhein Sieg Kunst Akademie. I drew a little girl and a huge fish (about the size of a gym). Protruding ears, oversized red rubber boots and a small, tough figure were created that can also accomplish the seemingly impossible. The picture raised questions: who is that? Why the rubber boots? Who is the fish Did the girl catch the fish or did the fish catch the girl? Where does she live and what kind of friends does she have? Little by little, Frieda took shape as the protagonist and a story emerged from many ideas and fantasies.
+          Frieda - design and marketing of a picture book series - then became my diploma thesis, which was rated very well.
+
+          I am infinitely grateful to you and look forward to an exciting and exciting time! Frieda on earth! And very special thanks to you, Konstantinos!
+     
+
+          I am infinitely grateful to you and look forward to an exciting and exciting time! Frieda on earth! And very special thanks to you, Konstantinos!
+         </Typography>
 
 
           <Box style={centerBtn} >
@@ -359,19 +341,13 @@ function ForChildren() {
 
         <Typography fontWeight="fontWeightLight" style={friedaText}>
           <Box textAlign="center">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            et ea rebum.
+          Frieda the adventure begins (Volume 1)
+          “Where's he going?” Frieda is worried about Papa, the old adventurer who has been on the ocean for so long. Involuntarily, she is drawn into a great adventure with Boo, the spherical sparrow, and the five wise stones, which is not just about looking for papa.
+          Frieda in the realm of the seahorses (Volume 2)
+          “Will I find him?” The search for her missing papa leads Frieda and her friends into an enchanted world deep down in the infinite ocean. Boo, Abu, Hihi and the five wise stones are loyally at her side on a fantastic journey full of dangers and surprises. But is Frieda ready for the great task that has been waiting for her there for so long?
+          The special thing about "Frieda" is the concept of the hands-on story! Do you have an idea how the story could go on in Volume 3? Then just send us a letter with your suggestions and self-painted pictures by post. We look forward to your contributions!
+          73 lavishly illustrated color pages, A4 landscape format, hardcover. Particularly suitable for children from 5 years!
+
           </Box>
         </Typography>
 

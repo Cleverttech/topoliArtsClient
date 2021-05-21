@@ -1,16 +1,23 @@
-import { Button, Card, CardContent } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import config from "../config";
 import Carousel from './Carousel'
+import Image from 'material-ui-image'
 
+const sectionStyle = { width: "80%", margin: "100px auto" };
+const friedaIntText = {
+  fontWeight: "bolder",
+  marginTop: "100px",
+  marginBottom: "50px"
+};
 export default class PortfolioDetails extends Component {
   state = {
     portfolio: null,
     extraImg: null,
   };
-  
+ 
   componentDidMount() {
     const artistId = this.props.match.params.artistId;
     let vol1=[];
@@ -42,11 +49,23 @@ export default class PortfolioDetails extends Component {
         </div>)
     }else{  
     return (
-      <div>
-        <h1>Portfolio</h1>
-        <img src={portfolio.cover} alt={portfolio.cover} />
-        <h3>{portfolio.title}</h3>
-        <p>{portfolio.description}</p>
+      <div style={sectionStyle}>
+            <Typography variant="h3" color="primary" style={friedaIntText}>
+                   Meet the Artists
+              </Typography>
+              <Image
+                src={portfolio.cover}
+                alt={portfolio.cover}
+                imageStyle={{width:"100%", height:"auto"}}
+              />
+
+              <Typography variant="h3" color="primary" style={friedaIntText}>
+              {portfolio.title}
+              </Typography>
+              <Typography variant="p" color="primary" >
+              {portfolio.description}
+              </Typography>
+  
         <Carousel images={extraImg}/>
         <div style={{ margin: "auto" , display: 'flex', justifyContent: 'space-around'}}>
         <Button variant='contained' color='secondary' component={Link} to={'/artists'}> Go Back </Button>

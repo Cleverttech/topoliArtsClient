@@ -101,15 +101,13 @@ function Artists(props){
               </Typography>
 
              <Typography style={{textAlign:"center", margin:"40px"}} variant="p" color="primary" component="p" >
-              Lorem ipsum stuff Lorem ipsum stuff Lorem ipsum stuff Lorem ipsum
-              stuffLorem ipsum stuffLorem ipsum stuffLorem ipsum stuffLorem ipsum
-              stuff
-              Lorem ipsum stuff Lorem ipsum stuff Lorem ipsum stuff Lorem ipsum
-              stuffLorem ipsum stuffLorem ipsum stuffLorem ipsum stuffLorem ipsum
-              stuff
-              Lorem ipsum stuff Lorem ipsum stuff Lorem ipsum stuff Lorem ipsum
-              stuffLorem ipsum stuffLorem ipsum stuffLorem ipsum stuffLorem ipsum
-              stuff
+             Combine your passion for drawing and reading literature by creating illustrations that are "worth a thousand words". In our courses, 
+             these artists will teach you how to illustrate diferent concepts, providing a personal vision of the text through images. They will show you
+            the essential steps from taking on editorial projects to 
+         creating first sketches and experimenting with new techniques to the creation of your final illustration.
+
+           Everything you learn from them can be applied to any illustration assignment or challenge that involves illustrations.
+    
              </Typography>
     
               <Grid style={gridStyle}>
