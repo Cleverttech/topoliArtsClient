@@ -403,6 +403,8 @@ class App extends Component {
     
     return (
       <div className="App">
+      <div style={{minHeight: '76.3vh'}}>
+
         <NavBar onLogout={this.handleLogout} user={user} />
 
 
@@ -446,8 +448,10 @@ class App extends Component {
             return (<Settings error={error} user={user} onSubmitSettings={this.handleSubmitSettings} {...routeProps}/>);}}/>
           <Route component={NotFound} />
         </Switch>
+        </div>
         <Footer/>
       </div>
+
     );
   }
 }
