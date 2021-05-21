@@ -403,10 +403,8 @@ class App extends Component {
     
     return (
       <div className="App">
+    <NavBar onLogout={this.handleLogout} user={user} />
       <div style={{minHeight: '76.3vh'}}>
-
-        <NavBar onLogout={this.handleLogout} user={user} />
-
 
         <Switch>
           <Route exact path="/" component={LandingPage} />
