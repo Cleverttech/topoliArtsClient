@@ -31,7 +31,7 @@ export default function RandomPhases () {
                             <CardActionArea>
                                 <CardMedia
                                 className={classes.media}
-                                image="../assets/AllBooks/Snorri2/DS8_Snorri2.jpg"
+                                image="../assets/KidsImages/Lea.jpg"
                                 title="Contemplative Reptile"
                                 />
                                 <CardContent>
@@ -50,7 +50,7 @@ export default function RandomPhases () {
                             <CardActionArea>
                                 <CardMedia
                                 className={classes.media}
-                                image="../assets/AllBooks/Snorri1/DS_1_Snorri.jpg"
+                                image="../assets/AllBooks/GoodNight-cologne/Heumarkt_Master.jpg"
                                 title="Contemplative Reptile"
                                 />
                                 <CardContent>
