@@ -1,9 +1,9 @@
 # Topoli Arts
-
 <br>
 [See live demo](https://topoli-arts.herokuapp.com/)
+<br>
 
-<img src="https://github.com/Cleverttech/topoliArtsClient/blob/main/topoliarts-demo.png" alt="demo-Image" margin="auto 0px" />
+<img src="https://github.com/Cleverttech/topoliArtsClient/blob/main/topoliarts-demo.PNG" alt="demo-Image" margin="auto 0px" />
 
 ## Description
 
