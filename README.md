@@ -189,16 +189,15 @@ timestamp: true}
 
 ### Trello/Kanban
 
-[Link to your trello board](https://trello.com/)
-or picture of your physical board
+[Link to project wireframe](https://whimsical.com/topoliarts-zRhHtVACW4oNF9k6tC8T9)
+
+<img src="https://github.com/Cleverttech/topoliArtsClient/blob/main/wireframe-demo.PNG" alt="demo-Image" margin="auto 0px" width="455" height="179"/>
 
 ### Git
 
 The url to your repository and to your deployed project
 
-[Client repository Link](https://github.com/)
-
-[Server repository Link](https://github.com/)
+[Server repository Link](https://github.com/Cleverttech/topoliArtsServer/)
 
 [Deployed App Link](https://topoliarts.herokuapp.com/)
 
@@ -206,4 +205,5 @@ The url to your repository and to your deployed project
 
 The url to your presentation slides
 
-[Slides Link](https://docs.google.com/)
+[Slides Link](https://my.visme.co/preview/90mon6jm-untitled-project?isPreview=1&t=68d0cab4a85d11fdbdd17da3054ccc99
+)
