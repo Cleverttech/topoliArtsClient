@@ -1,6 +1,9 @@
 # Topoli Arts
 
 <br>
+[See live demo](https://topoli-arts.herokuapp.com/)
+
+<img src="https://github.com/Cleverttech/topoliArtsClient/blob/main/topoliarts-demo.png" alt="demo-Image" margin="auto 0px" />
 
 ## Description
 
@@ -191,7 +194,7 @@ timestamp: true}
 
 [Link to project wireframe](https://whimsical.com/topoliarts-zRhHtVACW4oNF9k6tC8T9)
 
-<img src="https://github.com/Cleverttech/topoliArtsClient/blob/main/wireframe-demo.PNG" alt="demo-Image" margin="auto 0px" width="455" height="179"/>
+<img src="https://github.com/Cleverttech/topoliArtsClient/blob/main/wireframe-demo.jpg" alt="demo-Image" margin="auto 0px" />
 
 ### Git
 
