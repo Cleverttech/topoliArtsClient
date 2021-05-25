@@ -59,15 +59,15 @@ function MyCoursesByBuyer(props) {
         
         if(course.buyers.length > 0){
           
-              course.buyers.filter((e)=>{
+          course.buyers.filter((e)=>{
             // console.log(e)
             if(e.userId._id == user._id){
               return e
             }
           })
-          return course
         }  
       })
+      console.log(filteredCourses)
         return ( 
             <Grid style={gridStyle}>
               { filteredCourses.map(arrangeCards) }
