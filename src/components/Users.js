@@ -111,11 +111,11 @@ function UsersBoxTest(props){
                                         ?
                                         <>
                                         <label for='student'/>
-                                        <CheckBox  variant='contained' color='secondary'type='checkbox' id='student' name='student' value='student'/>
-                                        <Button variant='contained' color='secondary'>Ok</Button>
+                                        <input  type='checkbox' id='student' name='student'/>
+                                        <Button type='submit' variant='contained' color='secondary'>Ok</Button>
                                         </>  
                                         :
-                                        <CheckBox variant='contained' color='secondary' type='checkbox' name='admin' checked/>
+                                        <input type='checkbox' name='admin' checked/>
                                     }</form>
                                      
                                     

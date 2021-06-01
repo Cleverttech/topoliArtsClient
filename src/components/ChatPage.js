@@ -79,7 +79,6 @@ class ChatPage extends Component {
         const Image = '../assets/Background_test.jpg'
         const { loading , messageList} = this.state
         const { user } = this.props
-        console.log(user)
 
         if (loading) {
             return <Loader />,

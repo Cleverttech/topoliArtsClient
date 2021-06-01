@@ -23,6 +23,7 @@ function MyCoursesByBuyer(props) {
 
   const boxStyle = {height : "auto",display: "flex", margin: "25px auto"}
   const gridStyle = { margin: "40px 0px", display: "flex", flexWrap : "wrap", flexDirection : "row" }
+
   const arrangeCards = (card, index) => {
     return (  
       <div style={boxStyle}>
@@ -55,19 +56,16 @@ function MyCoursesByBuyer(props) {
     if(!courses || !user){
       return <p>Loading ...</p>
     }else{
-      let filteredCourses = courses.filter((course)=>{
-        
-        if(course.buyers.length > 0){
-          
-              course.buyers.filter((e)=>{
-            // console.log(e)
-            if(e.userId._id == user._id){
-              return e
-            }
-          })
-          return course
-        }  
-      })
+      let filteredCourses= [];
+      for(let i= 0; i< courses.length;i++) {
+        for(let j = 0; j<courses[i].buyers.length; j++){
+          console.log(courses[i].buyers[j])
+          if(courses[i].buyers[j].userId._id == user._id){
+            filteredCourses.push(courses[i])
+          }
+        }
+      }
+      
         return ( 
             <Grid style={gridStyle}>
               { filteredCourses.map(arrangeCards) }
