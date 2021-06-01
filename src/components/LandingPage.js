@@ -18,8 +18,8 @@ function LandingPage(){
      
       ]
       const gridStyle = {
-        marginTop: "-280px",
-        padding: "100px",
+        marginTop: "-160px",
+        padding: "20px",
       }; 
 
         return (
