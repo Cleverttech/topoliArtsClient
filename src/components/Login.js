@@ -7,11 +7,7 @@ import * as Yup from "yup";
 
 function Login(props) {
  const { error, onLogin } = props;
- const paperStyle = {
-  padding: "30px 20px",
-  width: 375,
-  margin: "30px auto",
- };
+
 
  //Validation starts here
  const initialValues = {
@@ -34,7 +30,7 @@ function Login(props) {
 
  return (
   <Grid>
-   <Paper elevation={20} style={paperStyle}>
+   <Paper elevation={20} className="paperStyle">
     <Grid align="center">
      <Avatar style={avatarStyle}>
       <LockIcon />
@@ -46,7 +42,7 @@ function Login(props) {
 
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onLogin}>
      {(props) => (
-      <Form>
+      <Form className="formStyleMobile">
        <Field
         as={TextField}
         name="email"

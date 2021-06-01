@@ -26,12 +26,6 @@ function PortfolioForm(props) {
   const classes = useStyles();
   const { user, userList, onCreatePortfolio, disableSubmit} = props;
 
-  const paperStyle = {
-    padding: "30px 20px",
-    width: 375,
-    margin: "30px auto",
-  };
-
   const btnStyle = {
     marginTop: "20px",
   };
@@ -42,7 +36,7 @@ const theme = useTheme()
   const uploadBtn = {height:"25px", fontSize:"11px", letterSpacing:"1px"}
   return (
     <Grid>
-      <Paper elevation={20} style={paperStyle}>
+      <Paper elevation={20} className="paperStyle">
         <Grid align="center">
         <Avatar style={avatarStyle}>
             <PhotoLibraryIcon/>
@@ -52,7 +46,7 @@ const theme = useTheme()
           </Typography>
         </Grid>
         <br/>
-      <form onSubmit={onCreatePortfolio}>
+      <form onSubmit={onCreatePortfolio} className="formStyleMobile">
       <label htmlFor="cover">
            <input
           style={{display:"none"}}

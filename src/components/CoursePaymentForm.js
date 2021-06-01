@@ -24,14 +24,7 @@ function CoursePaymentForm(props){
 	  backgroundColor:theme.palette.primary.main,
 	};
     // [state, updateState] = useState("test")
-    const classes = useStyles()
-		const paperStyle = {
-			padding: "30px 20px",
-			width: 375,
-			margin: "30px auto",
-		};
-
-		const btnStyle = {
+	const btnStyle = {
 			marginTop: "20px",
 		};
 		// Validation starts here
@@ -63,7 +56,7 @@ function CoursePaymentForm(props){
 
 		return (
 			     <Grid>
-				<Paper elevation={20} style={paperStyle}>
+				<Paper elevation={20} className="paperStyle">
 					<Grid align="center">
 						<Avatar style={avatarStyle}>
 							<CreditCardIcon />
@@ -94,7 +87,7 @@ function CoursePaymentForm(props){
 						onSubmit={(values)=>{handleOnSubmit(values)}}
 					>
 				
-						<Form >
+						<Form className="formStyleMobile">
 							<Field
 								as={TextField}
 								name="fullname"
