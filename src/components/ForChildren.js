@@ -175,6 +175,9 @@ function ForChildren() {
   };
   const closeStyle = {
     color: "white",
+    position: "absolute",
+    bottom: "635px",
+    left:"87vw",
   };
   const centerBtn = {
     justifyContent: "center",
