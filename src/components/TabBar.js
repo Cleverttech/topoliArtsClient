@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FullWidthTabs(props) {  
-  const { courses, user  , onCreatePortfolio, onCreate, onDeleteCourse, error, disableSubmit} = props
+  const { courses, user  , onCreatePortfolio, onCreate, onDeleteCourse, error, disableSubmit, history} = props
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -92,7 +92,7 @@ export default function FullWidthTabs(props) {
         onChangeIndex={handleChangeIndex}
       >
           <TabPanel value={value} index={0} dir={theme.direction}>
-            <MyCoursesByMentor error={error} courses={courses} user={user} onDeleteCourse={onDeleteCourse}/>  
+            <MyCoursesByMentor history={history} error={error} courses={courses} user={user} onDeleteCourse={onDeleteCourse}/>  
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
             <CoursesCreateForm disableSubmit={disableSubmit} onCreate={onCreate} />

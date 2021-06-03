@@ -18,7 +18,7 @@ function LandingPage(){
      
       ]
       const gridStyle = {
-        marginTop: "-160px",
+        minHeight: '100vh',
         padding: "20px",
       }; 
 

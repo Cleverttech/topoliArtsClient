@@ -28,7 +28,7 @@ export default function RandomPhases () {
                       <Grid container spacing={3}>
                         <Grid item xs={12} sm={6} md={4}>
                           <Card className={classes.root} elevation={0}>
-                            <CardActionArea>
+                            
                                 <CardMedia
                                 className={classes.media}
                                 image="../assets/KidsImages/Lea.jpg"
@@ -42,12 +42,12 @@ export default function RandomPhases () {
                                 You fill out the form and submit payment for the course
                                 </Typography>
                                 </CardContent>
-                            </CardActionArea>
+
                           </Card>
                           </Grid>
                           <Grid item xs={12} sm={6} md={4}>
                           <Card className={classes.root} elevation={0}>
-                            <CardActionArea>
+                            
                                 <CardMedia
                                 className={classes.media}
                                 image="../assets/AllBooks/GoodNight-cologne/Heumarkt_Master.jpg"
@@ -61,12 +61,12 @@ export default function RandomPhases () {
                                 Once a week you work with our artists via ZOOM. Lessons are 2 hours for adults and 1 hour for children.
                                 </Typography>
                                 </CardContent>
-                            </CardActionArea>
+                 
                           </Card>
                          </Grid>
                           <Grid item xs={12} sm={6} md={4}>
                           <Card className={classes.root} elevation={0}>
-                            <CardActionArea>
+                            
                                 <CardMedia
                                 className={classes.media}
                                 image="../assets/AllBooks/Snorri1/DS_5_Snorri.jpg"
@@ -80,7 +80,7 @@ export default function RandomPhases () {
                                 In addition to the online painting lessons via ZOOM, you will receive a weekly link to one of our video courses. If you are a beginner, we have a video exercise tailored for you. For the advanced students we have more complicated online tasks.
                                 </Typography>
                                 </CardContent>
-                            </CardActionArea>
+                            
                           </Card>
                          </Grid>
                       </Grid>

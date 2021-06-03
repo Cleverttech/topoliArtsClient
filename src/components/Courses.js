@@ -1,8 +1,11 @@
-import React from "react";
+import React , {useState, useEffect} from "react";
+
 import { Button, Grid, Typography , Card, CardActionArea, CardActions, CardContent, CardMedia} from "@material-ui/core";
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { Link } from "react-router-dom";
 import SearchCourses from './SearchCourses'
+import axios from 'axios';
+import config from '../config';
 
 const useStyles = makeStyles((theme) => ({
  root:{
@@ -19,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 const sectionStyle = { width: "80%", margin: "20px auto" };
 const friedaIntText = {
-
   fontWeight: "bolder",
 };
 function Courses(props){
@@ -43,12 +45,21 @@ function Courses(props){
       flexWrap : "wrap",
       flexDirection : "row"
     }
+    const [allCourses, updateCourses] = useState(courses);
+
+    useEffect(() => {
+      axios.get(`${config.API_URL}/api/courses`, { withCredentials: true })
+      .then((response) => {
+        updateCourses(response.data)
+      })
+    }, [])
+
     const arrangeCards =(card, index)=>{
       return (  
 
         <div style={boxStyle}>
       <Card style={{width:"20rem"}} key={index}>
-        <CardActionArea>
+        
           <CardMedia
             className={classes.media}
             image={card.image}
@@ -67,7 +78,7 @@ function Courses(props){
             </Typography>
       
           </CardContent>
-        </CardActionArea>
+
         <CardActions>
           <Button fullWidth variant="contained" color="secondary">
             <Link to={`/courses/${card._id}`} style={linkStyle}>
@@ -88,8 +99,8 @@ function Courses(props){
         <div className={classes.root} style={sectionStyle}>
            <SearchCourses  onSearchCourse={onSearchCourse} />
           {
-            !courses.length ?
-            <h3 style={{color: theme.palette.secondary.main}}>No courses found?...Did you paste Manish's code right?</h3>
+            !allCourses.length ?
+            <h3>No courses found.</h3>
             : true
           }
           <Typography style={friedaIntText} variant="h3">Courses Available</Typography>
@@ -97,7 +108,7 @@ function Courses(props){
               <Grid style={gridStyle}>
 
                  {
-                  courses.map(arrangeCards)
+                  allCourses.map(arrangeCards)
                  }               
             </Grid>
 

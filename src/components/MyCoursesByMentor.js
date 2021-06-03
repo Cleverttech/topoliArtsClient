@@ -1,6 +1,9 @@
-import React from "react";
+import React , {useState, useEffect} from "react";
 import { Typography , Card, CardActionArea, CardContent, CardMedia, Grid, Button} from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
+
+import config from '../config';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +20,16 @@ const useStyles = makeStyles((theme) => ({
    },
  }));
 function MyCoursesByMentor(props){
+  const {user, courses } = props;
   const classes = useStyles();
+  const [allCourses, updateCourses] = useState()
+  
+  useEffect(() => {
+    axios.get(`${config.API_URL}/api/courses`, { withCredentials: true })
+    .then((response) => {
+      updateCourses(response.data)
+    })
+  },[])
 
   const boxStyle = {
     height : "auto",
@@ -30,12 +42,35 @@ function MyCoursesByMentor(props){
     flexWrap : "wrap",
     flexDirection : "row"
   }
-  const { courses, user, onDeleteCourse } = props;
+  
+  const handleDeleteCourse = (courseId) => {
+    //1. Make an API call to the server side Route to delete that specific course
+    let filteredCourseid = courses.filter((course) => {
+      return course._id === courseId;
+    });
+    if (filteredCourseid) {
+      axios.delete(`${config.API_URL}/api/courses/${courseId}`, {withCredentials: true})
+      .then(() => {
+        let filteredCourses = courses.filter((course) => {
+          return course._id !== courseId;
+          });
+          updateCourses(filteredCourses)
+          props.history.push('/profile')
+      })
+      .catch((error) => {
+          this.setState({
+            error: error.data,
+          });
+        });
+    }
+  };
+  
   const arrangeCards = (card, index) => {
+
     return (  
       <div style={boxStyle}>
       <Card style={{width:"18rem"}} key={index}>
-        <CardActionArea>
+        
           <CardMedia
             className={classes.media}
             image={card.image}
@@ -52,22 +87,20 @@ function MyCoursesByMentor(props){
              
             </Typography>
           </CardContent>
-          <Button onClick={() => { onDeleteCourse(card._id)}} fullWidth variant="contained" color="secondary">
+          <Button onClick={() => { handleDeleteCourse(card._id)}} fullWidth variant="contained" color="secondary">
             Delete
           </Button>
-
-        </CardActionArea>
 
       </Card> 
        </div>
       )
   }
 
-    if(!courses || !user){
+    if(!allCourses || !user){
       return <p>Loading ...</p>
     }else{
       
-        let filteredCoursesMentor = courses.filter((course) => {
+        let filteredCoursesMentor = allCourses.filter((course) => {
           if (course.mentor._id === user._id) {
             return course;
           }

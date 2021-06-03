@@ -6,7 +6,7 @@ import config from "../config";
 import Carousel from './Carousel'
 import Image from 'material-ui-image'
 
-const sectionStyle = { width: "80%", margin: "100px auto" };
+
 const friedaIntText = {
   fontWeight: "bolder",
   marginTop: "100px",
@@ -49,14 +49,15 @@ export default class PortfolioDetails extends Component {
         </div>)
     }else{  
     return (
-      <div style={sectionStyle}>
+      <div>
             <Typography variant="h3" color="primary" style={friedaIntText}>
                    My Portfolio
               </Typography>
-              <Image
+              <img
+                loading='lazy'
                 src={portfolio.cover}
                 alt={portfolio.cover}
-                imageStyle={{width:"100%", height:"auto"}}
+                style={{maxWidth:'75vw', height:"auto"}}
               />
 
               <Typography variant="h3" color="primary" style={friedaIntText}>

@@ -139,7 +139,7 @@ function UsersBoxTest(props){
                         <Button variant ='contained' color='secondary' onClick={()=>{handleGralChatClick()}}>Global Chat</Button>
                         {
                         !allUsers.length 
-                            ? <h4 style={{color: 'red'}}>No user found?...Did you paste Manish's code?</h4>
+                            ? <h4>No user found.</h4>
                             : true
                         }
                         

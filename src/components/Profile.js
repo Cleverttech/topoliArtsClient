@@ -5,7 +5,9 @@ import TabBar from './TabBar'
 import TabBarStud from './TabBarStud'
 import MessageIcon from '@material-ui/icons/Message';
 import {Link} from 'react-router-dom';
-import { Avatar, Button } from "@material-ui/core";
+import { Avatar, Button, Typography } from "@material-ui/core";
+import axios from 'axios';
+import config from '../config';
 
 const sectionStyle = { width: "80%", margin: "60px auto" };
 
@@ -14,7 +16,10 @@ class Profile extends Component {
   state ={
     fileValue : false,
   }
-
+  
+  userName={
+    margin:0,
+  }
   handleChange=(e)=>{
     e.preventDefault()
     let fileVal = e.target.value
@@ -24,16 +29,10 @@ class Profile extends Component {
       })
     }
   }
-  handleClick=()=>{
-    
-    console.log('settings click')
-  }
 
-  e
   render() {
-
-    const {onCreate, onCreatePortfolio, user, courses, userList, onSubmitPic, onDeleteCourse, disableSubmit} = this.props;
-    const { fileValue } = this.state
+    const {onCreate, onCreatePortfolio, courses, user, userList, onSubmitPic, onDeleteCourse, disableSubmit, history} = this.props;
+    const { fileValue} = this.state
     
     if (!user) {
       return <p>Loading...</p>;
@@ -41,10 +40,11 @@ class Profile extends Component {
       return (
           <div style={sectionStyle}>
             <div style={{display: 'flex' , flexDirection: 'column', alignItems:'center', justifyContent:'flex-end'}}>
-       
+            <Typography variant='h3'className='userName' >{`Hi, ${user.username}!`}</Typography>
             <Avatar style={{width:'200px', height:'200px'}} aria-label="recipe">
               <img src={user.image} width='200px' alt="profpic" />
             </Avatar>
+            
             
               <form onSubmit={onSubmitPic} style={{display: "flex", flexDirection: 'row', justifyContent:'center', alignItems: 'center'}} >
                 
@@ -62,9 +62,8 @@ class Profile extends Component {
                     : false
                   }
                 
-               
               </form>
-                <div style={{position: 'relative', left:"40%", bottom:"43px"}}>
+              <div style={{position: 'relative', left:"40%", bottom:"43px"}}>
                   <Link style={{textDecoration:'none', color:'inherit'}} to="/users"><MessageIcon style={{width:'45px', height:'45px', cursor:'pointer', marginRight:"30px"}}/></Link>
                   <Link style={{textDecoration:'none', color:'inherit'}} to="/settings"><SettingsIcon style={{ width:'45px', height:'45px',cursor:'pointer'}}/></Link>
                 </div> 
@@ -73,7 +72,7 @@ class Profile extends Component {
          
           {            
             user.role !== 'student' 
-            ? <TabBar disableSubmit={disableSubmit} user={user} courses={courses} userList={userList} onCreatePortfolio={onCreatePortfolio} onCreate={onCreate} onDeleteCourse={onDeleteCourse} />
+            ? <TabBar disableSubmit={disableSubmit} user={user} courses={courses} userList={userList} onCreatePortfolio={onCreatePortfolio} onCreate={onCreate} onDeleteCourse={onDeleteCourse} history={history}/>
             : <TabBarStud user={user} courses={courses} userList={userList} />
           }
         </div>

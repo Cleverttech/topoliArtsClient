@@ -79,7 +79,6 @@ class App extends Component {
     });
   }
 
-
   componentDidMount = () => {
     this.fetchFromDB()
   };
@@ -240,7 +239,7 @@ class App extends Component {
 
     this.setState(
       {
-        user: patchPortfolio,
+        user: patchPortfolio.data,
         portfolio: [createFormData.data, ...this.state.portfolio],
         disableSubmit: false,
         
@@ -441,7 +440,9 @@ class App extends Component {
             <Route component={NotFound} />
           </Switch>
         </div>
-        <Footer/>
+        
+          <Footer/>
+
       </div>
 
     );

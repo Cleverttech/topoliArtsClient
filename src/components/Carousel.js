@@ -14,7 +14,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: "80%",
+    maxWidth: "87%",
     flexGrow: 1,
     display: "flex",
     flexDirection: "column",
@@ -73,7 +73,6 @@ function SwipeableTextMobileStepper(props) {
   const gridStyle = {
     height:"auto",
     margin: "auto",
-    marginTop: "200px",
     width:"100vw"
   }; 
 

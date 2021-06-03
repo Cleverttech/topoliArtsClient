@@ -28,7 +28,6 @@ function MyCoursesByBuyer(props) {
     return (  
       <div style={boxStyle}>
       <Card style={{width:"18rem"}} key={index}>
-        <CardActionArea>
           <CardMedia
             className={classes.media}
             image={card.image}
@@ -43,12 +42,8 @@ function MyCoursesByBuyer(props) {
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
             {card.description}
-            
             </Typography>
           </CardContent>
-
-        </CardActionArea>
-
       </Card> 
       </div>
       )

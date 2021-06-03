@@ -1,12 +1,13 @@
-import React from "react";
+import React , {useState, useEffect} from "react";
+
 import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {Card, Button, Grid, CardHeader, CardMedia, CardContent,Avatar, Typography} from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
 import Loader from './Loader'
 
-
-
+import axios from 'axios';
+import config from '../config';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +52,15 @@ function Artists(props){
         flexDirection : "row"
       }
     const { userList } = props
+    const [allUserList, updateUserList] = useState(userList)
+
+    useEffect(()=>{
+      axios.get(`${config.API_URL}/api/users`, { withCredentials: true })
+      .then((response) => {
+          updateUserList(response.data)
+      });
+    },[])
+
       const arrangeCards = (card, index) => {
 
         return (  
@@ -84,10 +94,10 @@ function Artists(props){
           </div>
           )
       }
-      if (!userList) {
+      if (!allUserList) {
         return <Loader />;
       } else {
-        let filteredUsers = userList.filter((singleUser) => {
+        let filteredUsers = allUserList.filter((singleUser) => {
     
           if (singleUser.role !== "student") {
             return singleUser 
