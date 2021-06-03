@@ -47,12 +47,6 @@ function BookReadingForm() {
   const { online, inPerson } = state;
   const error = [online, inPerson].filter((v) => v).length !== 1;
 
-  const paperStyle = {
-    padding: "30px 20px",
-    width: 375,
-    margin: "30px auto",
-  };
-
   const avatarStyle = {
     backgroundColor: "#7f7f7f",
   };
@@ -67,7 +61,7 @@ function BookReadingForm() {
 
   return (
     <Grid>
-      <Paper elevation={20} style={paperStyle}>
+      <Paper elevation={20} className="paperStyle">
         <Grid align="center">
           <Avatar style={avatarStyle}>
             <ScheduleIcon />
@@ -78,7 +72,7 @@ function BookReadingForm() {
           </Typography>
         </Grid>
 
-        <form>
+        <form className="formStyleMobile">
           <TextField
             as={TextField}
             name="fullname"
