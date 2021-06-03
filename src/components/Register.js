@@ -6,13 +6,7 @@ import AddBoxIcon from "@material-ui/icons/AddBox";
 import * as Yup from "yup";
 
 function Register(props) {
-  const paperStyle = {
-    padding: "30px 20px",
-    width: 375,
-    margin: "30px auto",
-  };
-
-  
+ 
   const theme = useTheme()
   const avatarStyle = {
     backgroundColor:theme.palette.primary.main,
@@ -40,7 +34,7 @@ function Register(props) {
   const { onSubmit } = props;
   return (
     <Grid>
-      <Paper elevation={20} style={paperStyle}>
+      <Paper elevation={20} className="paperStyle">
         {" "}
         <Grid align="center">
           <Avatar style={avatarStyle}>
@@ -52,7 +46,7 @@ function Register(props) {
         </Grid>
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
           {(props) => (
-            <Form>
+            <Form className="formStyleMobile">
               <Field
                 as={TextField}
                 name="username"

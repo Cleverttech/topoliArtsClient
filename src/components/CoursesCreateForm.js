@@ -12,31 +12,11 @@ import {
 } from "@material-ui/core";
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import AddIcon from "@material-ui/icons/Add";
-import { makeStyles, useTheme} from "@material-ui/core/styles";
-
-
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  formControl: {
-    margin: theme.spacing(3),
-  },
-
-}));
-
+import { useTheme} from "@material-ui/core/styles";
 
 function CoursesCreateForm(props) {
-  const classes = useStyles();
   const { onCreate, disableSubmit } = props;
   const theme = useTheme()
-
-  const paperStyle = {
-    padding: "30px 20px",
-    width: 375,
-    margin: "30px auto",
-  };
 
   const btnStyle = {
     marginTop: "20px",
@@ -48,7 +28,7 @@ function CoursesCreateForm(props) {
   const uploadBtn = {height:"25px", fontSize:"11px", letterSpacing:"1px"}
   return (
     <Grid>
-      <Paper elevation={20} style={paperStyle}>
+      <Paper elevation={20} className="paperStyle">
         <Grid align="center">
         <Avatar style={avatarStyle}>
             <LibraryBooksIcon/>
@@ -58,7 +38,7 @@ function CoursesCreateForm(props) {
           </Typography>
         </Grid>
         <br/>
-      <form onSubmit={onCreate}>
+      <form onSubmit={onCreate} className="formStyleMobile">
       <label htmlFor="courseImage">
            <input
           style={{display:"none"}}

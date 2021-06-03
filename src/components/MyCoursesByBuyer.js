@@ -53,25 +53,23 @@ function MyCoursesByBuyer(props) {
       </div>
       )
   }
-    if(!courses || !user){
-      return <p>Loading ...</p>
-    }else{
-      let filteredCourses= [];
-      for(let i= 0; i< courses.length;i++) {
-        for(let j = 0; j<courses[i].buyers.length; j++){
-          console.log(courses[i].buyers[j])
-          if(courses[i].buyers[j].userId._id == user._id){
-            filteredCourses.push(courses[i])
-          }
+  if(!courses || !user){
+    return <p>Loading ...</p>
+  }else{
+    let filteredCourses= [];
+    for(let i= 0; i< courses.length;i++) {
+      for(let j = 0; j<courses[i].buyers.length; j++){
+        if(courses[i].buyers[j].userId._id == user._id){
+          filteredCourses.push(courses[i])
         }
       }
-      
-        return ( 
-            <Grid style={gridStyle}>
-              { filteredCourses.map(arrangeCards) }
-            </Grid>
-            )
     }
+      return ( 
+          <Grid style={gridStyle}>
+            { filteredCourses.map(arrangeCards) }
+          </Grid>
+          )
+  }
 }
 
 export default MyCoursesByBuyer;

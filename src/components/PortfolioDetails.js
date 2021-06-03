@@ -51,7 +51,7 @@ export default class PortfolioDetails extends Component {
     return (
       <div style={sectionStyle}>
             <Typography variant="h3" color="primary" style={friedaIntText}>
-                   Meet the Artists
+                   My Portfolio
               </Typography>
               <Image
                 src={portfolio.cover}

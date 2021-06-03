@@ -25,11 +25,30 @@
   width: 100;
 }
 
+.paperStyle {
+  padding: 30px 20px;
+  width: 375px;
+  margin: 30px auto;
+}
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
+
+@media screen and (max-width: 600px) {
+  .paperStyle {
+    padding: 10px 0px;
+    margin: 30px auto;
+    width: 90vw;
+  }
+  .formStyleMobile{
+    margin:auto;
+    width: 80vw;
+  }
+}
+
+
 @font-face {
   font-family: 'Nunito';
   font-style: normal;

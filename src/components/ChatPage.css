@@ -77,7 +77,7 @@ body {
   }
   .messageIndividual {
     width: 200px;
-    height: 60px;
+    height: 80px;
     border-radius: 10px;
     display: grid;
     place-items: center;
