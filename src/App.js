@@ -15,8 +15,8 @@ import Stripe from "./components/Stripe";
 import Artists from "./components/Artists";
 import PortfolioDetails from "./components/PortfolioDetails";
 import CoursePaymentForm from "./components/CoursePaymentForm";
-import Loader from './components/Loader'
-import './App.css'
+import Loader from './components/Loader';
+import './App.css';
 
 import Profile from "./components/Profile";
 import Settings from "./components/Settings";
@@ -99,7 +99,6 @@ class App extends Component {
 
   handleSearchCourse =(e) => {
   let input = e.target.value
-
   const {courses} = this.state
   let filteredCourses = courses.filter((e)=>{
     return e.name.toLowerCase().includes(input.toLowerCase())
@@ -166,7 +165,6 @@ class App extends Component {
   handleSubmitSettings = (values) => {
     console.log('hello submit settings')
     const { username, email, password } = values;
-
     let newUser = {
       username,
       email,
@@ -196,7 +194,6 @@ class App extends Component {
         });
       })
       .catch((error) => {
-        // the real error json is always is the .response.data
         this.setState({
           error: error.data,
         });
@@ -205,7 +202,6 @@ class App extends Component {
 
   handleCreatePortfolio = async (e) => {
     e.preventDefault();
-  
     this.setState({
       disableSubmit : true,
     })
@@ -384,7 +380,6 @@ class App extends Component {
   };
   
   handleSubmitPayment=(e)=>{
-
 		e.preventDefault()
     const fullname = e.target.fullname.value
 		const { courseId } = this.props.match.params

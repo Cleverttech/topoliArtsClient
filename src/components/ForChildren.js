@@ -174,16 +174,19 @@ function ForChildren() {
     setOpenVol2(false);
   };
   const closeStyle = {
-    color: "white",
-    position: "absolute",
-    bottom: "635px",
-    left:"87vw",
+    color: "white",    
+    marginTop: '5px',
   };
   const centerBtn = {
     justifyContent: "center",
     display: "flex",
     margin: "20px",
   };
+  const gridModal={
+    display: 'flex',
+    flexDirection:'column',
+    alignItems: 'center',
+  }
 
   return (
     <div className={classes.root} style={sectionStyle}>
@@ -228,11 +231,11 @@ function ForChildren() {
           }}
         >
           <Fade in={open}>
-            <Grid>
-              <BookReadingForm />
+            <Grid style={gridModal}>
               <IconButton onClick={handleClose}>
                 <CancelIcon fontSize="large" style={closeStyle} />
               </IconButton>
+              <BookReadingForm />
             </Grid>
           </Fade>
         </Modal>
@@ -291,11 +294,11 @@ function ForChildren() {
                 }}
               >
                 <Fade in={openVol1}>
-                  <Grid>
-                    <Carousel images={vol1} />
+                <Grid style={gridModal}>
                     <IconButton onClick={handleCloseVol1}>
                       <CancelIcon fontSize="large" style={closeStyle} />
                     </IconButton>
+                    <Carousel images={vol1} />
                   </Grid>
                 </Fade>
               </Modal>
@@ -331,11 +334,11 @@ function ForChildren() {
             }}
           >
             <Fade in={openVol2}>
-              <Grid style={{ padding: "-50px" }}>
-                <Carousel images={vol2} />
+              <Grid style={gridModal}>
                 <IconButton onClick={handleCloseVol2}>
                   <CancelIcon fontSize="large" style={closeStyle} />
                 </IconButton>
+                <Carousel images={vol2} />
               </Grid>
             </Fade>
           </Modal>
